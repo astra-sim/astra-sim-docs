@@ -1,3 +1,9 @@
-# Welcome to ASTRA-sim Documentation!
+# Welcome to ASTRA-sim's documentation!
 
-This page is under construction, stay tuned!
+:::{note}
+ASTRA-sim documentation project is currently under active development. Please stay tuned!
+:::
+
+:::{toctree}
+getting-started/getting-started.md
+:::

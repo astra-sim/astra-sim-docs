@@ -1,4 +1,4 @@
-name: serve
+name: deploy
 
 on:
   push:
