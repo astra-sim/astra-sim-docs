@@ -3,8 +3,8 @@ ASTRA-sim Documentation
 
 | main branch | Status |
 |:---:|:---:|
-| build | [![build](https://github.com/astra-sim/astra-sim-docs/actions/workflows/check_build_status.yml/badge.svg)](https://github.com/astra-sim/astra-sim-docs/actions/workflows/check_build_status.yml) |
-| deploy | [![deploy](https://github.com/astra-sim/astra-sim-docs/actions/workflows/deploy_docs.yml/badge.svg)](https://github.com/astra-sim/astra-sim-docs/actions/workflows/deploy_docs.yml) |
+| build | [![build](https://github.com/astra-sim/astra-sim-docs/actions/workflows/check_build_status.yml/badge.svg?branch=main)](https://github.com/astra-sim/astra-sim-docs/actions/workflows/check_build_status.yml) |
+| deploy | [![deploy](https://github.com/astra-sim/astra-sim-docs/actions/workflows/deploy_docs.yml/badge.svg?branch=main)](https://github.com/astra-sim/astra-sim-docs/actions/workflows/deploy_docs.yml) |
 
 
 ## Dependencies
@@ -42,3 +42,7 @@ Please open a PR to the main branch. Once merged, the documentation will be depl
 
 ## Versioning
 The latest HEAD commit of the main branch will be compiled and deployed as a `latest` version. If you tag a commit, it will also be automatically compiled and deployed (e.g., if a commit is tagged as `1.3`, that commit will be compiled as version `1.3` and included in the deployed website). This should all happen automatically by the GitHub Actions during the deployment phase.
+
+
+## Caveat
+The documentation is being served through the `gh-pages` branch. This should be managed automatically via GitHub Actions, so please modify its content in any way.
