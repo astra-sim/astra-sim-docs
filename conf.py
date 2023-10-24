@@ -7,7 +7,7 @@ repo = Repo()
 current_year = datetime.date.today().year
 
 # Project Setup
-project = 'ASTRA-sim Documentation'
+project = 'ASTRA-sim'
 copyright = f'2020-{current_year}, Synergy Lab, Georgia Institute of Technology'
 author = 'ASTRA-sim'
 repo_name = 'astra-sim-docs'
