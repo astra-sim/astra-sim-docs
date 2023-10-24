@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Running ASTRA-sim &mdash; ASTRA-sim 2.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=60dbed4a"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="ASTRA-sim Output" href="astra-sim-output.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            ASTRA-sim
+          </a>
+              <div class="version">
+                latest
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="getting-started.html">Getting Started</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Running ASTRA-sim</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#argument-workload-config">Argument ${WORKLOAD_CONFIG}</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#argument-system-config">Argument ${SYSTEM_CONFIG}</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#argument-network-config">Argument ${NETWORK_CONFIG}</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-execution-trace-generator-et-generator">Using Execution Trace Generator (et_generator)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-execution-trace-converter-et-converter">Using Execution Trace Converter (et_converter)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="astra-sim-output.html">ASTRA-sim Output</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ASTRA-sim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="getting-started.html">Getting Started</a></li>
+      <li class="breadcrumb-item active">Running ASTRA-sim</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/getting-started/running-astra-sim.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="running-astra-sim">
+<h1>Running ASTRA-sim<a class="headerlink" href="#running-astra-sim" title="Link to this heading"></a></h1>
+<p>Once ASTRA-sim is built, the executable <code class="docutils literal notranslate"><span class="pre">${BINARY}</span></code> is located at:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>For<span class="w"> </span>the<span class="w"> </span>analytical<span class="w"> </span>network<span class="w"> </span>backend
+<span class="gp">$ </span><span class="o">{</span>ASTRA_SIM<span class="o">}</span>/build/astra_analytical/build/AnalyticalAstra/bin/AnalyticalAstra
+</pre></div>
+</div>
+<p>Run simulations by passing the required aruguments:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="si">${</span><span class="nv">BINARY</span><span class="si">}</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--workload-configuration<span class="o">=</span><span class="si">${</span><span class="nv">WORKLOAD_CONFIG</span><span class="si">}</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--system-configuration<span class="o">=</span><span class="si">${</span><span class="nv">SYSTEM_CONFIG</span><span class="si">}</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--network-configuration<span class="o">=</span><span class="si">${</span><span class="nv">NETWORK_CONFIG</span><span class="si">}</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--memory-configuration<span class="o">=</span><span class="si">${</span><span class="nv">ASTRA_SIM</span><span class="si">}</span>/inputs/memory/analytical/no_memory_expansion.json
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Additional arguments may be required based on the type of network backend.</p>
+</div>
+<section id="argument-workload-config">
+<h2>Argument ${WORKLOAD_CONFIG}<a class="headerlink" href="#argument-workload-config" title="Link to this heading"></a></h2>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">--workload-configuration: path to the prefix of execution trace files </span>
+</pre></div>
+</div>
+<p>The naming rule for execution traces follows the format {path_prefix}.{npu_id}.et.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Execution traces can be created using Chakra tools. You have the option of using either execution trace generator (et_generator) or execution trace converter (et_converter).</p>
+</div>
+</section>
+<section id="argument-system-config">
+<h2>Argument ${SYSTEM_CONFIG}<a class="headerlink" href="#argument-system-config" title="Link to this heading"></a></h2>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">--system-configuration: path to the system configuration file</span>
+</pre></div>
+</div>
+<p>Example system configurations can be found at:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span><span class="o">{</span>ASTRA_SIM<span class="o">}</span>/inputs/system/
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>scheduling-policy</strong>: (LIFO/FIFO)</p>
+<ul>
+<li><p>The order we proritize collectives according based on their time of arrival. LIFO means that most recently created collectives have higher priority. While FIFO is the reverse.</p></li>
+</ul>
+</li>
+<li><p><strong>intra-dimension-scheduling</strong>: (FIFO/SCF)</p>
+<ul>
+<li><p>The order we proritize collective chunks inside each dimension. FIFO means that the least recently created collectives have higher priority. SCF means that the smallest chunk have higher priority.</p></li>
+</ul>
+</li>
+<li><p><strong>inter-dimension-scheduling</strong>: (baseline/themis)</p>
+<ul>
+<li><p>The order we proritize collective chunks across multiple dimensions. baseline means that the scheduling always uses a constant schedule for all chunks. themis means that the scheduling issues chunks to the dimension with least load.</p></li>
+</ul>
+</li>
+<li><p><strong>endpoint-delay</strong>: (int)</p>
+<ul>
+<li><p>The time NPU spends processing a message after receiving it in terms of cycles.</p></li>
+</ul>
+</li>
+<li><p><strong>active-chunks-per-dimension</strong>: (int)</p>
+<ul>
+<li><p>This corresponds to the Maximum number of chunks we like execute in parallel on
+each logical dimesnion of topology.</p></li>
+</ul>
+</li>
+<li><p><strong>preferred-dataset-splits</strong>: (int)</p>
+<ul>
+<li><p>The number of chunks we divide each collective into.</p></li>
+</ul>
+</li>
+<li><p><strong>all-reduce-implementation</strong>: (Dimension0Collective_Dimension1Collective_xxx_DimensionNCollective)</p>
+<ul>
+<li><p>Here we can create a multiphase colective all-reduce algorithm and directly specify the collective algorithm type for each logical dimension. The available options (algorithms) are: ring, direct, doubleBinaryTree, oneRing, oneDirect.</p></li>
+<li><p>For example, “ring_doubleBinaryTree” means we create a logical topology with 2 dimensions and we perform ring algorithm on the first dimension followed by double binary tree on the second dimension for the all-reduce pattern. Hence the number of physical dimension should be equal to the number of logical dimensions. The only exceptions are oneRing/oneDirect where we assume no matter how many physical dimensions we have, we create a one big logical ring/direct(AllToAll) topology where all NPUs are connected and perfrom a one phase ring/direct algorithm.</p></li>
+</ul>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>oneRing and oneDirect is not available for Garnet Backend in this version.</p>
+</div>
+<ul class="simple">
+<li><p><strong>reduce-scatter-implementation</strong>: (Dimension0CollectiveAlg_Dimension1CollectiveAlg_xxx_DimensionNCollectiveAlg)</p>
+<ul>
+<li><p>The same as “all-reduce-implementation:” but for reduce-scatter collective. The available options are: ring, direct, oneRing, oneDirect.</p></li>
+</ul>
+</li>
+<li><p><strong>all-gather-implementation</strong>: (Dimension0CollectiveAlg_Dimension1CollectiveAlg_xxx_DimensionNCollectiveAlg)</p>
+<ul>
+<li><p>The same as “all-reduce-implementation:” but for all-gather collective. The available options (algorithms) are: ring, direct, oneRing, oneDirect.</p></li>
+</ul>
+</li>
+<li><p><strong>all-to-all-implementation</strong>: (Dimension0CollectiveAlg_Dimension1CollectiveAlg_xxx_DimensionNCollectiveAlg)</p>
+<ul>
+<li><p>The same as “all-reduce-implementation:” but for all-to-all collective. The available options (algorithms) are: ring, direct, oneRing, oneDirect.</p></li>
+</ul>
+</li>
+<li><p><strong>collective-optimization</strong>: (baseline/localBWAware)</p>
+<ul>
+<li><p>baseline issues allreduce across all dimensions to handle allreduce of single chunk. While for an N-dimensional network, localBWAware issues a series of reduce-scatters on all dimensions from dim1 to dimN-1, followed by all-reduce on dimN, and then series of all-gathers starting from dimN-1 to dim1. This optimization is used to reduce the chunk size as it goes to the next network dimensions.</p></li>
+</ul>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The default clock cycle period is 1ns (1 Ghz feq). This value is defined inside Sys.hh. One can change it to any number. It will be a configurable command line parameter in the later versions.</p>
+</div>
+</section>
+<section id="argument-network-config">
+<h2>Argument ${NETWORK_CONFIG}<a class="headerlink" href="#argument-network-config" title="Link to this heading"></a></h2>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">--network-configuration: path to the network configuration file</span>
+</pre></div>
+</div>
+<p>Example network configurations can be found at</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span><span class="o">{</span>ASTRA_SIM<span class="o">}</span>/inputs/network/
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>topology-name</strong>: (string) put “Hierarchical”</p></li>
+<li><p><strong>dimensions-count</strong>: (uint) number of network dimensions</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Each configurations below is represented as an array of size <strong>dimensions-count</strong>, indexed by the dimension level.</p>
+</div>
+<ul class="simple">
+<li><p><strong>topologies-per-dim</strong>: (string) network topology (“Ring”, “FullyConnected”, or “Switch”)</p></li>
+<li><p><strong>dimension-type</strong>: (string) dimension type (“Tile”, “Package”, “Node”, or “Pod”)</p></li>
+<li><p><strong>units-count</strong>: (uint) number of GPUs</p></li>
+<li><p><strong>links-count</strong>: (uint) number of links</p></li>
+<li><p><strong>link-latency</strong>: (uint) link latency (ns)</p></li>
+<li><p><strong>link-bandwidth</strong>: (uint) link bandwidth (GB/s or B/ns)</p></li>
+<li><p><strong>nic-latency</strong>: (uint) nic latency (ns)</p></li>
+<li><p><strong>router-latency</strong>: (uint) router latency (ns)</p></li>
+<li><p><strong>hbm-latency</strong>: (uint) memory latency (ns)</p></li>
+<li><p><strong>hbm-bandwidth</strong>: (uint) memory bandwidth (GB/s or B/ns)</p></li>
+<li><p><strong>hbm-scale</strong>: (uint) memory scaling factor</p></li>
+</ul>
+</section>
+<section id="using-execution-trace-generator-et-generator">
+<h2>Using Execution Trace Generator (et_generator)<a class="headerlink" href="#using-execution-trace-generator-et-generator" title="Link to this heading"></a></h2>
+<p>et_generator can be used to define and generate any execution traces, functioning as a test case generator. You can generate execution traces with the following commands:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span><span class="o">{</span>ASTRA_SIM<span class="o">}</span>/extern/graph_frontend/chakra/et_generator
+<span class="gp">$ </span>cmake<span class="w"> </span>CMakeLists.txt<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span>-j<span class="k">$(</span>nproc<span class="k">)</span>
+<span class="gp">$ </span>./et_generator<span class="w"> </span>--num_npus<span class="w"> </span><span class="m">64</span><span class="w"> </span>--num_dims<span class="w"> </span><span class="m">1</span>
+</pre></div>
+</div>
+<p>To run one of the example traces (twoCompNodesDependent), execute the following command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>-
+<span class="gp">$ </span>./build/astra_analytical/build/AnalyticalAstra/bin/AnalyticalAstra<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--workload-configuration<span class="o">=</span>./extern/graph_frontend/chakra/et_generator/twoCompNodesDependent<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--system-configuration<span class="o">=</span>./inputs/system/sample_fully_connected_sys.txt<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--network-configuration<span class="o">=</span>./inputs/network/analytical/fully_connected.json<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--memory-configuration<span class="o">=</span>./inputs/memory/analytical/no_memory_expansion.json
+</pre></div>
+</div>
+<p>Upon completion, ASTRA-sim will display the number of cycles it took to run the simulation.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="go">sys[0] finished, 10 cycles</span>
+<span class="linenos">2</span><span class="go">sys[1] finished, 10 cycles</span>
+<span class="linenos">3</span><span class="go">...</span>
+<span class="linenos">4</span><span class="go">sys[62] finished, 10 cycles</span>
+<span class="linenos">5</span><span class="go">sys[63] finished, 10 cycles</span>
+</pre></div>
+</div>
+</section>
+<section id="using-execution-trace-converter-et-converter">
+<h2>Using Execution Trace Converter (et_converter)<a class="headerlink" href="#using-execution-trace-converter-et-converter" title="Link to this heading"></a></h2>
+<p>et_converter is a trace schema conversion tool, supporting PyTorch and FlexFlow execution traces, as well as ASTRA-sim 1.0 input files. You can convert ASTRA-sim 1.0 text input files into Chakra traces with the following commands:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span><span class="o">{</span>ASTRA_SIM<span class="o">}</span>/extern/graph_frontend/chakra/
+<span class="gp">$ </span>python3<span class="w"> </span>setup.py<span class="w"> </span>install<span class="w"> </span>--user
+<span class="gp">$ </span>python3<span class="w"> </span>-m<span class="w"> </span>et_converter.et_converter<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--input_type<span class="w"> </span>Text<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--input_filename<span class="w"> </span>../../../inputs/workload/ASTRA-sim-1.0/Resnet50_DataParallel.txt<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--output_filename<span class="w"> </span>../../../inputs/workload/ASTRA-sim-2.0/Resnet50_DataParallel<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--num_npus<span class="w"> </span><span class="m">64</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--num_dims<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--num_passes<span class="w"> </span><span class="m">1</span>
+</pre></div>
+</div>
+<p>Run the following command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>-
+<span class="gp">$ </span>./build/astra_analytical/build/AnalyticalAstra/bin/AnalyticalAstra<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--workload-configuration<span class="o">=</span>./inputs/workload/ASTRA-sim-2.0/Resnet50_DataParallel<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--system-configuration<span class="o">=</span>./inputs/system/sample_fully_connected_sys.txt<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--network-configuration<span class="o">=</span>./inputs/network/analytical/fully_connected.json<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--memory-configuration<span class="o">=</span>./inputs/memory/analytical/no_memory_expansion.json
+</pre></div>
+</div>
+<p>Upon completion, ASTRA-sim will display the number of cycles it took to run the simulation.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="go">sys[62] finished, 187442108 cycles</span>
+<span class="linenos">2</span><span class="go">sys[61] finished, 187442108 cycles</span>
+<span class="linenos">3</span><span class="go">...</span>
+<span class="linenos">4</span><span class="go">sys[0] finished, 187442108 cycles</span>
+<span class="linenos">5</span><span class="go">sys[63] finished, 187442108 cycles</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="astra-sim-output.html" class="btn btn-neutral float-right" title="ASTRA-sim Output" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2023, Synergy Lab, Georgia Institute of Technology.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Read the Docs</span>
+        v: latest
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        
+        <dl>
+            <dt>Versions</dt>
+            
+            
+                <dd><a href="/astra-sim-docs/1.0/index.html">1.0</a></dd>
+                
+            
+            
+                <dd><a href="/astra-sim-docs/index.html">latest</a></dd>
+                
+            
+        </dl>
+        
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
