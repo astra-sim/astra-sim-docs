@@ -1,6 +1,9 @@
+# Version of documentation
+version = '2.0'
+release = version
+
 import datetime
 from git import Repo
-
 
 # Retrive info
 repo = Repo()
@@ -11,10 +14,6 @@ project = 'ASTRA-sim'
 copyright = f'2020-{current_year}, Synergy Lab, Georgia Institute of Technology'
 author = 'ASTRA-sim'
 repo_name = 'astra-sim-docs'
-
-# Version of documentation
-version = '2.0'
-release = version
 
 # Sphinx Setup: Initialization
 html_context = dict()
