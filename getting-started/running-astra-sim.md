@@ -14,17 +14,16 @@ $ ${BINARY} \
   --workload-configuration=${WORKLOAD_CONFIG} \
   --system-configuration=${SYSTEM_CONFIG} \
   --network-configuration=${NETWORK_CONFIG} \
-  --memory-configuration=${ASTRA_SIM}/inputs/memory/analytical/no_memory_expansion.json
+  --memory-configuration=${MEMORY_CONFIG}
 :::
 
 :::{toctree}
 argument-workload-config.md
 argument-system-config.md
 argument-network-config.md
+argument-memory-config.md
 :::
-
 
 :::{note}
 Additional arguments may be required based on the type of network backend.
 :::
-

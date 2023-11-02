@@ -7,7 +7,7 @@
 The naming rule for execution traces follows the format {path_prefix}.{npu_id}.et.
 
 :::{note}
-Execution traces can be created using Chakra tools. You have the option of using either execution trace generator (et_generator) or execution trace converter (et_converter).
+Execution traces can be created using [Chakra tools](https://github.com/mlcommons/chakra/blob/main). You have the option of using either execution trace generator (et_generator) or execution trace converter (et_converter).
 :::
 
 ## Using Execution Trace Generator (et_generator)
