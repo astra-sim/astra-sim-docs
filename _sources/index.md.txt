@@ -6,4 +6,6 @@ ASTRA-sim documentation project is currently under active development. Please st
 
 :::{toctree}
 getting-started/getting-started.md
+network-backend/network-backend.md
+memory-backend/memory-backend.md
 :::
