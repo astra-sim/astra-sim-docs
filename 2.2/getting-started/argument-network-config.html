@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Argument ${NETWORK_CONFIG} &mdash; ASTRA-sim 2.2 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=f35be339"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Argument ${MEMORY_CONFIG}" href="argument-memory-config.html" />
+    <link rel="prev" title="Argument ${SYSTEM_CONFIG}" href="argument-system-config.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            ASTRA-sim
+          </a>
+              <div class="version">
+                2.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="getting-started.html">Getting Started</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="running-astra-sim.html">Running ASTRA-sim</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="argument-workload-config.html">Argument ${WORKLOAD_CONFIG}</a></li>
+<li class="toctree-l3"><a class="reference internal" href="argument-system-config.html">Argument ${SYSTEM_CONFIG}</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Argument ${NETWORK_CONFIG}</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#analytical-network-config">Analytical Network Config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#garnet-network-config">Garnet Network Config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ns3-network-config">NS3 Network Config</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="argument-memory-config.html">Argument ${MEMORY_CONFIG}</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="astra-sim-output.html">ASTRA-sim Output</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../network-backend/network-backend.html">Network Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../memory-backend/memory-backend.html">Memory Backend</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ASTRA-sim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="getting-started.html">Getting Started</a></li>
+          <li class="breadcrumb-item"><a href="running-astra-sim.html">Running ASTRA-sim</a></li>
+      <li class="breadcrumb-item active">Argument ${NETWORK_CONFIG}</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/getting-started/argument-network-config.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="argument-network-config">
+<h1>Argument ${NETWORK_CONFIG}<a class="headerlink" href="#argument-network-config" title="Link to this heading"></a></h1>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">--network-configuration: path to the network configuration file</span>
+</pre></div>
+</div>
+<section id="analytical-network-config">
+<h2><a class="reference external" href="https://github.com/astra-sim/astra-network-analytical/tree/40d3d0ff11bfd241b20423f1d9b5c670dc0d5bd8">Analytical Network Config</a><a class="headerlink" href="#analytical-network-config" title="Link to this heading"></a></h2>
+<p>Example network configurations can be found at</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="si">${</span><span class="nv">ASTRA_SIM</span><span class="si">}</span>/inputs/network/analytical/
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>topology-name</strong>: (string) put “Hierarchical”</p></li>
+<li><p><strong>dimensions-count</strong>: (uint) number of network dimensions</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Each configurations below is represented as an array of size <strong>dimensions-count</strong>, indexed by the dimension level.</p>
+</div>
+<ul class="simple">
+<li><p><strong>topologies-per-dim</strong>: (string) network topology (“Ring”, “FullyConnected”, or “Switch”)</p></li>
+<li><p><strong>dimension-type</strong>: (string) dimension type (“Tile”, “Package”, “Node”, or “Pod”)</p></li>
+<li><p><strong>units-count</strong>: (uint) number of GPUs</p></li>
+<li><p><strong>links-count</strong>: (uint) number of links</p></li>
+<li><p><strong>link-latency</strong>: (uint) link latency (ns)</p></li>
+<li><p><strong>link-bandwidth</strong>: (uint) link bandwidth (GB/s or B/ns)</p></li>
+<li><p><strong>nic-latency</strong>: (uint) nic latency (ns)</p></li>
+<li><p><strong>router-latency</strong>: (uint) router latency (ns)</p></li>
+<li><p><strong>hbm-latency</strong>: (uint) memory latency (ns)</p></li>
+<li><p><strong>hbm-bandwidth</strong>: (uint) memory bandwidth (GB/s or B/ns)</p></li>
+<li><p><strong>hbm-scale</strong>: (uint) memory scaling factor</p></li>
+</ul>
+</section>
+<section id="garnet-network-config">
+<h2><a class="reference external" href="https://github.com/astra-sim/astra-network-garnet/tree/c09ba4ebee0643cff3f75d64143d5310b7f31ee1">Garnet Network Config</a><a class="headerlink" href="#garnet-network-config" title="Link to this heading"></a></h2>
+<p>Example network configurations can be found at</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="si">${</span><span class="nv">ASTRA_SIM</span><span class="si">}</span>/inputs/network/garnet/
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>num-npus</strong>: (int) Total number of NPUs we are simulating</p></li>
+<li><p><strong>num-packages</strong>: (int) Total number of packages (each could contain one or multiple NPUs)</p></li>
+<li><p><strong>package-rows</strong>: (int) Number of package rows. it defines the vertical dimension size</p></li>
+<li><p><strong>topology</strong>: (NV_Switch/Torus3D) Determines the physical topology</p></li>
+<li><p><strong>local-rings</strong>: (int) Determines the number of rings in the local (intra-package) dimension</p></li>
+<li><p><strong>vertical-rings</strong>: (int) Determines the number of rings in the vertical (inter-package) dimension (applicable only on the Torus3D topology)</p></li>
+<li><p><strong>horizontal-rings</strong>: (int) Determines the number of rings in the horizontal (inter-package) dimension (applicable only on the Torus3D topology)</p></li>
+<li><p><strong>links-per-tile</strong>: (int) Determines the number of links for the alltoall (inter-package) dimesnion (applicable only on the NV_Switch topology)</p></li>
+<li><p><strong>flit-width</strong>: (int) The width of flits in bits</p></li>
+<li><p><strong>local-packet-size</strong>: (int) The size of intra-pcakge packets in bytes</p></li>
+<li><p><strong>package-packet-size</strong>: (int) The size of inter-pcakge packets in bytes</p></li>
+<li><p><strong>tile-link-width</strong>: (int) The width of intra-pcakge links in bits</p></li>
+<li><p><strong>package-link-width</strong>: (int) The width of inter-pcakge links in bits</p></li>
+<li><p><strong>vcs-per-vnet</strong>: (int) Number of VCs per each Vnet</p></li>
+<li><p><strong>routing-algorithm</strong>: (Ring_XY/AllToAll) Routing algorithm</p></li>
+<li><p><strong>router-latency</strong>: (int) Delay at each router</p></li>
+<li><p><strong>local-link-latency</strong>: (int) delay of intra-package links in cycles</p></li>
+<li><p><strong>package-link-latency</strong>: (int) delay of inter-package links in cycles</p></li>
+<li><p><strong>buffers-per-vc</strong>: (int) Buffer size per each VS in terms of number of flits</p></li>
+<li><p><strong>local-link-efficiency</strong>: (float) The ratio of (data/header+data) for intra-package packets</p></li>
+<li><p><strong>package-link-efficiency</strong>: (float) The ratio of (data/header+data) for inter-package packets</p></li>
+</ul>
+</section>
+<section id="ns3-network-config">
+<h2><a class="reference external" href="https://github.com/astra-sim/astra-network-ns3/tree/a46d80f9fab4d44ba687e81588c9d317ecaf3370">NS3 Network Config</a><a class="headerlink" href="#ns3-network-config" title="Link to this heading"></a></h2>
+<p>Example network configurations can be found at</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="si">${</span><span class="nv">ASTRA_SIM</span><span class="si">}</span>/inputs/network/ns3/
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="argument-system-config.html" class="btn btn-neutral float-left" title="Argument ${SYSTEM_CONFIG}" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="argument-memory-config.html" class="btn btn-neutral float-right" title="Argument ${MEMORY_CONFIG}" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2023, Synergy Lab, Georgia Institute of Technology.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Read the Docs</span>
+        v: 2.2
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        
+        <dl>
+            <dt>Versions</dt>
+            
+            
+                <dd><a href="/astra-sim-docs/1.0/index.html">1.0</a></dd>
+                
+            
+            
+                <dd><a href="/astra-sim-docs/2.2/index.html">2.2</a></dd>
+                
+            
+            
+                <dd><a href="/astra-sim-docs/index.html">latest</a></dd>
+                
+            
+        </dl>
+        
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
