@@ -1,5 +1,5 @@
 # Version of documentation
-version = '2.0'
+version = '2.2'
 release = version
 
 import datetime
