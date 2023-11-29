@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Installation &mdash; ASTRA-sim 2.2 documentation</title>
+  <title>Dependencies Setup &mdash; ASTRA-sim 2.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
 
@@ -21,7 +21,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Running ASTRA-sim" href="running-astra-sim.html" />
+    <link rel="next" title="Build ASTRA-sim" href="installing-astra-sim.html" />
     <link rel="prev" title="Getting Started" href="getting-started.html" /> 
 </head>
 
@@ -37,7 +37,7 @@
             ASTRA-sim
           </a>
               <div class="version">
-                2.2
+                latest
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -49,15 +49,17 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="getting-started.html">Getting Started</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Installation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#install-dependencies">Install Dependencies</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#compile-astra-sim">Compile ASTRA-sim</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Dependencies Setup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#install-required-system-packages">Install Required System Packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-required-python-packages">Install Required Python Packages</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="running-astra-sim.html">Running ASTRA-sim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installing-astra-sim.html">Build ASTRA-sim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running-astra-sim.html">Run ASTRA-sim</a></li>
 <li class="toctree-l2"><a class="reference internal" href="astra-sim-output.html">ASTRA-sim Output</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../system-layer/system-layer.html">System Layer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../network-backend/network-backend.html">Network Backend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../memory-backend/memory-backend.html">Memory Backend</a></li>
 </ul>
@@ -77,9 +79,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="getting-started.html">Getting Started</a></li>
-      <li class="breadcrumb-item active">Installation</li>
+      <li class="breadcrumb-item active">Dependencies Setup</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/getting-started/installation.md.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/getting-started/setup.md.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -87,11 +89,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="installation">
-<h1>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h1>
-<section id="install-dependencies">
-<h2>Install Dependencies<a class="headerlink" href="#install-dependencies" title="Link to this heading"></a></h2>
-<p>For Debian-based Linux distributions (including Ubuntu), you can install ASTRA-sim dependencies by executing the following commands.</p>
+  <section id="dependencies-setup">
+<h1>Dependencies Setup<a class="headerlink" href="#dependencies-setup" title="Link to this heading"></a></h1>
+<section id="install-required-system-packages">
+<h2>Install Required System Packages<a class="headerlink" href="#install-required-system-packages" title="Link to this heading"></a></h2>
+<ul>
+<li><h3 class="rubric" id="debian-based-linux-distributions">Debian-Based Linux Distributions</h3>
+</li>
+</ul>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>update
 <span class="gp">$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>gcc<span class="w"> </span>g++<span class="w"> </span>make<span class="w"> </span>cmake<span class="w"> </span><span class="se">\</span>
@@ -101,26 +106,55 @@
 <span class="gp">$ </span>sudo<span class="w"> </span>pip3<span class="w"> </span>install<span class="w"> </span><span class="nv">protobuf</span><span class="o">==</span><span class="m">3</span>.6.1<span class="w"> </span>pydot
 </pre></div>
 </div>
-</section>
-<section id="compile-astra-sim">
-<h2>Compile ASTRA-sim<a class="headerlink" href="#compile-astra-sim" title="Link to this heading"></a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Please make sure that you have all the required depencencies installed.</p>
+<p>For the ns3 backend python2, gcc-5.0 and g++-5.0 are also required. This is because the ns3 backend is based on an older ns3 version. We recommend using virtual environments to isolate python instances. Even with the ns3 backend, python3 is still used to create the workload using Chakra.</p>
 </div>
-<ol class="arabic simple">
-<li><p>To install ASTRA-sim, clone it from GitHub:</p></li>
-</ol>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>clone<span class="w"> </span>--recurse-submodules<span class="w"> </span>git@github.com:astra-sim/astra-sim.git
+<ul>
+<li><h3 class="rubric" id="macos-using-homebrew">macOS using <a class="reference external" href="https://brew.sh/">homebrew</a></h3>
+</li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>brew<span class="w"> </span>update
+<span class="gp">$ </span>brew<span class="w"> </span>upgrade
+<span class="gp">$ </span>brew<span class="w"> </span>install<span class="w"> </span>boost<span class="w"> </span>cmake<span class="w"> </span>coreutils<span class="w"> </span>
 </pre></div>
 </div>
-<ol class="arabic simple" start="2">
-<li><p>After that, go to the downloaded directory and execute the build script based on your target network backend:</p></li>
-</ol>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>astra-sim
-
-<span class="gp"># </span>For<span class="w"> </span>the<span class="w"> </span>analytical<span class="w"> </span>network<span class="w"> </span>backend
-<span class="gp">$ </span>./build/astra_analytical/build.sh
+<p>Then, you have to install protobuf 3.6.1 locally. You can download protobuf 3.6.1 here: <a class="reference external" href="https://github.com/protocolbuffers/protobuf/releases/tag/v3.6.1">[GitHub]</a> <a class="reference external" href="https://github.com/protocolbuffers/protobuf/releases/download/v3.6.1/protobuf-all-3.6.1.tar.gz">[protobuf-all-3.6.1.tar.gz]</a>.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Installing<span class="w"> </span>protobuf<span class="w"> </span><span class="m">3</span>.6.1<span class="w"> </span>locally
+<span class="gp">$ </span>./configure
+<span class="gp">$ </span>make<span class="w"> </span>-j<span class="k">$(</span>nproc<span class="k">)</span>
+<span class="gp">$ </span>make<span class="w"> </span>check<span class="w"> </span>-j<span class="k">$(</span>nproc<span class="k">)</span><span class="w">  </span><span class="c1"># checking compilation finished successfully</span>
+<span class="gp">$ </span>sudo<span class="w"> </span>make<span class="w"> </span>install<span class="w">  </span><span class="c1"># register protobuf to PATH</span>
+<span class="gp">$ </span>which<span class="w"> </span>protoc<span class="w">  </span><span class="c1"># system should be able to locate protoc</span>
+<span class="gp">$ </span>protoc<span class="w"> </span>--version<span class="w">  </span><span class="c1"># should be 3.6.1</span>
+</pre></div>
+</div>
+<ul>
+<li><h3 class="rubric" id="windows">Windows</h3>
+</li>
+</ul>
+<p>ASTRA-sim is not natively supporting Windows environment at this moment. We suggest to use Docker or <a class="reference external" href="https://learn.microsoft.com/en-us/windows/wsl/install">Windows Subsystem for Linux (WSL)</a>).</p>
+</section>
+<section id="install-required-python-packages">
+<h2>Install Required Python Packages<a class="headerlink" href="#install-required-python-packages" title="Link to this heading"></a></h2>
+<p>Now, you can install required Python packages, either through conda or pip3.</p>
+<ul>
+<li><h3 class="rubric" id="conda">Conda</h3>
+</li>
+</ul>
+<p>If you are managing Python environments through conda, you can run below commands to create a new environment for astra-sim.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>astra-sim<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.7
+<span class="gp">$ </span>conda<span class="w"> </span>activate<span class="w"> </span>astra-sim
+<span class="gp">$ </span>conda<span class="w"> </span>install<span class="w"> </span><span class="nv">protobuf</span><span class="o">=</span><span class="m">3</span>.6.1<span class="w"> </span>graphviz<span class="w"> </span>python-graphviz<span class="w"> </span>pydot
+</pre></div>
+</div>
+<ul>
+<li><h3 class="rubric" id="pip3">pip3</h3>
+</li>
+</ul>
+<p>You can also install required Python packages natively using pip3.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip3<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
+<span class="gp">$ </span>pip3<span class="w"> </span>install<span class="w"> </span><span class="nv">protobuf</span><span class="o">==</span><span class="m">3</span>.6.1<span class="w"> </span>pydot
 </pre></div>
 </div>
 </section>
@@ -131,7 +165,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="getting-started.html" class="btn btn-neutral float-left" title="Getting Started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="running-astra-sim.html" class="btn btn-neutral float-right" title="Running ASTRA-sim" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="installing-astra-sim.html" class="btn btn-neutral float-right" title="Build ASTRA-sim" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
@@ -153,7 +187,7 @@
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
         <span class="fa fa-book"> Read the Docs</span>
-        v: 2.2
+        v: latest
         <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">

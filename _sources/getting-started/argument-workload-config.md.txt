@@ -20,15 +20,31 @@ $ cmake CMakeLists.txt && make -j$(nproc)
 $ ./et_generator --num_npus 64 --num_dims 1
 :::
 
-To run one of the example traces (twoCompNodesDependent), execute the following command:
+To run one of the example traces (oneCommNodeAllReduce), execute the following command:
 
 :::{code-block} console
 $ cd -
-$ ./build/astra_analytical/build/AnalyticalAstra/bin/AnalyticalAstra \
-  --workload-configuration=./extern/graph_frontend/chakra/et_generator/twoCompNodesDependent \
-  --system-configuration=./inputs/system/sample_fully_connected_sys.txt \
-  --network-configuration=./inputs/network/analytical/fully_connected.json \
-  --memory-configuration=./inputs/memory/analytical/no_memory_expansion.json
+$ ./build/astra_analytical/build/bin/AstraSim_Analytical_Congestion_Unaware \
+  --workload-configuration=./extern/graph_frontend/chakra/et_generator/oneCommNodeAllReduce \
+  --system-configuration=./inputs/system/Switch.json \
+  --network-configuration=./inputs/network/analytical/Switch.yml \
+  --remote-memory-configuration=./inputs/remote_memory/analytical/no_memory_expansion.json
+  
+# For the ns3 network backend. Python2 required
+# After editing the configuration files in the following script
+$ ./build/astra_ns3/build.sh -r
+
+# Or, alternatively:
+$ cd ./extern/network_backend/ns3/simulation
+$ ./waf --run "scratch/AstraSimNetwork \
+  --workload-configuration=../../../../extern/graph_frontend/chakra/et_generator/oneCommNodeAllReduce \
+  --system-configuration=../../../../inputs/system/Switch.json \
+  --network-configuration=mix/config.txt \
+  --remote-memory-configuration=../../../../inputs/remote_memory/analytical/no_memory_expansion.json \
+  --logical-topology-configuration=../../../../inputs/network/ns3/sample_64nodes_1D.json \
+  --comm-group-configuration=\"empty\""
+$ cd -
+
 :::
 
 Upon completion, ASTRA-sim will display the number of cycles it took to run the simulation.
@@ -36,11 +52,11 @@ Upon completion, ASTRA-sim will display the number of cycles it took to run the 
 :::{code-block} console
 :lineno-start: 1
 
-sys[0] finished, 10 cycles
-sys[1] finished, 10 cycles
+sys[0] finished, 50904 cycles
+sys[1] finished, 50904 cycles
 ...
-sys[62] finished, 10 cycles
-sys[63] finished, 10 cycles
+sys[62] finished, 50904 cycles
+sys[63] finished, 50904 cycles
 :::
 
 ## Using Execution Trace Converter (et_converter)
@@ -63,20 +79,22 @@ Run the following command:
 
 :::{code-block} console
 $ cd -
-$ ./build/astra_analytical/build/AnalyticalAstra/bin/AnalyticalAstra \
+$ ./build/astra_analytical/build/bin/AstraSim_Analytical_Congestion_Unaware \
   --workload-configuration=./inputs/workload/ASTRA-sim-2.0/Resnet50_DataParallel \
-  --system-configuration=./inputs/system/sample_fully_connected_sys.txt \
-  --network-configuration=./inputs/network/analytical/fully_connected.json \
-  --memory-configuration=./inputs/memory/analytical/no_memory_expansion.json
+  --system-configuration=./inputs/system/Switch.json \
+  --network-configuration=./inputs/network/analytical/Switch.yml \
+  --remote-memory-configuration=./inputs/remote_memory/analytical/no_memory_expansion.json
+
+# Similarly, for ns3, run the previous command while only changing the workload.
 :::
 
 Upon completion, ASTRA-sim will display the number of cycles it took to run the simulation.
 
 :::{code-block} console
 :lineno-start: 1
-sys[62] finished, 187442108 cycles
-sys[61] finished, 187442108 cycles
+sys[62] finished, 6749042 cycles
+sys[61] finished, 6749042 cycles
 ...
-sys[0] finished, 187442108 cycles
-sys[63] finished, 187442108 cycles
+sys[0] finished, 6749042 cycles
+sys[63] finished, 6749042 cycles
 :::

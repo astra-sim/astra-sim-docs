@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Installation &mdash; ASTRA-sim 2.2 documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <title>Build ASTRA-sim &mdash; ASTRA-sim 2.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -19,8 +21,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Running ASTRA-sim" href="running-astra-sim.html" />
-    <link rel="prev" title="Getting Started" href="getting-started.html" /> 
+    <link rel="next" title="Run ASTRA-sim" href="running-astra-sim.html" />
+    <link rel="prev" title="Dependencies Setup" href="setup.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -47,12 +49,14 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="getting-started.html">Getting Started</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Installation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#install-dependencies">Install Dependencies</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#compile-astra-sim">Compile ASTRA-sim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup.html">Dependencies Setup</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Build ASTRA-sim</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#clone-repository">Clone Repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#build-with-docker-optional">Build with Docker (Optional)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#compile-program">Compile Program</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="running-astra-sim.html">Running ASTRA-sim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running-astra-sim.html">Run ASTRA-sim</a></li>
 <li class="toctree-l2"><a class="reference internal" href="astra-sim-output.html">ASTRA-sim Output</a></li>
 </ul>
 </li>
@@ -76,9 +80,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="getting-started.html">Getting Started</a></li>
-      <li class="breadcrumb-item active">Installation</li>
+      <li class="breadcrumb-item active">Build ASTRA-sim</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/getting-started/installation.md.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/getting-started/installing-astra-sim.md.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -86,40 +90,36 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="installation">
-<h1>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h1>
-<section id="install-dependencies">
-<h2>Install Dependencies<a class="headerlink" href="#install-dependencies" title="Link to this heading"></a></h2>
-<p>For Debian-based Linux distributions (including Ubuntu), you can install ASTRA-sim dependencies by executing the following commands.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>update
-<span class="gp">$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>gcc<span class="w"> </span>g++<span class="w"> </span>make<span class="w"> </span>cmake<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>libboost-dev<span class="w"> </span>libboost-program-options-dev<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>libprotobuf-dev<span class="w"> </span>protobuf-compiler<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>python3<span class="w"> </span>python3-pip<span class="w"> </span>git
-<span class="gp">$ </span>sudo<span class="w"> </span>pip3<span class="w"> </span>install<span class="w"> </span><span class="nv">protobuf</span><span class="o">==</span><span class="m">3</span>.6.1<span class="w"> </span>pydot
-</pre></div>
-</div>
-</section>
-<section id="compile-astra-sim">
-<h2>Compile ASTRA-sim<a class="headerlink" href="#compile-astra-sim" title="Link to this heading"></a></h2>
+  <section id="build-astra-sim">
+<h1>Build ASTRA-sim<a class="headerlink" href="#build-astra-sim" title="Link to this heading"></a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Please make sure that you have all the required depencencies installed.</p>
 </div>
-<ol class="arabic simple">
-<li><p>To install ASTRA-sim, clone it from GitHub:</p></li>
-</ol>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>clone<span class="w"> </span>--recurse-submodules<span class="w"> </span>git@github.com:astra-sim/astra-sim.git
+<section id="clone-repository">
+<h2>Clone Repository<a class="headerlink" href="#clone-repository" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>--recurse-submodules<span class="w"> </span>git@github.com:astra-sim/astra-sim.git
+$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>astra-sim
 </pre></div>
 </div>
-<ol class="arabic simple" start="2">
-<li><p>After that, go to the downloaded directory and execute the build script based on your target network backend:</p></li>
-</ol>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>astra-sim
+</section>
+<section id="build-with-docker-optional">
+<h2>Build with Docker (Optional)<a class="headerlink" href="#build-with-docker-optional" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create Docker Image</span>
+$<span class="w"> </span>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>astra-sim<span class="w"> </span>.
 
-<span class="gp"># </span>For<span class="w"> </span>the<span class="w"> </span>analytical<span class="w"> </span>network<span class="w"> </span>backend
-<span class="gp">$ </span>./build/astra_analytical/build.sh
+<span class="c1"># Run Docker Image</span>
+$<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>astra-sim
+</pre></div>
+</div>
+</section>
+<section id="compile-program">
+<h2>Compile Program<a class="headerlink" href="#compile-program" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># For Analytical Network Backend</span>
+$<span class="w"> </span>./build/astra_analytical/build.sh
+
+<span class="c1"># For NS3 Network Backend</span>
+$<span class="w"> </span>./build/astra_ns3/build.sh<span class="w"> </span>-c
 </pre></div>
 </div>
 </section>
@@ -129,8 +129,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="getting-started.html" class="btn btn-neutral float-left" title="Getting Started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="running-astra-sim.html" class="btn btn-neutral float-right" title="Running ASTRA-sim" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="setup.html" class="btn btn-neutral float-left" title="Dependencies Setup" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="running-astra-sim.html" class="btn btn-neutral float-right" title="Run ASTRA-sim" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

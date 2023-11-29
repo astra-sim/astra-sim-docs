@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Welcome to ASTRA-sim’s documentation! &mdash; ASTRA-sim 2.2 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -77,56 +79,23 @@
              
   <section id="welcome-to-astra-sim-s-documentation">
 <h1>Welcome to ASTRA-sim’s documentation!<a class="headerlink" href="#welcome-to-astra-sim-s-documentation" title="Link to this heading"></a></h1>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>ASTRA-sim documentation project is currently under active development. Please stay tuned!</p>
-</div>
+<p><a class="reference external" href="https://astra-sim.github.io/">ASTRA-sim</a> is a cycle-accurate distributed training simulator developed by Intel, Meta, and Georgia Tech. It enables the systematic study of challenges in modern deep learning systems, allowing for the exploration of bottlenecks and the development of efficient training methodologies for large DNN models across diverse future platforms.</p>
+<p><img alt="alt text" src="_images/astra_sim_overview.png" /></p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="getting-started/getting-started.html">Getting Started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="getting-started/installation.html">Installation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="getting-started/installation.html#install-dependencies">Install Dependencies</a></li>
-<li class="toctree-l3"><a class="reference internal" href="getting-started/installation.html#compile-astra-sim">Compile ASTRA-sim</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="getting-started/running-astra-sim.html">Running ASTRA-sim</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="getting-started/argument-workload-config.html">Argument ${WORKLOAD_CONFIG}</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="getting-started/argument-workload-config.html#using-execution-trace-generator-et-generator">Using Execution Trace Generator (et_generator)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="getting-started/argument-workload-config.html#using-execution-trace-converter-et-converter">Using Execution Trace Converter (et_converter)</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="getting-started/argument-system-config.html">Argument ${SYSTEM_CONFIG}</a></li>
-<li class="toctree-l3"><a class="reference internal" href="getting-started/argument-network-config.html">Argument ${NETWORK_CONFIG}</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="getting-started/argument-network-config.html#analytical-network-config">Analytical Network Config</a></li>
-<li class="toctree-l4"><a class="reference internal" href="getting-started/argument-network-config.html#garnet-network-config">Garnet Network Config</a></li>
-<li class="toctree-l4"><a class="reference internal" href="getting-started/argument-network-config.html#ns3-network-config">NS3 Network Config</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="getting-started/argument-memory-config.html">Argument ${MEMORY_CONFIG}</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="getting-started/argument-memory-config.html#analytical-memory-config">Analytical Memory Config</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="getting-started/setup.html">Dependencies Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting-started/installing-astra-sim.html">Build ASTRA-sim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting-started/running-astra-sim.html">Run ASTRA-sim</a></li>
 <li class="toctree-l2"><a class="reference internal" href="getting-started/astra-sim-output.html">ASTRA-sim Output</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="system-layer/system-layer.html">System Layer</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="system-layer/overview.html">Overview</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="system-layer/overview.html#foreword">Foreword</a></li>
-<li class="toctree-l3"><a class="reference internal" href="system-layer/overview.html#queue-management">Queue Management</a></li>
-<li class="toctree-l3"><a class="reference internal" href="system-layer/overview.html#collective-implementation">Collective Implementation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="system-layer/overview.html#interface-with-network-backend">Interface with network backend</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="system-layer/overview.html">Overview</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="network-backend/network-backend.html">Network Backend</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="network-backend/analytical-network-backend.html">Analytical Network Backend</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="network-backend/analytical-network-backend.html#overview">Overview</a></li>
-<li class="toctree-l3"><a class="reference internal" href="network-backend/analytical-network-backend.html#documentation">Documentation</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="network-backend/analytical-network-backend.html">Analytical Network Backend</a></li>
 <li class="toctree-l2"><a class="reference internal" href="network-backend/ns3-network-backend.html">ns-3 Network Backend</a></li>
 <li class="toctree-l2"><a class="reference internal" href="network-backend/garnet-network-backend.html">Garnet Network Backend</a></li>
 </ul>
@@ -136,6 +105,10 @@
 </ul>
 </li>
 </ul>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>ASTRA-sim documentation project is currently under active development. Please stay tuned!</p>
 </div>
 </section>
 
