@@ -1,7 +1,8 @@
 # Getting Started
 
 :::{toctree}
-installation.md
+setup.md
+installing-astra-sim.md
 running-astra-sim.md
 astra-sim-output.md
 :::

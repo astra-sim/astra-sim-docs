@@ -1,4 +1,4 @@
-# Running ASTRA-sim
+# Run ASTRA-sim
 
 Once ASTRA-sim is built, the executable `${BINARY}` is located at:
 
