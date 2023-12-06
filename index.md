@@ -2,6 +2,7 @@
 
 [ASTRA-sim](https://astra-sim.github.io/) is a cycle-accurate distributed training simulator developed by Intel, Meta, and Georgia Tech. It enables the systematic study of challenges in modern deep learning systems, allowing for the exploration of bottlenecks and the development of efficient training methodologies for large DNN models across diverse future platforms.
 
+Here is a concise visual summary of our simulator:
 ![alt text](/_static/astra_sim_overview.png)
 
 :::{toctree}
