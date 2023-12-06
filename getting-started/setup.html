@@ -50,8 +50,9 @@
               <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="getting-started.html">Getting Started</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Dependencies Setup</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#install-required-system-packages">Install Required System Packages</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#install-required-python-packages">Install Required Python Packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#debian-based-linux-distributions">Debian-Based Linux Distributions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#macos-using-homebrew">macOS using homebrew</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#windows">Windows</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="installing-astra-sim.html">Build ASTRA-sim</a></li>
@@ -91,53 +92,22 @@
              
   <section id="dependencies-setup">
 <h1>Dependencies Setup<a class="headerlink" href="#dependencies-setup" title="Link to this heading"></a></h1>
-<section id="install-required-system-packages">
-<h2>Install Required System Packages<a class="headerlink" href="#install-required-system-packages" title="Link to this heading"></a></h2>
-<ul>
-<li><h3 class="rubric" id="debian-based-linux-distributions">Debian-Based Linux Distributions</h3>
-</li>
-</ul>
+<section id="debian-based-linux-distributions">
+<h2>Debian-Based Linux Distributions<a class="headerlink" href="#debian-based-linux-distributions" title="Link to this heading"></a></h2>
+<p>Install required system packages:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>update
 <span class="gp">$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>gcc<span class="w"> </span>g++<span class="w"> </span>make<span class="w"> </span>cmake<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>libboost-dev<span class="w"> </span>libboost-program-options-dev<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>libprotobuf-dev<span class="w"> </span>protobuf-compiler<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>python3<span class="w"> </span>python3-pip<span class="w"> </span>git
-<span class="gp">$ </span>sudo<span class="w"> </span>pip3<span class="w"> </span>install<span class="w"> </span><span class="nv">protobuf</span><span class="o">==</span><span class="m">3</span>.6.1<span class="w"> </span>pydot
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>For the ns3 backend python2, gcc-5.0 and g++-5.0 are also required. This is because the ns3 backend is based on an older ns3 version. We recommend using virtual environments to isolate python instances. Even with the ns3 backend, python3 is still used to create the workload using Chakra.</p>
+<p>For the ns3 backend <code class="docutils literal notranslate"><span class="pre">python2</span></code>, <code class="docutils literal notranslate"><span class="pre">gcc-5.0</span></code> and <code class="docutils literal notranslate"><span class="pre">g++-5.0</span></code> are also required. This is because the ns3 backend is based on an older ns3 version. We recommend using virtual environments to isolate python instances. Even with the ns3 backend, <code class="docutils literal notranslate"><span class="pre">python3</span></code> is still used to create the workload using Chakra.</p>
 </div>
-<ul>
-<li><h3 class="rubric" id="macos-using-homebrew">macOS using <a class="reference external" href="https://brew.sh/">homebrew</a></h3>
-</li>
-</ul>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>brew<span class="w"> </span>update
-<span class="gp">$ </span>brew<span class="w"> </span>upgrade
-<span class="gp">$ </span>brew<span class="w"> </span>install<span class="w"> </span>boost<span class="w"> </span>cmake<span class="w"> </span>coreutils<span class="w"> </span>
-</pre></div>
-</div>
-<p>Then, you have to install protobuf 3.6.1 locally. You can download protobuf 3.6.1 here: <a class="reference external" href="https://github.com/protocolbuffers/protobuf/releases/tag/v3.6.1">[GitHub]</a> <a class="reference external" href="https://github.com/protocolbuffers/protobuf/releases/download/v3.6.1/protobuf-all-3.6.1.tar.gz">[protobuf-all-3.6.1.tar.gz]</a>.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Installing<span class="w"> </span>protobuf<span class="w"> </span><span class="m">3</span>.6.1<span class="w"> </span>locally
-<span class="gp">$ </span>./configure
-<span class="gp">$ </span>make<span class="w"> </span>-j<span class="k">$(</span>nproc<span class="k">)</span>
-<span class="gp">$ </span>make<span class="w"> </span>check<span class="w"> </span>-j<span class="k">$(</span>nproc<span class="k">)</span><span class="w">  </span><span class="c1"># checking compilation finished successfully</span>
-<span class="gp">$ </span>sudo<span class="w"> </span>make<span class="w"> </span>install<span class="w">  </span><span class="c1"># register protobuf to PATH</span>
-<span class="gp">$ </span>which<span class="w"> </span>protoc<span class="w">  </span><span class="c1"># system should be able to locate protoc</span>
-<span class="gp">$ </span>protoc<span class="w"> </span>--version<span class="w">  </span><span class="c1"># should be 3.6.1</span>
-</pre></div>
-</div>
-<ul>
-<li><h3 class="rubric" id="windows">Windows</h3>
-</li>
-</ul>
-<p>ASTRA-sim is not natively supporting Windows environment at this moment. We suggest to use Docker or <a class="reference external" href="https://learn.microsoft.com/en-us/windows/wsl/install">Windows Subsystem for Linux (WSL)</a>).</p>
-</section>
-<section id="install-required-python-packages">
-<h2>Install Required Python Packages<a class="headerlink" href="#install-required-python-packages" title="Link to this heading"></a></h2>
-<p>Now, you can install required Python packages, either through conda or pip3.</p>
+<p>Now, you can install required Python packages, either through conda or pip3:</p>
 <ul>
 <li><h3 class="rubric" id="conda">Conda</h3>
 </li>
@@ -157,6 +127,28 @@
 <span class="gp">$ </span>pip3<span class="w"> </span>install<span class="w"> </span><span class="nv">protobuf</span><span class="o">==</span><span class="m">3</span>.6.1<span class="w"> </span>pydot
 </pre></div>
 </div>
+</section>
+<section id="macos-using-homebrew">
+<h2>macOS using <a class="reference external" href="https://brew.sh/">homebrew</a><a class="headerlink" href="#macos-using-homebrew" title="Link to this heading"></a></h2>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>brew<span class="w"> </span>update
+<span class="gp">$ </span>brew<span class="w"> </span>upgrade
+<span class="gp">$ </span>brew<span class="w"> </span>install<span class="w"> </span>boost<span class="w"> </span>cmake<span class="w"> </span>coreutils
+</pre></div>
+</div>
+<p>Then, you have to install protobuf 3.6.1 locally. You can download protobuf 3.6.1 here: <a class="reference external" href="https://github.com/protocolbuffers/protobuf/releases/tag/v3.6.1">[GitHub]</a> <a class="reference external" href="https://github.com/protocolbuffers/protobuf/releases/download/v3.6.1/protobuf-all-3.6.1.tar.gz">[protobuf-all-3.6.1.tar.gz]</a>.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Installing<span class="w"> </span>protobuf<span class="w"> </span><span class="m">3</span>.6.1<span class="w"> </span>locally
+<span class="gp">$ </span>./configure
+<span class="gp">$ </span>make<span class="w"> </span>-j<span class="k">$(</span>nproc<span class="k">)</span>
+<span class="gp">$ </span>make<span class="w"> </span>check<span class="w"> </span>-j<span class="k">$(</span>nproc<span class="k">)</span><span class="w">  </span><span class="c1"># checking compilation finished successfully</span>
+<span class="gp">$ </span>sudo<span class="w"> </span>make<span class="w"> </span>install<span class="w">  </span><span class="c1"># register protobuf to PATH</span>
+<span class="gp">$ </span>which<span class="w"> </span>protoc<span class="w">  </span><span class="c1"># system should be able to locate protoc</span>
+<span class="gp">$ </span>protoc<span class="w"> </span>--version<span class="w">  </span><span class="c1"># should be 3.6.1</span>
+</pre></div>
+</div>
+</section>
+<section id="windows">
+<h2>Windows<a class="headerlink" href="#windows" title="Link to this heading"></a></h2>
+<p>ASTRA-sim is not natively supporting Windows environment at this moment. We suggest to use Docker or <a class="reference external" href="https://learn.microsoft.com/en-us/windows/wsl/install">Windows Subsystem for Linux (WSL)</a>).</p>
 </section>
 </section>
 
