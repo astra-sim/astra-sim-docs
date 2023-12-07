@@ -14,7 +14,7 @@ $ ${BINARY} \
   --workload-configuration=${WORKLOAD_CONFIG} \
   --system-configuration=${SYSTEM_CONFIG} \
   --network-configuration=${NETWORK_CONFIG} \
-  --memory-configuration=${MEMORY_CONFIG}
+  --remote-memory-configuration=${MEMORY_CONFIG}
 :::
 
 :::{toctree}
