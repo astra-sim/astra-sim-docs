@@ -14,12 +14,6 @@ Execution traces can be created using [Chakra tools](https://github.com/mlcommon
 
 et_generator can be used to define and generate any execution traces, functioning as a test case generator. You can generate execution traces with the following commands:
 
-:::{code-block} console
-$ cd ${ASTRA_SIM}/extern/graph_frontend/chakra/et_generator
-$ cmake CMakeLists.txt && make -j$(nproc)
-$ ./et_generator --num_npus 64 --num_dims 1
-:::
-
 ```bash
 $ cd ${ASTRA_SIM}/extern/graph_frontend/chakra
 $ pip3 install .

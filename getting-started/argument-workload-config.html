@@ -112,11 +112,6 @@
 <section id="using-execution-trace-generator-et-generator">
 <h2>Using Execution Trace Generator (et_generator)<a class="headerlink" href="#using-execution-trace-generator-et-generator" title="Link to this heading"></a></h2>
 <p>et_generator can be used to define and generate any execution traces, functioning as a test case generator. You can generate execution traces with the following commands:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span><span class="si">${</span><span class="nv">ASTRA_SIM</span><span class="si">}</span>/extern/graph_frontend/chakra/et_generator
-<span class="gp">$ </span>cmake<span class="w"> </span>CMakeLists.txt<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span>-j<span class="k">$(</span>nproc<span class="k">)</span>
-<span class="gp">$ </span>./et_generator<span class="w"> </span>--num_npus<span class="w"> </span><span class="m">64</span><span class="w"> </span>--num_dims<span class="w"> </span><span class="m">1</span>
-</pre></div>
-</div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span><span class="si">${</span><span class="nv">ASTRA_SIM</span><span class="si">}</span>/extern/graph_frontend/chakra
 $<span class="w"> </span>pip3<span class="w"> </span>install<span class="w"> </span>.
 $<span class="w"> </span>python3<span class="w"> </span>-m<span class="w"> </span>chakra.et_generator.et_generator<span class="w"> </span>--num_npus<span class="w"> </span><span class="m">64</span><span class="w"> </span>--num_dims<span class="w"> </span><span class="m">1</span>
