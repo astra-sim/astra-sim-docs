@@ -16,7 +16,7 @@
 
 
 ### Results
-![Alt text](gpu_2.png)
+![Alt text](../../_static/images/validation/hardware/gpu_2.png)
 
 **Geomean error rate = 11.4%**
 
@@ -36,7 +36,7 @@
 2. Reduction operation - Sum
 
 ### Results
-![Alt text](gpu_4.png)
+![Alt text](../../_static/images/validation/hardware/gpu_4.png)
 
 **Geomean error rate = 7.9%**
 
@@ -56,7 +56,7 @@
 2. Reduction operation - Sum
 
 ### Results
-![Alt text](gpu_8.png)
+![Alt text](../../_static/images/validation/hardware/gpu_8.png)
 
 **Geomean error rate = 2.8%**
 

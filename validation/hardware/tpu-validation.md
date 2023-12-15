@@ -20,11 +20,11 @@
 ### Results
 All Reduce results:
 
-![Alt text](tpu_v3-8_allreduce.png)
+![Alt text](../../_static/images/validation/hardware/tpu_v3-8_allreduce.png)
 
 All Gather results:
 
-![Alt text](tpu_v3-8_allgather.png)
+![Alt text](../../_static/images/validation/hardware/tpu_v3-8_allgather.png)
 
 
 ## Senario - 1: v3-32 nodes
@@ -46,11 +46,11 @@ All Gather results:
 ### Results
 TPU v3-32 modelled as a Ring:
 
-![Alt text](tpu_v3-32_ring_allreduce.png)
+![Alt text](../../_static/images/validation/hardware/tpu_v3-32_ring_allreduce.png)
 
 TPU v3-32 modelled as a 2D-Torus:
 
-![Alt text](tpu_v3-32_torus_allreduce.png)
+![Alt text](../../_static/images/validation/hardware/tpu_v3-32_torus_allreduce.png)
 
 ## Recommended practices
 1. Factor in SW overheads such as JIT's lazy compilation and dispatch time, by calling and tracking the allreduce over differrent iterations.
