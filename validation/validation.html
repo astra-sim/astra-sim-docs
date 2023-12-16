@@ -21,7 +21,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Validation on System 1" href="validation-system1.html" />
+    <link rel="next" title="Validation on GPU Systems - NCCL over HPE ProLiant Gen10" href="hardware/gpu-validation.html" />
     <link rel="prev" title="Analytical Memory Backend" href="../memory-backend/analytical-memory-backend.html" /> 
 </head>
 
@@ -53,8 +53,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../network-backend/network-backend.html">Network Backend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../memory-backend/memory-backend.html">Memory Backend</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Validation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="validation-system1.html">Validation on System 1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="validation-system2.html">Validation on System 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hardware/gpu-validation.html">Validation on GPU Systems - NCCL over HPE ProLiant Gen10</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hardware/tpu-validation.html">Validation on Google’s TPU-v3</a></li>
 </ul>
 </li>
 </ul>
@@ -92,8 +92,49 @@
 <p>This page will be populated with validation results by comparing ASTRA-sim results with various real systems measurements.</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="validation-system1.html">Validation on System 1</a></li>
-<li class="toctree-l1"><a class="reference internal" href="validation-system2.html">Validation on System 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hardware/gpu-validation.html">Validation on GPU Systems - NCCL over HPE ProLiant Gen10</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="hardware/gpu-validation.html#senario-1-2-gpus-all-reduce">Senario - 1: 2-GPUs All-Reduce</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hardware/gpu-validation.html#hardware-setup">Hardware Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hardware/gpu-validation.html#astra-sim-setup">ASTRA-Sim setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hardware/gpu-validation.html#collectives-run">Collectives run</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hardware/gpu-validation.html#results">Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hardware/gpu-validation.html#senario-2-4-gpus-all-reduce">Senario - 2: 4-GPUs All-Reduce</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hardware/gpu-validation.html#id1">Hardware Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hardware/gpu-validation.html#id2">ASTRA-Sim setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hardware/gpu-validation.html#id3">Collectives run</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hardware/gpu-validation.html#id4">Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hardware/gpu-validation.html#senario-3-8-gpus-all-reduce">Senario - 3: 8-GPUs All-Reduce</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hardware/gpu-validation.html#id5">Hardware Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hardware/gpu-validation.html#id6">ASTRA-Sim setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hardware/gpu-validation.html#id7">Collectives run</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hardware/gpu-validation.html#id8">Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hardware/gpu-validation.html#recommended-practices">Recommended practices</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="hardware/tpu-validation.html">Validation on Google’s TPU-v3</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="hardware/tpu-validation.html#senario-1-v3-8-nodes">Senario - 1: v3-8 nodes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hardware/tpu-validation.html#hardware-setup">Hardware Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hardware/tpu-validation.html#astra-sim-setup">ASTRA-Sim setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hardware/tpu-validation.html#collectives-run">Collectives run</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hardware/tpu-validation.html#results">Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hardware/tpu-validation.html#senario-1-v3-32-nodes">Senario - 1: v3-32 nodes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hardware/tpu-validation.html#id1">Hardware Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hardware/tpu-validation.html#id2">ASTRA-Sim setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hardware/tpu-validation.html#id3">Collectives run</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hardware/tpu-validation.html#id4">Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hardware/tpu-validation.html#recommended-practices">Recommended practices</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </section>
@@ -103,7 +144,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../memory-backend/analytical-memory-backend.html" class="btn btn-neutral float-left" title="Analytical Memory Backend" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="validation-system1.html" class="btn btn-neutral float-right" title="Validation on System 1" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="hardware/gpu-validation.html" class="btn btn-neutral float-right" title="Validation on GPU Systems - NCCL over HPE ProLiant Gen10" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
