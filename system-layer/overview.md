@@ -33,7 +33,7 @@ In the other cases, `proceed_to_next_vnet_baseline` executes a subset of the abo
 The collective implementations of Astra-sim follows general implementations, such as NCCL, but differ slightly in detail.
 
 ### Ring
-![Ring Algorithm](/_static/images/system_collective_ring.svg)
+<!-- ![Ring Algorithm](/_static/images/system_collective_ring.svg) -->
 In a ring with n nodes, a collective originally in node k will have to go through n-1 communications to traverse through all nodes and arrive at node k-1. From node k's point of view, node k will send n-1 messages and receive n-1 messages.
 
 Here is a detail of how it happens.
