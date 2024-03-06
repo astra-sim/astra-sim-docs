@@ -11,6 +11,7 @@ getting-started/getting-started.md
 system-layer/system-layer.md
 network-backend/network-backend.md
 memory-backend/memory-backend.md
+compute-backend/compute-backend.md
 validation/validation.md
 :::
 
