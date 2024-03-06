@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Memory Backend &mdash; ASTRA-sim 2.2 documentation</title>
+  <title>Compute Backend &mdash; ASTRA-sim 2.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
 
@@ -20,9 +20,7 @@
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Analytical Memory Backend" href="analytical-memory-backend.html" />
-    <link rel="prev" title="Garnet Network Backend" href="../network-backend/garnet-network-backend.html" /> 
+    <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -47,14 +45,11 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul class="current">
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="../getting-started/getting-started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../system-layer/system-layer.html">System Layer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../network-backend/network-backend.html">Network Backend</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Memory Backend</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="analytical-memory-backend.html">Analytical Memory Backend</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../memory-backend/memory-backend.html">Memory Backend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../validation/validation.html">Validation</a></li>
 </ul>
 
@@ -72,9 +67,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Memory Backend</li>
+      <li class="breadcrumb-item active">Compute Backend</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/memory-backend/memory-backend.md.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/compute-backend/compute-backend.md.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -82,16 +77,22 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="memory-backend">
-<h1>Memory Backend<a class="headerlink" href="#memory-backend" title="Link to this heading"></a></h1>
+  <section id="compute-backend">
+<h1>Compute Backend<a class="headerlink" href="#compute-backend" title="Link to this heading"></a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This page is currently under construction. Please stay tuned for updates!</p>
 </div>
-<p>ASTRA-sim currently supports one memory simulator as its memory modeling backend.</p>
+<p>ASTRA-sim currently supports two Compute simulators as its Compute modeling backend.</p>
+<ul class="simple">
+<li><p>Scale-sim Compute Simulator</p></li>
+</ul>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="analytical-memory-backend.html">Analytical Memory Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="roofline-compute-backend.html">Roofline Compute Backend</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="roofline-compute-backend.html#enable-roofline-models">Enable Roofline Models</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </section>
@@ -99,10 +100,7 @@
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../network-backend/garnet-network-backend.html" class="btn btn-neutral float-left" title="Garnet Network Backend" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="analytical-memory-backend.html" class="btn btn-neutral float-right" title="Analytical Memory Backend" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+          <footer>
 
   <hr/>
 

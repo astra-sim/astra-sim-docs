@@ -165,18 +165,6 @@ sys[0] finished, 13271344 cycles
 sys[1] finished, 14249000 cycles
 ```
 
-## Enable Roofline Models
-ASTRA-sim 2.0 supports two computational performance models: the measured runtime model and the roofline model. You can enable the roofline model by setting the 'roofline-enabled' field to 1 in the system configuration file. Additionally, specify the local memory bandwidth (in GB/sec) and peak performance (in TFLOPS).
-```
-...
-"roofline-enabled": 1,
-"local-mem-bw": 50,
-"peak-perf": 2000,
-...
-```
-When creating execution traces, ensure to include the number of floating point operations and the tensor size for each compute operator.
-
-
 ## Enable Communicator Groups
 ASTRA-sim 2.0 supports [communicator groups](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/communicators.html).
 You can pass a communicator group configuration file by specifying the file path using `--comm-group-configuration`.

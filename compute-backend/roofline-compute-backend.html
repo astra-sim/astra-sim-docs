@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Memory Backend &mdash; ASTRA-sim 2.2 documentation</title>
+  <title>Roofline Compute Backend &mdash; ASTRA-sim 2.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
 
@@ -20,9 +20,7 @@
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Analytical Memory Backend" href="analytical-memory-backend.html" />
-    <link rel="prev" title="Garnet Network Backend" href="../network-backend/garnet-network-backend.html" /> 
+    <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -47,14 +45,11 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul class="current">
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="../getting-started/getting-started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../system-layer/system-layer.html">System Layer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../network-backend/network-backend.html">Network Backend</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Memory Backend</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="analytical-memory-backend.html">Analytical Memory Backend</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../memory-backend/memory-backend.html">Memory Backend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../validation/validation.html">Validation</a></li>
 </ul>
 
@@ -72,9 +67,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Memory Backend</li>
+      <li class="breadcrumb-item active">Roofline Compute Backend</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/memory-backend/memory-backend.md.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/compute-backend/roofline-compute-backend.md.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -82,27 +77,30 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="memory-backend">
-<h1>Memory Backend<a class="headerlink" href="#memory-backend" title="Link to this heading"></a></h1>
+  <section id="roofline-compute-backend">
+<h1>Roofline Compute Backend<a class="headerlink" href="#roofline-compute-backend" title="Link to this heading"></a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This page is currently under construction. Please stay tuned for updates!</p>
 </div>
-<p>ASTRA-sim currently supports one memory simulator as its memory modeling backend.</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="analytical-memory-backend.html">Analytical Memory Backend</a></li>
-</ul>
+<section id="enable-roofline-models">
+<h2>Enable Roofline Models<a class="headerlink" href="#enable-roofline-models" title="Link to this heading"></a></h2>
+<p>ASTRA-sim 2.0 supports two computational performance models: the measured runtime model and the roofline model. You can enable the roofline model by setting the ‘roofline-enabled’ field to 1 in the system configuration file. Additionally, specify the local memory bandwidth (in GB/sec) and peak performance (in TFLOPS).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
+<span class="s2">&quot;roofline-enabled&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+<span class="s2">&quot;local-mem-bw&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+<span class="s2">&quot;peak-perf&quot;</span><span class="p">:</span> <span class="mi">2000</span><span class="p">,</span>
+<span class="o">...</span>
+</pre></div>
 </div>
+<p>When creating execution traces, ensure to include the number of floating point operations and the tensor size for each compute operator.</p>
+</section>
 </section>
 
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../network-backend/garnet-network-backend.html" class="btn btn-neutral float-left" title="Garnet Network Backend" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="analytical-memory-backend.html" class="btn btn-neutral float-right" title="Analytical Memory Backend" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+          <footer>
 
   <hr/>
 
