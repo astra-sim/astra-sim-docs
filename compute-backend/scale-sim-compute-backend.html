@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Build ASTRA-sim &mdash; ASTRA-sim 2.2 documentation</title>
+  <title>Scale-sim Compute Backend &mdash; ASTRA-sim 2.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
 
@@ -21,8 +21,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Run ASTRA-sim" href="running-astra-sim.html" />
-    <link rel="prev" title="Dependencies Setup" href="setup.html" /> 
+    <link rel="next" title="Roofline Compute Backend" href="roofline-compute-backend.html" />
+    <link rel="prev" title="Compute Backend" href="compute-backend.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -48,22 +48,15 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="getting-started.html">Getting Started</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="setup.html">Dependencies Setup</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Build ASTRA-sim</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#clone-repository">Clone Repository</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#build-with-docker-optional">Build with Docker (Optional)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#compile-program">Compile Program</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="running-astra-sim.html">Run ASTRA-sim</a></li>
-<li class="toctree-l2"><a class="reference internal" href="astra-sim-output.html">ASTRA-sim Output</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/getting-started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../system-layer/system-layer.html">System Layer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../network-backend/network-backend.html">Network Backend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../memory-backend/memory-backend.html">Memory Backend</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../compute-backend/compute-backend.html">Compute Backend</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="compute-backend.html">Compute Backend</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Scale-sim Compute Backend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="roofline-compute-backend.html">Roofline Compute Backend</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../validation/validation.html">Validation</a></li>
 </ul>
 
@@ -81,10 +74,10 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="getting-started.html">Getting Started</a></li>
-      <li class="breadcrumb-item active">Build ASTRA-sim</li>
+          <li class="breadcrumb-item"><a href="compute-backend.html">Compute Backend</a></li>
+      <li class="breadcrumb-item active">Scale-sim Compute Backend</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/getting-started/installing-astra-sim.md.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/compute-backend/scale-sim-compute-backend.md.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -92,47 +85,20 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="build-astra-sim">
-<h1>Build ASTRA-sim<a class="headerlink" href="#build-astra-sim" title="Link to this heading"></a></h1>
+  <section id="scale-sim-compute-backend">
+<h1>Scale-sim Compute Backend<a class="headerlink" href="#scale-sim-compute-backend" title="Link to this heading"></a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Please make sure that you have all the required depencencies installed.</p>
+<p>This page is currently under construction. Please stay tuned for updates!</p>
 </div>
-<section id="clone-repository">
-<h2>Clone Repository<a class="headerlink" href="#clone-repository" title="Link to this heading"></a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>--recurse-submodules<span class="w"> </span>git@github.com:astra-sim/astra-sim.git
-$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>astra-sim
-</pre></div>
-</div>
-</section>
-<section id="build-with-docker-optional">
-<h2>Build with Docker (Optional)<a class="headerlink" href="#build-with-docker-optional" title="Link to this heading"></a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create Docker Image</span>
-$<span class="w"> </span>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>astra-sim<span class="w"> </span>.
-
-<span class="c1"># Run Docker Image</span>
-$<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>astra-sim
-</pre></div>
-</div>
-</section>
-<section id="compile-program">
-<h2>Compile Program<a class="headerlink" href="#compile-program" title="Link to this heading"></a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># For Analytical Network Backend</span>
-$<span class="w"> </span>./build/astra_analytical/build.sh
-
-<span class="c1"># For NS3 Network Backend</span>
-$<span class="w"> </span>./build/astra_ns3/build.sh<span class="w"> </span>-c
-</pre></div>
-</div>
-</section>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="setup.html" class="btn btn-neutral float-left" title="Dependencies Setup" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="running-astra-sim.html" class="btn btn-neutral float-right" title="Run ASTRA-sim" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="compute-backend.html" class="btn btn-neutral float-left" title="Compute Backend" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="roofline-compute-backend.html" class="btn btn-neutral float-right" title="Roofline Compute Backend" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
