@@ -14,14 +14,14 @@ $ ${BINARY} \
   --workload-configuration=${WORKLOAD_CONFIG} \
   --system-configuration=${SYSTEM_CONFIG} \
   --network-configuration=${NETWORK_CONFIG} \
-  --remote-memory-configuration=${MEMORY_CONFIG}
+  --remote-memory-configuration=${REMOTE_MEMORY_CONFIG}
 :::
 
 :::{toctree}
 argument-workload-config.md
 argument-system-config.md
 argument-network-config.md
-argument-memory-config.md
+argument-remote-memory-config.md
 :::
 
 :::{note}
