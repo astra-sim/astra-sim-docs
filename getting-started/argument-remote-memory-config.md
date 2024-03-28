@@ -1,12 +1,12 @@
-# Argument ${MEMORY_CONFIG}
+# Argument ${REMOTE_MEMORY_CONFIG}
 
 :::{code-block} console
---memory-configuration: path to the memory configuration file
+--remote-memory-configuration: path to the memory configuration file
 :::
 
-## Analytical Memory Config
+## Analytical Remote Memory Config
 
-Example memory configurations can be found at
+Example remote memory configurations can be found at
 
 :::{code-block} console
 $ ${ASTRA_SIM}/inputs/remote_memory/analytical
