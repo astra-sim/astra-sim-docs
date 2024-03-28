@@ -97,5 +97,39 @@ $ ${ASTRA_SIM}/inputs/network/garnet/
 Example network configurations can be found at
 
 :::{code-block} console
-$ ${ASTRA_SIM}/inputs/network/ns3/
+$ ${ASTRA_SIM}/extern/network_backend/ns-3/scratch/config/
 :::
+
+The Network configuration file defines the knobs to the ns3 simulation.  
+Refer to [this spreadsheet](https://docs.google.com/spreadsheets/d/1Xoo_QWgOuEJojnCOv-znwzARLjFArlR6tULKA2CBIqQ/edit?usp=sharing) for a detailed description of each knobs. 
+
+### Physical Topology
+One important knob of the configuration is the *physical topology*. Examples are located in `.../ns-3/scratch/topology`, and the filenames are defined in the configuration file under `TOPOLOGY_FILE`.
+
+Let's take a sample file, `7_nodes_3_switch_topology.txt`, and examine its components. This file describes a topology where there are 7 nodes, 3 of which are network switches (4, 5, 6). There are 8 links in total. 
+
+```
+7 3 8 // {no. of nodes}  {no. of switches}  {no. of links}
+4 5 6 // {List of node id for switches}
+4 0 200Gbps 0.0005ms 0 // From here on each line corresponds to one link.
+6 0 200Gbps 0.0005ms 0 // {id of one endpoint} {id of another endpoint} {bandwidth} {latency} {error rate of link}
+4 1 200Gbps 0.0005ms 0
+6 1 200Gbps 0.0005ms 0
+5 2 200Gbps 0.0005ms 0
+6 2 200Gbps 0.0005ms 0
+5 3 200Gbps 0.0005ms 0
+6 3 200Gbps 0.0005ms 0
+
+```
+
+### Logical Topology 
+In addition to the ns3 configurations (including the physical topology), the binary for the NS3 backend takes a unique command line argument, `--logical-topology-configuration=${LOGICAL_TOPOLOGY}`. 
+
+Examples of this can be found at 
+
+:::{code-block} console
+$ ${ASTRA_SIM}/inputs/network/ns3
+:::
+
+This file defines the *logical* topology, where each number corresponds to the number of NPUs in a dimension.
+If the file shows `{8, 4}`, the system layer will run a 2D topology, regardless of the physical connectivity.
