@@ -13,10 +13,6 @@ $ sudo apt install \
   python3 python3-pip git
 :::
 
-:::{note}
-For the ns3 backend `python2`, `gcc-5.0` and `g++-5.0` are also required. This is because the ns3 backend is based on an older ns3 version. We recommend using virtual environments to isolate python instances. Even with the ns3 backend, `python3` is still used to create the workload using Chakra.
-:::
-
 Now, you can install required Python packages, either through conda or pip3:
 
 - ### Conda
