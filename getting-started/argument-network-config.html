@@ -166,9 +166,39 @@
 <section id="ns3-network-config">
 <h2><a class="reference external" href="https://github.com/astra-sim/astra-network-ns3/tree/a46d80f9fab4d44ba687e81588c9d317ecaf3370">NS3 Network Config</a><a class="headerlink" href="#ns3-network-config" title="Link to this heading"></a></h2>
 <p>Example network configurations can be found at</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="si">${</span><span class="nv">ASTRA_SIM</span><span class="si">}</span>/inputs/network/ns3/
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="si">${</span><span class="nv">ASTRA_SIM</span><span class="si">}</span>/extern/network_backend/ns-3/scratch/config/
 </pre></div>
 </div>
+<p>The Network configuration file defines the knobs to the ns3 simulation.<br />
+Refer to <a class="reference external" href="https://docs.google.com/spreadsheets/d/1Xoo_QWgOuEJojnCOv-znwzARLjFArlR6tULKA2CBIqQ/edit?usp=sharing">this spreadsheet</a> for a detailed description of each knobs.</p>
+<section id="physical-topology">
+<h3>Physical Topology<a class="headerlink" href="#physical-topology" title="Link to this heading"></a></h3>
+<p>One important knob of the configuration is the <em>physical topology</em>. Examples are located in <code class="docutils literal notranslate"><span class="pre">.../ns-3/scratch/topology</span></code>, and the filenames are defined in the configuration file under <code class="docutils literal notranslate"><span class="pre">TOPOLOGY_FILE</span></code>.</p>
+<p>Let’s take a sample file, <code class="docutils literal notranslate"><span class="pre">7_nodes_3_switch_topology.txt</span></code>, and examine its components. This file describes a topology where there are 7 nodes, 3 of which are network switches (4, 5, 6). There are 8 links in total.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">7</span> <span class="mi">3</span> <span class="mi">8</span> <span class="o">//</span> <span class="p">{</span><span class="n">no</span><span class="o">.</span> <span class="n">of</span> <span class="n">nodes</span><span class="p">}</span>  <span class="p">{</span><span class="n">no</span><span class="o">.</span> <span class="n">of</span> <span class="n">switches</span><span class="p">}</span>  <span class="p">{</span><span class="n">no</span><span class="o">.</span> <span class="n">of</span> <span class="n">links</span><span class="p">}</span>
+<span class="mi">4</span> <span class="mi">5</span> <span class="mi">6</span> <span class="o">//</span> <span class="p">{</span><span class="n">List</span> <span class="n">of</span> <span class="n">node</span> <span class="nb">id</span> <span class="k">for</span> <span class="n">switches</span><span class="p">}</span>
+<span class="mi">4</span> <span class="mi">0</span> <span class="mi">200</span><span class="n">Gbps</span> <span class="mf">0.0005</span><span class="n">ms</span> <span class="mi">0</span> <span class="o">//</span> <span class="n">From</span> <span class="n">here</span> <span class="n">on</span> <span class="n">each</span> <span class="n">line</span> <span class="n">corresponds</span> <span class="n">to</span> <span class="n">one</span> <span class="n">link</span><span class="o">.</span>
+<span class="mi">6</span> <span class="mi">0</span> <span class="mi">200</span><span class="n">Gbps</span> <span class="mf">0.0005</span><span class="n">ms</span> <span class="mi">0</span> <span class="o">//</span> <span class="p">{</span><span class="nb">id</span> <span class="n">of</span> <span class="n">one</span> <span class="n">endpoint</span><span class="p">}</span> <span class="p">{</span><span class="nb">id</span> <span class="n">of</span> <span class="n">another</span> <span class="n">endpoint</span><span class="p">}</span> <span class="p">{</span><span class="n">bandwidth</span><span class="p">}</span> <span class="p">{</span><span class="n">latency</span><span class="p">}</span> <span class="p">{</span><span class="n">error</span> <span class="n">rate</span> <span class="n">of</span> <span class="n">link</span><span class="p">}</span>
+<span class="mi">4</span> <span class="mi">1</span> <span class="mi">200</span><span class="n">Gbps</span> <span class="mf">0.0005</span><span class="n">ms</span> <span class="mi">0</span>
+<span class="mi">6</span> <span class="mi">1</span> <span class="mi">200</span><span class="n">Gbps</span> <span class="mf">0.0005</span><span class="n">ms</span> <span class="mi">0</span>
+<span class="mi">5</span> <span class="mi">2</span> <span class="mi">200</span><span class="n">Gbps</span> <span class="mf">0.0005</span><span class="n">ms</span> <span class="mi">0</span>
+<span class="mi">6</span> <span class="mi">2</span> <span class="mi">200</span><span class="n">Gbps</span> <span class="mf">0.0005</span><span class="n">ms</span> <span class="mi">0</span>
+<span class="mi">5</span> <span class="mi">3</span> <span class="mi">200</span><span class="n">Gbps</span> <span class="mf">0.0005</span><span class="n">ms</span> <span class="mi">0</span>
+<span class="mi">6</span> <span class="mi">3</span> <span class="mi">200</span><span class="n">Gbps</span> <span class="mf">0.0005</span><span class="n">ms</span> <span class="mi">0</span>
+
+</pre></div>
+</div>
+</section>
+<section id="logical-topology">
+<h3>Logical Topology<a class="headerlink" href="#logical-topology" title="Link to this heading"></a></h3>
+<p>In addition to the ns3 configurations (including the physical topology), the binary for the NS3 backend takes a unique command line argument, <code class="docutils literal notranslate"><span class="pre">--logical-topology-configuration=${LOGICAL_TOPOLOGY}</span></code>.</p>
+<p>Examples of this can be found at</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="si">${</span><span class="nv">ASTRA_SIM</span><span class="si">}</span>/inputs/network/ns3
+</pre></div>
+</div>
+<p>This file defines the <em>logical</em> topology, where each number corresponds to the number of NPUs in a dimension.
+If the file shows <code class="docutils literal notranslate"><span class="pre">{8,</span> <span class="pre">4}</span></code>, the system layer will run a 2D topology, regardless of the physical connectivity.</p>
+</section>
 </section>
 </section>
 
