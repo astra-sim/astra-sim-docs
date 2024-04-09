@@ -51,7 +51,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../getting-started/getting-started.html">Getting Started</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="workload-layer.html">Workload Layer</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Overview</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#big-picture">Big Picture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#astra-sim-workload-layer-overview">ASTRA-Sim Workload Layer Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#evolution-from-astra-sim-1-0-to-2-0">Evolution from ASTRA-Sim 1.0 to 2.0</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#chakra-trace-feeder-library">Chakra Trace Feeder Library</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#integration-and-access">Integration and Access</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -90,9 +95,36 @@
              
   <section id="overview">
 <h1>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h1>
-<section id="big-picture">
-<h2>Big Picture<a class="headerlink" href="#big-picture" title="Link to this heading"></a></h2>
-<p>The workload layer takes execution traces as inputs and instantiate a ETFeeder object. ETFeeder helps iterate through and manipulate the traces. The workload layer receives events (e.g. communication finished, computation completed) and schedules the next issuable traces to the available hardware resources. Once the operation is completed, an event is sent to the workload layer to begin issuing next iteration of traces.</p>
+<section id="astra-sim-workload-layer-overview">
+<h2>ASTRA-Sim Workload Layer Overview<a class="headerlink" href="#astra-sim-workload-layer-overview" title="Link to this heading"></a></h2>
+<p><img alt="Workload Layer Overview" src="../_images/workload_overview.png" /></p>
+<p>The workload layer in ASTRA-Sim plays a pivotal role, enabling users to define and simulate their desired DNN models, parallelization strategies, and training loops efficiently.
+The transition from ASTRA-Sim 1.0 to 2.0 brought forth significant advancements, enhancing the layer’s functionality and operational efficiency.</p>
+<section id="evolution-from-astra-sim-1-0-to-2-0">
+<h3>Evolution from ASTRA-Sim 1.0 to 2.0<a class="headerlink" href="#evolution-from-astra-sim-1-0-to-2-0" title="Link to this heading"></a></h3>
+<p>Initially, ASTRA-Sim 1.0 laid the groundwork by allowing users to articulate target DNN models, parallelization strategies, and training loops.
+With the evolution to ASTRA-Sim 2.0, the platform adopted Execution Trace (ET) from Chakra, leveraging a Directed Acyclic Graph (DAG) format for more streamlined and structured processing.</p>
+<ul class="simple">
+<li><p><strong>Execution Trace Support:</strong> Integration of Execution Trace from Chakra in ASTRA-Sim 2.0 allows the workload layer to utilize Chakra ET as its primary input, executing the graph efficiently. This method replaces the text-based inputs of version 1, offering a more organized and effective processing approach.</p></li>
+<li><p><strong>Dependency Management:</strong> The system meticulously evaluates dependencies of nodes upon completion. Once all dependencies are resolved, it processes these nodes, ensuring an efficient and uninterrupted execution flow.</p></li>
+<li><p><strong>Resource Management:</strong> ASTRA-Sim checks for the availability of the required hardware resources before processing a node. In cases where a resource is occupied, the system implements strategies to manage the queue or prioritize tasks, maintaining operational efficiency.</p></li>
+<li><p><strong>Graph-Input Workload Layer:</strong> This enhanced layer processes nodes from the ET sequentially without dependencies, with each node completing after a set number of cycles. This mirrors real-world timings of computational and communication tasks accurately.</p></li>
+<li><p><strong>Cycle Simulation:</strong> ASTRA-Sim 2.0 effectively simulates the requisite number of cycles for compute or communication nodes. It can draw directly from the ET or perform internal modeling for both computation and communication tasks, catering to current and future architectural needs with precision.</p></li>
+</ul>
+</section>
+<section id="chakra-trace-feeder-library">
+<h3>Chakra Trace Feeder Library<a class="headerlink" href="#chakra-trace-feeder-library" title="Link to this heading"></a></h3>
+<p>Contributed by the Chakra project, the trace feeder library is tailored for simulators, garnering adoption across numerous companies and research institutions which share and utilize traces in the Chakra schema.</p>
+<ul class="simple">
+<li><p><strong>C++ Implementation:</strong> The library’s implementation in C++ simplifies the parsing process, considerably reducing the engineering efforts required from users.</p></li>
+<li><p><strong>Functionality:</strong> Through the public member functions of the trace feeder class, users can effortlessly instantiate a trace feeder, retrieve nodes, and manage dependencies, streamlining their simulation processes.</p></li>
+</ul>
+</section>
+<section id="integration-and-access">
+<h3>Integration and Access<a class="headerlink" href="#integration-and-access" title="Link to this heading"></a></h3>
+<p>The incorporation of the Chakra ETFeeder as a submodule within the ASTRA-Sim GitHub repository signifies a major milestone, offering direct access to advanced simulation capabilities for a wide user base.
+For more information and to access the source code, please visit the <a class="reference external" href="https://github.com/mlcommons/chakra/tree/main/et_feeder">Chakra ETFeeder on GitHub</a>.</p>
+</section>
 </section>
 </section>
 
