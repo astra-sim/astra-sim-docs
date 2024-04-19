@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Validation on Google’s TPU-v3 &mdash; ASTRA-sim 2.2 documentation</title>
+  <title>Validation on GPU Systems - NCCL over HGX-H100 Systems &mdash; ASTRA-sim 2.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
 
@@ -21,7 +21,8 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="prev" title="Validation on GPU Systems - NCCL over HGX-H100 Systems" href="gpu-validation-hgx-h100.html" /> 
+    <link rel="next" title="Validation on Google’s TPU-v3" href="tpu-validation.html" />
+    <link rel="prev" title="Validation on GPU Systems - NCCL over HPE ProLiant Gen10" href="gpu-validation.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -55,25 +56,33 @@
 <li class="toctree-l1"><a class="reference internal" href="../../remote-memory-backend/remote-memory-backend.html">Remote Memory Backend</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../validation.html">Validation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="gpu-validation.html">Validation on GPU Systems - NCCL over HPE ProLiant Gen10</a></li>
-<li class="toctree-l2"><a class="reference internal" href="gpu-validation-hgx-h100.html">Validation on GPU Systems - NCCL over HGX-H100 Systems</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Validation on Google’s TPU-v3</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#senario-1-v3-8-nodes">Senario - 1: v3-8 nodes</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Validation on GPU Systems - NCCL over HGX-H100 Systems</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#hgx-h100-topology">HGX-H100 Topology</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#senario-1-2-gpus-all-reduce">Senario - 1: 2-GPUs All-Reduce</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#hardware-setup">Hardware Setup</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#astra-sim-setup">ASTRA-Sim setup</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#collectives-run">Collectives run</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#results">Results</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#senario-1-v3-32-nodes">Senario - 1: v3-32 nodes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#senario-2-4-gpus-all-reduce">Senario - 2: 4-GPUs All-Reduce</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id1">Hardware Setup</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id2">ASTRA-Sim setup</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id3">Collectives run</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id4">Results</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#senario-3-8-gpus-all-reduce">Senario - 3: 8-GPUs All-Reduce</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id5">Hardware Setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">ASTRA-Sim setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">Collectives run</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">Results</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#recommended-practices">Recommended practices</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="tpu-validation.html">Validation on Google’s TPU-v3</a></li>
 </ul>
 </li>
 </ul>
@@ -93,9 +102,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../validation.html">Validation</a></li>
-      <li class="breadcrumb-item active">Validation on Google’s TPU-v3</li>
+      <li class="breadcrumb-item active">Validation on GPU Systems - NCCL over HGX-H100 Systems</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../../_sources/validation/hardware/tpu-validation.md.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/validation/hardware/gpu-validation-hgx-h100.md.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -103,57 +112,57 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="validation-on-google-s-tpu-v3">
-<h1>Validation on Google’s TPU-v3<a class="headerlink" href="#validation-on-google-s-tpu-v3" title="Link to this heading"></a></h1>
-<section id="senario-1-v3-8-nodes">
-<h2>Senario - 1: v3-8 nodes<a class="headerlink" href="#senario-1-v3-8-nodes" title="Link to this heading"></a></h2>
+  <section id="validation-on-gpu-systems-nccl-over-hgx-h100-systems">
+<h1>Validation on GPU Systems - NCCL over HGX-H100 Systems<a class="headerlink" href="#validation-on-gpu-systems-nccl-over-hgx-h100-systems" title="Link to this heading"></a></h1>
+<section id="hgx-h100-topology">
+<h2>HGX-H100 Topology<a class="headerlink" href="#hgx-h100-topology" title="Link to this heading"></a></h2>
+<p><img alt="alt text" src="../../_images/hgx_h100_topology.png" /></p>
+</section>
+<section id="senario-1-2-gpus-all-reduce">
+<h2>Senario - 1: 2-GPUs All-Reduce<a class="headerlink" href="#senario-1-2-gpus-all-reduce" title="Link to this heading"></a></h2>
 <section id="hardware-setup">
 <h3>Hardware Setup<a class="headerlink" href="#hardware-setup" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
-<li><p>8 TPUs connected in a bidirectional ring</p></li>
-<li><p>Each of the 2 links are 80 GB/s</p></li>
-<li><p>Jax All-reduce is based on NCCL ring Algorithm</p></li>
+<li><p>2 H100 GPUs connected in switch, over 4 NVSwitches</p></li>
+<li><p>Each GPU has bidirectional BW of 900 GB/s</p></li>
+<li><p>NCCL Ring Algorithm</p></li>
 </ol>
 </section>
 <section id="astra-sim-setup">
 <h3>ASTRA-Sim setup<a class="headerlink" href="#astra-sim-setup" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p>Modelled with the ASTRA-Sim Analytical Backend</p></li>
-<li><p>Bidirectional Ring</p></li>
-<li><p>Link Latency is 1 us [as per TPU research team]</p></li>
+<li><p>Switch Network Topology</p></li>
 </ol>
 </section>
 <section id="collectives-run">
 <h3>Collectives run<a class="headerlink" href="#collectives-run" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
-<li><p>All-Reduce &amp; All-gather</p></li>
+<li><p>All-Reduce</p></li>
 <li><p>Reduction operation - Sum</p></li>
 </ol>
 </section>
 <section id="results">
 <h3>Results<a class="headerlink" href="#results" title="Link to this heading"></a></h3>
-<p>All Reduce results:</p>
-<p><img alt="Alt text" src="../../_images/tpu_v3-8_allreduce.png" /></p>
-<p>All Gather results:</p>
-<p><img alt="Alt text" src="../../_images/tpu_v3-8_allgather.png" /></p>
+<p><img alt="alt text" src="../../_images/2gpus.png" /></p>
+<p><strong>Geomean error rate = 20.63%</strong></p>
 </section>
 </section>
-<section id="senario-1-v3-32-nodes">
-<h2>Senario - 1: v3-32 nodes<a class="headerlink" href="#senario-1-v3-32-nodes" title="Link to this heading"></a></h2>
+<section id="senario-2-4-gpus-all-reduce">
+<h2>Senario - 2: 4-GPUs All-Reduce<a class="headerlink" href="#senario-2-4-gpus-all-reduce" title="Link to this heading"></a></h2>
 <section id="id1">
 <h3>Hardware Setup<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
-<li><p>32 TPUs connected in a Mesh</p></li>
-<li><p>Each of the 2 (or 3) links are 80 GB/s</p></li>
-<li><p>Jax All-reduce is based on NCCL ring Algorithm</p></li>
+<li><p>4 H100 GPUs connected in switch, over 4 NVSwitches</p></li>
+<li><p>Each GPU has bidirectional BW of 900 GB/s</p></li>
+<li><p>NCCL Ring Algorithm</p></li>
 </ol>
 </section>
 <section id="id2">
 <h3>ASTRA-Sim setup<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p>Modelled with the ASTRA-Sim Analytical Backend</p></li>
-<li><p>Bidirectional Ring and 2D Torus</p></li>
-<li><p>Link Latency is 1 us [as per TPU research team]</p></li>
+<li><p>Switch Network Topology</p></li>
 </ol>
 </section>
 <section id="id3">
@@ -165,52 +174,48 @@
 </section>
 <section id="id4">
 <h3>Results<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
-<p>TPU v3-32 modelled as a Ring:</p>
-<p><img alt="Alt text" src="../../_images/tpu_v3-32_ring_allreduce.png" /></p>
-<p>TPU v3-32 modelled as a 2D-Torus:</p>
-<p><img alt="Alt text" src="../../_images/tpu_v3-32_torus_allreduce.png" /></p>
+<p><img alt="alt text" src="../../_images/4gpus.png" /></p>
+<p><strong>Geomean error rate = 12.01%</strong></p>
+</section>
+</section>
+<section id="senario-3-8-gpus-all-reduce">
+<h2>Senario - 3: 8-GPUs All-Reduce<a class="headerlink" href="#senario-3-8-gpus-all-reduce" title="Link to this heading"></a></h2>
+<section id="id5">
+<h3>Hardware Setup<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>8 H100 GPUs connected in switch, over 4 NVSwitches</p></li>
+<li><p>Each GPU has bidirectional BW of 900 GB/s</p></li>
+<li><p>NCCL Ring Algorithm</p></li>
+</ol>
+</section>
+<section id="id6">
+<h3>ASTRA-Sim setup<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Modelled with the ASTRA-Sim Analytical Backend</p></li>
+<li><p>Switch Network Topology</p></li>
+</ol>
+</section>
+<section id="id7">
+<h3>Collectives run<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>All-Reduce</p></li>
+<li><p>Reduction operation - Sum</p></li>
+</ol>
+</section>
+<section id="id8">
+<h3>Results<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<p><img alt="alt text" src="../../_images/8gpus.png" /></p>
+<p><strong>Geomean error rate = 9.69%</strong></p>
 </section>
 </section>
 <section id="recommended-practices">
 <h2>Recommended practices<a class="headerlink" href="#recommended-practices" title="Link to this heading"></a></h2>
 <ol class="arabic simple">
-<li><p>Factor in SW overheads such as JIT’s lazy compilation and dispatch time, by calling and tracking the allreduce over differrent iterations.</p></li>
-<li><p>factor in pmap release to ensure the code is optimized</p></li>
-<li><p>Sample code for running allreduce on Jax:</p></li>
+<li><p>Emperically extract warm up latency by running smaller collectives</p></li>
+<li><p>Emperically extract practical link latency by first running smaller collectives and varying number of NPUs/GPUs</p></li>
+<li><p>It is observed that the maximum achieved BW is 741.34 GB/s (bidirectional).</p></li>
+<li><p>Strictly enforce NCCL to use only Ring Algorithm. NCCL switches from Ring to Tree algorithm with respect to Collective sizes. We observe this to be suboptimal, atleast for this topology, hardware and configuration.</p></li>
 </ol>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">jax</span>
-<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
-<span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">pmap</span>
-<span class="kn">import</span> <span class="nn">time</span>
-
-
-<span class="n">size_of_allreduce_in_bytes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">128</span><span class="p">]</span>
-
-
-<span class="n">iterations</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10000</span><span class="p">]</span>
-
-<span class="k">for</span> <span class="n">iterr</span> <span class="ow">in</span> <span class="n">iterations</span><span class="p">:</span>
-    <span class="k">for</span> <span class="n">ss</span> <span class="ow">in</span> <span class="n">size_of_allreduce_in_bytes</span><span class="p">:</span>
-
-        <span class="n">num_devices</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">local_device_count</span><span class="p">()</span>
-
-        <span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">ss</span><span class="o">/</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">num_devices</span><span class="p">))</span>
-        <span class="n">x1</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">x</span><span class="p">]</span> <span class="c1"># for 8 TPUs</span>
-        <span class="n">x2</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
-
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;running collective of size = </span><span class="si">{</span><span class="n">x2</span><span class="o">.</span><span class="n">nbytes</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-        <span class="n">pmapped_fn</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">pmap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">xx</span><span class="p">:</span> <span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">psum</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">),</span> <span class="n">axis_name</span><span class="o">=</span><span class="s1">&#39;i&#39;</span><span class="p">)</span>
-
-        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iterr</span><span class="p">):</span>
-            <span class="n">r</span> <span class="o">=</span> <span class="n">pmapped_fn</span><span class="p">(</span><span class="n">x2</span><span class="p">)</span>
-        <span class="n">end_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;num_iter = </span><span class="si">{</span><span class="n">iterr</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;execution_time = </span><span class="si">{</span><span class="p">(</span><span class="n">end_time</span><span class="o">-</span><span class="n">start_time</span><span class="p">)</span><span class="o">/</span><span class="n">iterr</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
 </section>
 </section>
 
@@ -218,7 +223,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="gpu-validation-hgx-h100.html" class="btn btn-neutral float-left" title="Validation on GPU Systems - NCCL over HGX-H100 Systems" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="gpu-validation.html" class="btn btn-neutral float-left" title="Validation on GPU Systems - NCCL over HPE ProLiant Gen10" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tpu-validation.html" class="btn btn-neutral float-right" title="Validation on Google’s TPU-v3" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
