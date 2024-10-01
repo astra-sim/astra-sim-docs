@@ -1,7 +1,7 @@
 # Collective Scheduler
 ![System Layer Queue](/_static/images/system_overview_queue.svg)
 
-Core to the System layer is a set of queues called `active_Streams`.
+The system layer has a collective scheduler which schedules and dispatches collectives. Even if the dependencies for multiple non-dependent collectives have been resolved in the workload layer (such as in a Data Parallel case), a single NPU cannot issue dozens of collectives at once, due to hardware limits. Core to the scheduler is a set of queues called `active_Streams`.
 
 Each queue holds `StreamBaseline` objects, which are depicted at the top right corner of the image. A `StreamBaseline` object represents a stream (i.e. collective), which consists of multiple collective phases. The variable `phases_to_go` is a queue holding these phases. The pointer `my_current_phase` points to the phase currently being executed.
 

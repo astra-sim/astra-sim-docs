@@ -11,5 +11,5 @@ Since the compute and memory operations are fairly straightforward, we focus on 
 :::{toctree}
 collective-scheduler.md
 collective-implementation.md
-input.md
+sysinput.md
 :::
