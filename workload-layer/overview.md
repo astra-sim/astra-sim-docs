@@ -23,4 +23,5 @@ Contributed by the Chakra project, the trace feeder library is tailored for simu
   
 ### Integration and Access
 The incorporation of the Chakra ETFeeder as a submodule within the ASTRA-Sim GitHub repository signifies a major milestone, offering direct access to advanced simulation capabilities for a wide user base.
-For more information and to access the source code, please visit the [Chakra ETFeeder on GitHub](https://github.com/mlcommons/chakra/tree/main/et_feeder).
+For more information and to access the source code, please visit the [Chakra ETFeeder on GitHub](https://github.com/mlcommons/chakra/tree/main/src/feeder).
+
