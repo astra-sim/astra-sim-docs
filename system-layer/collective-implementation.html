@@ -1,0 +1,171 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Collective Implementation &mdash; ASTRA-sim 2.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=f35be339"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Input Files for Collective API" href="sysinput.html" />
+    <link rel="prev" title="Collective Scheduler" href="collective-scheduler.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            ASTRA-sim
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workload-layer/workload-layer.html">Workload Layer</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="system-layer.html">System Layer</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="collective-scheduler.html">Collective Scheduler</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Collective Implementation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#astra-sim-native-implementation">ASTRA-Sim Native Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#chakra-based-arbitrary-definition-through-collective-api">Chakra Based Arbitrary Definition Through Collective API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sysinput.html">Input Files for Collective API</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../network-backend/network-backend.html">Network Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compute-backend/compute-backend.html">Compute Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote-memory-backend/remote-memory-backend.html">Remote Memory Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation/validation.html">Validation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ASTRA-sim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="system-layer.html">System Layer</a></li>
+      <li class="breadcrumb-item active">Collective Implementation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/system-layer/collective-implementation.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="collective-implementation">
+<h1>Collective Implementation<a class="headerlink" href="#collective-implementation" title="Link to this heading"></a></h1>
+<p><img alt="Collective Implementation" src="../_images/coll_implementation.svg" /></p>
+<p>As discussed before, the simulator takes in a collective communication (e.g., AllReduce, AllGather, etc.) and breaks it down into send and receive messages. These send and receive messages are simulated by the network backend.</p>
+<p>There are two ways the simulator breaks a collective into send and receive messages. The prominent method so far was for the simulator to implement a predefined set of commonly used algorithms (e.g. Ring, DoubleBinary, HalvingDoubling, etc). This ‘Native’ implementation logic resides within the simulator codebase and allows users to quickly explore a predefined set of algorithms.</p>
+<p>Since August 2024, ASTRA-sim supports a new way of collective algorithm representation. The system layer exposes a collective API, through which it can receive definitions of <em>arbitrary</em> collective algorithms.</p>
+<p>Both methods are implementations of the <code class="docutils literal notranslate"><span class="pre">CollectivePhase::Algorithm</span></code> object, which is the unit of scheduling in the System layer (refer to the previous scheduling page). Please refer to the code in <a class="reference external" href="https://github.com/astra-sim/astra-sim/blob/master/astra-sim/system/CollectivePhase.hh">https://github.com/astra-sim/astra-sim/blob/master/astra-sim/system/CollectivePhase.hh</a>.</p>
+<section id="astra-sim-native-implementation">
+<h2>ASTRA-Sim Native Implementation<a class="headerlink" href="#astra-sim-native-implementation" title="Link to this heading"></a></h2>
+<p>This part is still under construction. For now, please refer to the code in <a class="reference external" href="https://github.com/astra-sim/astra-sim/blob/master/astra-sim/system/collective/Ring.cc">https://github.com/astra-sim/astra-sim/blob/master/astra-sim/system/collective/Ring.cc</a></p>
+</section>
+<section id="chakra-based-arbitrary-definition-through-collective-api">
+<h2>Chakra Based Arbitrary Definition Through Collective API<a class="headerlink" href="#chakra-based-arbitrary-definition-through-collective-api" title="Link to this heading"></a></h2>
+<p>An inherent limitation of the above native method is that to simulate a new collective algorithm, one would have to implement the whole collective in ASTRA_sim native code.
+With an increasing number of work in non-regular collectives, such as TACOS (topology aware collectives)[1], MSCCLang (expressively written collectives based on DSL)[2], etc., the need to quickly simulate and iterate over a wide variety of arbitrary collective algorithms becomes ever more important.</p>
+<p>Therefore, we expose a new <code class="docutils literal notranslate"><span class="pre">collective</span> <span class="pre">API</span></code> to accept the definition of any collective algorithms, not limited to the predefined set (Ring, etc.). For the representation, we use the Chakra ET schema for a separate graph. We represent the collective algorithm as a graph of COMM_SEND, COMM_RECV nodes in the Chakra ET schema. That is, instead of the system layer breaking down collectives into send and receive messages, the system layer simply follows the breakdown already represented in the Chakra graph. Since ASTRA-sim already uses Chakra ET to represent workload, using Chakra ET to additionally define collective algorithms provides an easy and simple way to navigate through the graph.</p>
+<p>Refer to the figure on the top of this page. When the Workload layer issues an “AllReduce” collective, instead of running the native implementation logic already in the simulator codebase, the system layer will iterate through the Chakra ET representing the collective algorithm, which has been provided through the collective API. Note how the Chakra graph for the workload and the chakra graph for the collective is decoupled, and provided through different input points. It is the ASTRA-sim simulator that eventually ‘replaces’ the communication nodes with the collective implemenation. This graph substitution is made easy by the workload and communication using the same schema. We anticipate this to open up new avenues such as compute-communication co-optimization.</p>
+<p>For a more detailed explanation of the background and motivation, please refer to our paper published in Hot Interconnects (HotI) 2024. (<a class="reference external" href="https://arxiv.org/abs/2408.11008">Paper Link</a>)</p>
+<p>For a more detailed explanation to generating the inputs to the collective API, please refer to the <a class="reference external" href="https://astra-sim.github.io/astra-sim-docs/system-layer/sysinput.html">Collective API Input</a> page.</p>
+<p><strong>Reference</strong>
+[1] Won, William, et al. “TACOS: Topology-Aware Collective Algorithm Synthesizer for Distributed Machine Learning.”, In Proceedings of IEEE MICRO 2024 (to appear), https://arxiv.org/abs/2304.05301.
+[2] Meghan Cowan, et al. “MSCCLang: Microsoft Collective Communication Language.”, In Proceedings of ASPLOS 2023, https://doi.org/10.1145/3575693.3575724</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="collective-scheduler.html" class="btn btn-neutral float-left" title="Collective Scheduler" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="sysinput.html" class="btn btn-neutral float-right" title="Input Files for Collective API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2024, Synergy Lab, Georgia Institute of Technology.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Read the Docs</span>
+        v: latest
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        
+        <dl>
+            <dt>Versions</dt>
+            
+            
+                <dd><a href="/astra-sim-docs/1.0/index.html">1.0</a></dd>
+                
+            
+            
+                <dd><a href="/astra-sim-docs/2.2/index.html">2.2</a></dd>
+                
+            
+            
+                <dd><a href="/astra-sim-docs/index.html">latest</a></dd>
+                
+            
+        </dl>
+        
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

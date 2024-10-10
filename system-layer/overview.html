@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../">
 <head>
@@ -6,23 +8,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Overview &mdash; ASTRA-sim 2.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=f35be339"></script>
-        <script src="../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=f35be339"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Network Backend" href="../network-backend/network-backend.html" />
-    <link rel="prev" title="System Layer" href="system-layer.html" /> 
+    <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -36,9 +32,6 @@
           <a href="../index.html" class="icon icon-home">
             ASTRA-sim
           </a>
-              <div class="version">
-                latest
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -47,19 +40,10 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul class="current">
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="../getting-started/getting-started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../workload-layer/workload-layer.html">Workload Layer</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="system-layer.html">System Layer</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Overview</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#foreword">Foreword</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#queue-management">Queue Management</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#collective-implementation">Collective Implementation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#interface-with-network-backend">Interface with network backend</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="system-layer.html">System Layer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../network-backend/network-backend.html">Network Backend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../compute-backend/compute-backend.html">Compute Backend</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../remote-memory-backend/remote-memory-backend.html">Remote Memory Backend</a></li>
@@ -80,7 +64,6 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="system-layer.html">System Layer</a></li>
       <li class="breadcrumb-item active">Overview</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/system-layer/overview.md.txt" rel="nofollow"> View page source</a>
@@ -93,55 +76,12 @@
              
   <section id="overview">
 <h1>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h1>
-<section id="foreword">
-<h2>Foreword<a class="headerlink" href="#foreword" title="Link to this heading"></a></h2>
-<p>This page describes the basic mechanism of the System layer at a very high level. Some details are omitted and/or simplified for clear delivery. Please refer to the codebase and email the user mailing list <a class="reference external" href="mailto:astrasim-users&#37;&#52;&#48;googlegroups&#46;com">astrasim-users<span>&#64;</span>googlegroups<span>&#46;</span>com</a> if anything remains unclear.</p>
-</section>
-<section id="queue-management">
-<h2>Queue Management<a class="headerlink" href="#queue-management" title="Link to this heading"></a></h2>
-<p><img alt="System Layer Queue" src="../_images/system_overview_queue.svg" /></p>
-<p>Core to the System layer is a set of queues called <code class="docutils literal notranslate"><span class="pre">active_Streams</span></code>.</p>
-<p>Each queue holds <code class="docutils literal notranslate"><span class="pre">StreamBaseline</span></code> objects, which are depicted at the top right corner of the image. A <code class="docutils literal notranslate"><span class="pre">StreamBaseline</span></code> object represents a stream (i.e. collective), which consists of multiple collective phases. The variable <code class="docutils literal notranslate"><span class="pre">phases_to_go</span></code> is a queue holding these phases. The pointer <code class="docutils literal notranslate"><span class="pre">my_current_phase</span></code> points to the phase currently being executed.</p>
-<p>For each stream, the function <code class="docutils literal notranslate"><span class="pre">proceed_to_next_vnet_baseline</span></code> is critical in advancing the collective phases and moving the stream object between one queue to another.
-This function is called in the following possible cases:</p>
-<ol class="arabic simple">
-<li><p>When a stream has been removed from <code class="docutils literal notranslate"><span class="pre">ready_list</span></code> and is about to be inserted into <code class="docutils literal notranslate"><span class="pre">active_Streams</span></code> for the first time.</p></li>
-<li><p>When a stream has finished one phase and is ready to wait for the next phase.</p></li>
-<li><p>When a stream has finished its last phase.</p></li>
-</ol>
-<p>Let’s first look at the behavior of <code class="docutils literal notranslate"><span class="pre">proceed_to_next_vnet_baseline</span></code> at case #2. In the image above, refer to the pink circles (2-1), (2-2), … (2-5).</p>
-<ol class="arabic simple">
-<li><p>Look at the queue currently holding the stream. <code class="docutils literal notranslate"><span class="pre">erase()</span></code> the <code class="docutils literal notranslate"><span class="pre">StreamBaseline</span></code> object from the queue, which is really a <code class="docutils literal notranslate"><span class="pre">list</span></code> object. (Note that streams may not finish in the order they start executing.)</p></li>
-<li><p>Modify the StreamBaseline object. The finished collective phase is popped from <code class="docutils literal notranslate"><span class="pre">phases_to_go</span></code>, and <code class="docutils literal notranslate"><span class="pre">my_current_phase</span></code> now points to the next phase to be executed.</p></li>
-<li><p>Insert the <code class="docutils literal notranslate"><span class="pre">StreamBaseline</span></code> object into the next queue using <code class="docutils literal notranslate"><span class="pre">insert_stream</span></code>.</p></li>
-<li><p>Call the function <code class="docutils literal notranslate"><span class="pre">notify_stream_removed</span></code>. This looks at the head of the previous queue. The variable <code class="docutils literal notranslate"><span class="pre">stream_pointer</span></code> points to the frontmost stream which is not running (marked blue). The function starts the execution of this stream’s next phase by calling <code class="docutils literal notranslate"><span class="pre">StreamBaseline::init()</span></code>.</p></li>
-<li><p>Similarly, use <code class="docutils literal notranslate"><span class="pre">notify_stream_added</span></code> to trigger the phase of the stream at the head of the new queue.</p></li>
-</ol>
-<p>In the other cases, <code class="docutils literal notranslate"><span class="pre">proceed_to_next_vnet_baseline</span></code> executes a subset of the above steps. In case #1 (stream has just been removed from <code class="docutils literal notranslate"><span class="pre">ready_list</span></code>), <code class="docutils literal notranslate"><span class="pre">proceed_to_next..</span></code> initializes the stream (1-2), inserts it into the first queue (1-3), and triggers the streams at the head of this queue. At case #3 (stream has finished), the function erases the stream from the previous queue (3-1), and triggers the streams at the head of the previous queue. Additionally, the <code class="docutils literal notranslate"><span class="pre">StreamBaseline</span></code> object is <code class="docutils literal notranslate"><span class="pre">delete</span></code>d, and <code class="docutils literal notranslate"><span class="pre">notify_stream_finished</span></code> is called to notify the <code class="docutils literal notranslate"><span class="pre">Sys</span></code> object that a stream has ended (3-6).</p>
-</section>
-<section id="collective-implementation">
-<h2>Collective Implementation<a class="headerlink" href="#collective-implementation" title="Link to this heading"></a></h2>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This section is currently under construction. Please stay tuned for updates!</p>
-</div>
-</section>
-<section id="interface-with-network-backend">
-<h2>Interface with network backend<a class="headerlink" href="#interface-with-network-backend" title="Link to this heading"></a></h2>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This section is currently under construction. Please stay tuned for updates!</p>
-</div>
-</section>
 </section>
 
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="system-layer.html" class="btn btn-neutral float-left" title="System Layer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../network-backend/network-backend.html" class="btn btn-neutral float-right" title="Network Backend" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+          <footer>
 
   <hr/>
 

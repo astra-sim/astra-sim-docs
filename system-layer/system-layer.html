@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../">
 <head>
@@ -6,22 +8,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>System Layer &mdash; ASTRA-sim 2.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=f35be339"></script>
-        <script src="../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=f35be339"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Overview" href="overview.html" />
+    <link rel="next" title="Collective Scheduler" href="collective-scheduler.html" />
     <link rel="prev" title="Overview" href="../workload-layer/overview.html" /> 
 </head>
 
@@ -36,9 +34,6 @@
           <a href="../index.html" class="icon icon-home">
             ASTRA-sim
           </a>
-              <div class="version">
-                latest
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -51,7 +46,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../getting-started/getting-started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../workload-layer/workload-layer.html">Workload Layer</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">System Layer</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="collective-scheduler.html">Collective Scheduler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="collective-implementation.html">Collective Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sysinput.html">Input Files for Collective API</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../network-backend/network-backend.html">Network Backend</a></li>
@@ -86,13 +83,31 @@
              
   <section id="system-layer">
 <h1>System Layer<a class="headerlink" href="#system-layer" title="Link to this heading"></a></h1>
+<p>The Workload layer iterates over the nodes in the Chakra ET and issues commands for the operation each Chakra ET node refers to. The system layer takes these commands and translates them so that the respective Network, Compute, or Memory backends can properly simulate the operation. Depending on the operation, the system layer’s behavior changes as follows:</p>
+<ul class="simple">
+<li><p>Compute operation: Issues a call to the Compute backend to simulate the duration of the operation.</p></li>
+<li><p>Memory operation: Issues a call to the Memory backend to simulate the duration of the operation.</p></li>
+<li><p>Collective operation: Breaks the collective communication into point-to-point send and receive messages, and issues a ‘send’ or ‘receive’ call to the network backend to simulate the messages.</p></li>
+</ul>
+<p>Since the compute and memory operations are fairly straightforward, we focus on how the collective operations are scheduled and executed.</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="overview.html#foreword">Foreword</a></li>
-<li class="toctree-l2"><a class="reference internal" href="overview.html#queue-management">Queue Management</a></li>
-<li class="toctree-l2"><a class="reference internal" href="overview.html#collective-implementation">Collective Implementation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="overview.html#interface-with-network-backend">Interface with network backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="collective-scheduler.html">Collective Scheduler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="collective-implementation.html">Collective Implementation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="collective-implementation.html#astra-sim-native-implementation">ASTRA-Sim Native Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="collective-implementation.html#chakra-based-arbitrary-definition-through-collective-api">Chakra Based Arbitrary Definition Through Collective API</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sysinput.html">Input Files for Collective API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sysinput.html#astra-sim-native">ASTRA-sim Native</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sysinput.html#collective-api">Collective API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sysinput.html#generating-chakra-et-representation-from-collective-tools">Generating Chakra ET Representation from Collective Tools</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sysinput.html#mscclang">MSCCLang</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sysinput.html#tacos">TACOS</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -104,7 +119,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../workload-layer/overview.html" class="btn btn-neutral float-left" title="Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="overview.html" class="btn btn-neutral float-right" title="Overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="collective-scheduler.html" class="btn btn-neutral float-right" title="Collective Scheduler" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
