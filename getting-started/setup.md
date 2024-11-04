@@ -14,6 +14,19 @@ $ sudo apt install \
   python3 python3-pip git
 :::
 
+Then, you need to install protobuf. We recommand you to use protobuf 3.6.1. 
+You can download protobuf 3.6.1 here: [[GitHub]](https://github.com/protocolbuffers/protobuf/releases/tag/v3.6.1) [[protobuf-all-3.6.1.tar.gz]](https://github.com/protocolbuffers/protobuf/releases/download/v3.6.1/protobuf-all-3.6.1.tar.gz).
+
+:::{code-block} console
+# Installing protobuf 3.6.1 locally
+$ ./configure
+$ make -j$(nproc)
+$ make check -j$(nproc)  # checking compilation finished successfully
+$ sudo make install  # register protobuf to PATH
+$ which protoc  # system should be able to locate protoc
+$ protoc --version  # should be 3.6.1
+:::
+
 Now, you can install required Python packages, either through conda or pip3:
 
 - ### Conda
@@ -23,7 +36,7 @@ If you are managing Python environments through conda, you can run below command
 :::{code-block} console
 $ conda create -n astra-sim python=3.7
 $ conda activate astra-sim
-$ conda install protobuf=3.6.1 graphviz python-graphviz pydot
+$ conda install graphviz python-graphviz pydot
 :::
 
 - ### pip3
@@ -32,7 +45,7 @@ You can also install required Python packages natively using pip3.
 
 :::{code-block} console
 $ pip3 install --upgrade pip
-$ pip3 install protobuf==3.6.1 pydot
+$ pip3 install pydot
 :::
 
 ## macOS using [homebrew](https://brew.sh/)
