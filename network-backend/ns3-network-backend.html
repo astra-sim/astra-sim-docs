@@ -48,7 +48,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../system-layer/system-layer.html">System Layer</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="network-backend.html">Network Backend</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="analytical-network-backend.html">Analytical Network Backend</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">ns-3 Network Backend</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">ns-3 Network Backend</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#running-the-ns3-backend">Running the ns3 backend.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configuring-the-ns3-backend">Configuring the ns3 backend.</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="garnet-network-backend.html">Garnet Network Backend</a></li>
 </ul>
 </li>
@@ -86,8 +90,79 @@
 <h1>ns-3 Network Backend<a class="headerlink" href="#ns-3-network-backend" title="Link to this heading"></a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This page is currently under construction. Please stay tuned for updates!</p>
+<p>The below documentation is a copy-paste of a recent email. We posted the documentation here considering the urgency, but will strive to update /clean up as soon as possible.</p>
 </div>
+<section id="running-the-ns3-backend">
+<h2>Running the ns3 backend.<a class="headerlink" href="#running-the-ns3-backend" title="Link to this heading"></a></h2>
+<p>There have been some changes to the execution/build script recently. Please pull the most recent commit from the github repo.
+Compiling the ns3 backend is similar to the analytical backend.
+bash build/astra_ns3/build.sh
+And running the ns3 backend is done with the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>   <span class="c1"># {NS3_DIR} is the directory of the ns-3 backend. That is, &#39;{ASTRA_SIM_ROOT_DIRECTORY}/extern/network_backend/ns-3&#39;</span>
+    <span class="n">cd</span> <span class="s2">&quot;$</span><span class="si">{NS3_DIR}</span><span class="s2">/build/scratch&quot;</span>
+    <span class="o">./</span><span class="n">ns3</span><span class="mf">.42</span><span class="o">-</span><span class="n">AstraSimNetwork</span><span class="o">-</span><span class="n">default</span> \
+        <span class="o">--</span><span class="n">workload</span><span class="o">-</span><span class="n">configuration</span><span class="o">=</span><span class="s2">&quot;${SCRIPT_DIR:?}&quot;</span><span class="o">/../../</span><span class="n">extern</span><span class="o">/</span><span class="n">graph_frontend</span><span class="o">/</span><span class="n">chakra</span><span class="o">/</span><span class="n">one_comm_coll_node_allgather</span><span class="p">}</span>  \
+        <span class="o">--</span><span class="n">system</span><span class="o">-</span><span class="n">configuration</span><span class="o">=</span><span class="s2">&quot;${SCRIPT_DIR:?}&quot;</span><span class="o">/../../</span><span class="n">inputs</span><span class="o">/</span><span class="n">system</span><span class="o">/</span><span class="n">Switch</span><span class="o">.</span><span class="n">json</span>  \
+        <span class="o">--</span><span class="n">network</span><span class="o">-</span><span class="n">configuration</span><span class="o">=</span><span class="s2">&quot;../../../ns-3/scratch/config/config.txt&quot;</span>   \
+        <span class="o">--</span><span class="n">remote</span><span class="o">-</span><span class="n">memory</span><span class="o">-</span><span class="n">configuration</span><span class="o">=</span><span class="s2">&quot;${SCRIPT_DIR:?}&quot;</span><span class="o">/../../</span><span class="n">inputs</span><span class="o">/</span><span class="n">remote_memory</span><span class="o">/</span><span class="n">analytical</span><span class="o">/</span><span class="n">no_memory_expansion</span><span class="o">.</span><span class="n">json</span> \
+        <span class="o">--</span><span class="n">logical</span><span class="o">-</span><span class="n">topology</span><span class="o">-</span><span class="n">configuration</span><span class="o">=</span><span class="s2">&quot;${SCRIPT_DIR:?}&quot;</span><span class="o">/../../</span><span class="n">inputs</span><span class="o">/</span><span class="n">network</span><span class="o">/</span><span class="n">ns3</span><span class="o">/</span><span class="n">sample_8nodes_1D</span><span class="o">.</span><span class="n">json</span>   \
+        <span class="o">--</span><span class="n">comm</span><span class="o">-</span><span class="n">group</span><span class="o">-</span><span class="n">configuration</span><span class="o">=</span>\<span class="s2">&quot;empty</span><span class="se">\&quot;</span>
+</pre></div>
+</div>
+<p>This can also be achieved with</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bash</span> <span class="n">build</span><span class="o">/</span><span class="n">astra_ns3</span><span class="o">/</span><span class="n">build</span><span class="o">.</span><span class="n">sh</span> <span class="o">-</span><span class="n">r</span>
+</pre></div>
+</div>
+<p>Note the ‘-r’ flag. If you examine the top of the build script, you’ll be able to find how to change between different configuration files</p>
+</section>
+<section id="configuring-the-ns3-backend">
+<h2>Configuring the ns3 backend.<a class="headerlink" href="#configuring-the-ns3-backend" title="Link to this heading"></a></h2>
+<p>In the execution script above, note the two flags <code class="docutils literal notranslate"><span class="pre">--network-backend</span></code> and <code class="docutils literal notranslate"><span class="pre">--logical-topology</span></code>. Note that in the analytical backend, we only used the <code class="docutils literal notranslate"><span class="pre">--network</span> <span class="pre">backend</span></code>. This is because, in the analytical backend, the logical topology and physical topology was the same, while ns3 allows us to separate logical and physical topology. More on this later.</p>
+<p>Let’s observe the <code class="docutils literal notranslate"><span class="pre">--network-backend</span></code> flag first. This is the configuration file that configures the NS3 simulator itself. This is why, uniquely, the path after <code class="docutils literal notranslate"><span class="pre">--network-backend</span></code> is relative to <code class="docutils literal notranslate"><span class="pre">{NS3_DIR}/scratch/..</span></code>.
+If we open the file <code class="docutils literal notranslate"><span class="pre">astra-sim/extern/network_backend/ns-3/scratch/config/</span></code>, we see the following file.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">USE_DYNAMIC_PFC_THRESHOLD</span> <span class="mi">1</span>
+
+<span class="n">PACKET_PAYLOAD_SIZE</span> <span class="mi">1000</span>
+
+<span class="n">TOPOLOGY_FILE</span> <span class="o">../../</span><span class="n">scratch</span><span class="o">/</span><span class="n">topology</span><span class="o">/</span><span class="mi">8</span><span class="n">_nodes_1_switch_topology</span><span class="o">.</span><span class="n">txt</span>
+<span class="n">FLOW_FILE</span> <span class="o">../../</span><span class="n">scratch</span><span class="o">/</span><span class="n">output</span><span class="o">/</span><span class="n">flow</span><span class="o">.</span><span class="n">txt</span>
+<span class="n">TRACE_FILE</span> <span class="o">../../</span><span class="n">scratch</span><span class="o">/</span><span class="n">output</span><span class="o">/</span><span class="n">trace</span><span class="o">.</span><span class="n">txt</span>
+<span class="p">(</span><span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here, the “TOPOLOGY_FILE” knob points to the file which defines the physical topology.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">144</span> <span class="mi">16</span> <span class="mi">192</span>
+<span class="mi">128</span> <span class="mi">129</span> <span class="mi">130</span> <span class="mi">131</span> <span class="mi">132</span> <span class="mi">133</span> <span class="mi">134</span> <span class="mi">135</span> <span class="mi">136</span> <span class="mi">137</span> <span class="mi">138</span> <span class="mi">139</span> <span class="mi">140</span> <span class="mi">141</span> <span class="mi">142</span> <span class="mi">143</span>
+<span class="mi">0</span> <span class="mi">128</span> <span class="mi">200</span><span class="n">Gbps</span> <span class="mf">0.005</span><span class="n">ms</span> <span class="mi">0</span>
+<span class="mi">1</span> <span class="mi">128</span> <span class="mi">200</span><span class="n">Gbps</span> <span class="mf">0.005</span><span class="n">ms</span> <span class="mi">0</span>
+<span class="mi">2</span> <span class="mi">128</span> <span class="mi">200</span><span class="n">Gbps</span> <span class="mf">0.005</span><span class="n">ms</span> <span class="mi">0</span>
+<span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="mi">135</span> <span class="mi">142</span> <span class="mi">200</span><span class="n">Gbps</span> <span class="mf">0.0125</span><span class="n">ms</span> <span class="mi">0</span>
+<span class="mi">135</span> <span class="mi">143</span> <span class="mi">200</span><span class="n">Gbps</span> <span class="mf">0.0125</span><span class="n">ms</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>Please have a look at the image below for the format description. This is how the physical topology (e.g. gpus, wired connectivity between gpu, etc.) is defined. This is the way to define the fat tree topology
+Each line starting from the third line (“0 128 200Gbps…”) defines a link. Note that in the above example, the links between switches 135 and 142 are the ‘upper’ links of the fat tree connecting the ToR switches and the spine switches.</p>
+<p><img alt="Physical Topology Definition" src="../_images/ns3_physical_topology.png" /></p>
+<p>For the other knobs in the ns3 configuration, please refer to the document in : ‘astra-sim/extern/network_backend/ns-3/scratch/config/config_doc.txt’</p>
+<p>Now let’s talk about the logical topology.
+In a real world topology where 1 server node = 8 GPU, and 16 of these server nodes are connected through switches, it would seem ideal to run parallelization across the first 8 GPUs (intra-node-communication/e.g., 0,1,2,3,4,5,6,7) and then run parallelization across the 16 GPUs (inter-node-communication/e.g., 0,16,32,48,…). In this case, the logical dimension would be [8,16]. However, it is possible to run, for example, first dimension across collective across 32 GPUs (0,1,2,3,…,31), and then across a stride of 4 GPUs(0,32,64,96). In this case, the logical dimension would be [32,4].</p>
+<p>The ns3 simulator’s <code class="docutils literal notranslate"><span class="pre">--logical</span> <span class="pre">dimension</span></code> flag allows the ability to test different logical dimensions that might differ from the physical topology. The file structure is pretty straightforward.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;logical-dims&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;8&quot;</span><span class="p">,</span><span class="s2">&quot;16&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Note that the number of logical dimensions (1D v. 2D v. 3D) must match the number of collectives in the system configuration, passed to <code class="docutils literal notranslate"><span class="pre">--system-configuration</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># astra-sim/inputs/system/Ring_FullyConnected_Switch.json</span>
+<span class="p">{</span>
+<span class="p">(</span><span class="o">...</span><span class="p">)</span>
+  <span class="s2">&quot;all-reduce-implementation&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;ring&quot;</span><span class="p">,</span> <span class="s2">&quot;direct&quot;</span><span class="p">,</span> <span class="s2">&quot;halvingDoubling&quot;</span><span class="p">],</span>
+<span class="p">}</span> 
+</pre></div>
+</div>
+<p>The above two examples would not work (the simulator might not complain, but semantically it wouldn’t be correct) because while we have a 2D logical topology, the system layer is prepared to run a 3D all-reduce implementation.</p>
+</section>
 </section>
 
 
