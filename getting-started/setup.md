@@ -9,7 +9,8 @@ $ sudo apt update
 $ sudo apt install \
   gcc g++ make cmake \
   libboost-dev libboost-program-options-dev \
-  libprotobuf-dev \
+  libprotobuf-dev protobuf-compiler \
+  openmpi-bin openmpi-doc libopenmpi-dev \
   python3 python3-pip git
 :::
 
