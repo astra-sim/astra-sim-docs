@@ -20,7 +20,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Argument ${WORKLOAD_CONFIG}" href="argument-workload-config.html" />
-    <link rel="prev" title="Build ASTRA-sim" href="installing-astra-sim.html" /> 
+    <link rel="prev" title="Build ASTRA-sim" href="build.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -45,7 +45,7 @@
               <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="getting-started.html">Getting Started</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="setup.html">Dependencies Setup</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installing-astra-sim.html">Build ASTRA-sim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="build.html">Build ASTRA-sim</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Run ASTRA-sim</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="argument-workload-config.html">Argument ${WORKLOAD_CONFIG}</a></li>
 <li class="toctree-l3"><a class="reference internal" href="argument-system-config.html">Argument ${SYSTEM_CONFIG}</a></li>
@@ -53,7 +53,7 @@
 <li class="toctree-l3"><a class="reference internal" href="argument-remote-memory-config.html">Argument ${REMOTE_MEMORY_CONFIG}</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="astra-sim-output.html">ASTRA-sim Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="output.html">ASTRA-sim Output</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../workload-layer/workload-layer.html">Workload Layer</a></li>
@@ -81,7 +81,7 @@
           <li class="breadcrumb-item"><a href="getting-started.html">Getting Started</a></li>
       <li class="breadcrumb-item active">Run ASTRA-sim</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/getting-started/running-astra-sim.md.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/getting-started/run.md.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -91,13 +91,8 @@
              
   <section id="run-astra-sim">
 <h1>Run ASTRA-sim<a class="headerlink" href="#run-astra-sim" title="Link to this heading"></a></h1>
-<p>Once ASTRA-sim is built, the executable <code class="docutils literal notranslate"><span class="pre">${BINARY}</span></code> is located at:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>For<span class="w"> </span>the<span class="w"> </span>analytical<span class="w"> </span>network<span class="w"> </span>backend
-<span class="gp">$ </span><span class="si">${</span><span class="nv">ASTRA_SIM</span><span class="si">}</span>/build/astra_analytical/build/AnalyticalAstra/bin/AnalyticalAstra
-</pre></div>
-</div>
 <p>Run simulations by passing the required aruguments:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="si">${</span><span class="nv">BINARY</span><span class="si">}</span><span class="w"> </span><span class="se">\</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span><span class="o">{</span>ASTRA_SIM_BIN<span class="o">}</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--workload-configuration<span class="o">=</span><span class="si">${</span><span class="nv">WORKLOAD_CONFIG</span><span class="si">}</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--system-configuration<span class="o">=</span><span class="si">${</span><span class="nv">SYSTEM_CONFIG</span><span class="si">}</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--network-configuration<span class="o">=</span><span class="si">${</span><span class="nv">NETWORK_CONFIG</span><span class="si">}</span><span class="w"> </span><span class="se">\</span>
@@ -139,7 +134,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="installing-astra-sim.html" class="btn btn-neutral float-left" title="Build ASTRA-sim" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="build.html" class="btn btn-neutral float-left" title="Build ASTRA-sim" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="argument-workload-config.html" class="btn btn-neutral float-right" title="Argument ${WORKLOAD_CONFIG}" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

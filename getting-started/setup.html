@@ -19,7 +19,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Build ASTRA-sim" href="installing-astra-sim.html" />
+    <link rel="next" title="Build ASTRA-sim" href="build.html" />
     <link rel="prev" title="Getting Started" href="getting-started.html" /> 
 </head>
 
@@ -45,14 +45,12 @@
               <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="getting-started.html">Getting Started</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Dependencies Setup</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#debian-based-linux-distributions">Debian-Based Linux Distributions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#macos-using-homebrew">macOS using homebrew</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#windows">Windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#debian-based-linux-distributions-recommend-ubuntu-22-04">Debian-Based Linux Distributions (Recommend Ubuntu 22.04)</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="installing-astra-sim.html">Build ASTRA-sim</a></li>
-<li class="toctree-l2"><a class="reference internal" href="running-astra-sim.html">Run ASTRA-sim</a></li>
-<li class="toctree-l2"><a class="reference internal" href="astra-sim-output.html">ASTRA-sim Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="build.html">Build ASTRA-sim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="run.html">Run ASTRA-sim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="output.html">ASTRA-sim Output</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../workload-layer/workload-layer.html">Workload Layer</a></li>
@@ -90,71 +88,25 @@
              
   <section id="dependencies-setup">
 <h1>Dependencies Setup<a class="headerlink" href="#dependencies-setup" title="Link to this heading"></a></h1>
-<section id="debian-based-linux-distributions">
-<h2>Debian-Based Linux Distributions<a class="headerlink" href="#debian-based-linux-distributions" title="Link to this heading"></a></h2>
-<p>Install required system packages:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>update
-<span class="gp">$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>gcc<span class="w"> </span>g++<span class="w"> </span>make<span class="w"> </span>cmake<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>libboost-dev<span class="w"> </span>libboost-program-options-dev<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>libprotobuf-dev<span class="w"> </span>protobuf-compiler<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>openmpi-bin<span class="w"> </span>openmpi-doc<span class="w"> </span>libopenmpi-dev<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>python3<span class="w"> </span>python3-pip<span class="w"> </span>git
+<section id="debian-based-linux-distributions-recommend-ubuntu-22-04">
+<h2>Debian-Based Linux Distributions (Recommend Ubuntu 22.04)<a class="headerlink" href="#debian-based-linux-distributions-recommend-ubuntu-22-04" title="Link to this heading"></a></h2>
+<p>Install system dependencies:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo apt -y update</span>
+<span class="go">sudo apt -y install coreutils wget vim git</span>
+<span class="go">sudo apt -y install gcc-11 g++-11 make cmake </span>
+<span class="go">sudo apt -y install clang-format </span>
+<span class="go">sudo apt -y install libboost-dev libboost-program-options-dev</span>
+<span class="go">sudo apt -y install python3.10 python3-pip</span>
+<span class="go">sudo apt -y install libprotobuf-dev protobuf-compiler</span>
+<span class="go">sudo apt -y install openmpi-bin openmpi-doc libopenmpi-dev</span>
 </pre></div>
 </div>
-<p>Then, you need to install protobuf. We recommand you to use protobuf 3.6.1.
-You can download protobuf 3.6.1 here: <a class="reference external" href="https://github.com/protocolbuffers/protobuf/releases/tag/v3.6.1">[GitHub]</a> <a class="reference external" href="https://github.com/protocolbuffers/protobuf/releases/download/v3.6.1/protobuf-all-3.6.1.tar.gz">[protobuf-all-3.6.1.tar.gz]</a>.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Installing<span class="w"> </span>protobuf<span class="w"> </span><span class="m">3</span>.6.1<span class="w"> </span>locally
-<span class="gp">$ </span>./configure
-<span class="gp">$ </span>make<span class="w"> </span>-j<span class="k">$(</span>nproc<span class="k">)</span>
-<span class="gp">$ </span>make<span class="w"> </span>check<span class="w"> </span>-j<span class="k">$(</span>nproc<span class="k">)</span><span class="w">  </span><span class="c1"># checking compilation finished successfully</span>
-<span class="gp">$ </span>sudo<span class="w"> </span>make<span class="w"> </span>install<span class="w">  </span><span class="c1"># register protobuf to PATH</span>
-<span class="gp">$ </span>which<span class="w"> </span>protoc<span class="w">  </span><span class="c1"># system should be able to locate protoc</span>
-<span class="gp">$ </span>protoc<span class="w"> </span>--version<span class="w">  </span><span class="c1"># should be 3.6.1</span>
+<p>Install Python packages:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">pip3 install --upgrade pip</span>
+<span class="go">pip3 install protobuf==5.28.2</span>
+<span class="go">pip3 install graphviz pydot</span>
 </pre></div>
 </div>
-<p>Now, you can install required Python packages, either through conda or pip3:</p>
-<ul>
-<li><p class="rubric" id="conda">Conda</p>
-</li>
-</ul>
-<p>If you are managing Python environments through conda, you can run below commands to create a new environment for astra-sim.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>astra-sim<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.7
-<span class="gp">$ </span>conda<span class="w"> </span>activate<span class="w"> </span>astra-sim
-<span class="gp">$ </span>conda<span class="w"> </span>install<span class="w"> </span>graphviz<span class="w"> </span>python-graphviz<span class="w"> </span>pydot
-</pre></div>
-</div>
-<ul>
-<li><p class="rubric" id="pip3">pip3</p>
-</li>
-</ul>
-<p>You can also install required Python packages natively using pip3.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip3<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
-<span class="gp">$ </span>pip3<span class="w"> </span>install<span class="w"> </span>pydot
-</pre></div>
-</div>
-</section>
-<section id="macos-using-homebrew">
-<h2>macOS using <a class="reference external" href="https://brew.sh/">homebrew</a><a class="headerlink" href="#macos-using-homebrew" title="Link to this heading"></a></h2>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>brew<span class="w"> </span>update
-<span class="gp">$ </span>brew<span class="w"> </span>upgrade
-<span class="gp">$ </span>brew<span class="w"> </span>install<span class="w"> </span>boost<span class="w"> </span>cmake<span class="w"> </span>coreutils
-</pre></div>
-</div>
-<p>Then, you have to install protobuf 3.6.1 locally. You can download protobuf 3.6.1 here: <a class="reference external" href="https://github.com/protocolbuffers/protobuf/releases/tag/v3.6.1">[GitHub]</a> <a class="reference external" href="https://github.com/protocolbuffers/protobuf/releases/download/v3.6.1/protobuf-all-3.6.1.tar.gz">[protobuf-all-3.6.1.tar.gz]</a>.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Installing<span class="w"> </span>protobuf<span class="w"> </span><span class="m">3</span>.6.1<span class="w"> </span>locally
-<span class="gp">$ </span>./configure
-<span class="gp">$ </span>make<span class="w"> </span>-j<span class="k">$(</span>nproc<span class="k">)</span>
-<span class="gp">$ </span>make<span class="w"> </span>check<span class="w"> </span>-j<span class="k">$(</span>nproc<span class="k">)</span><span class="w">  </span><span class="c1"># checking compilation finished successfully</span>
-<span class="gp">$ </span>sudo<span class="w"> </span>make<span class="w"> </span>install<span class="w">  </span><span class="c1"># register protobuf to PATH</span>
-<span class="gp">$ </span>which<span class="w"> </span>protoc<span class="w">  </span><span class="c1"># system should be able to locate protoc</span>
-<span class="gp">$ </span>protoc<span class="w"> </span>--version<span class="w">  </span><span class="c1"># should be 3.6.1</span>
-</pre></div>
-</div>
-</section>
-<section id="windows">
-<h2>Windows<a class="headerlink" href="#windows" title="Link to this heading"></a></h2>
-<p>ASTRA-sim is not natively supporting Windows environment at this moment. We suggest to use Docker or <a class="reference external" href="https://learn.microsoft.com/en-us/windows/wsl/install">Windows Subsystem for Linux (WSL)</a>).</p>
 </section>
 </section>
 
@@ -163,7 +115,7 @@ You can download protobuf 3.6.1 here: <a class="reference external" href="https:
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="getting-started.html" class="btn btn-neutral float-left" title="Getting Started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="installing-astra-sim.html" class="btn btn-neutral float-right" title="Build ASTRA-sim" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="build.html" class="btn btn-neutral float-right" title="Build ASTRA-sim" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
