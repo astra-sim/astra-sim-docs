@@ -7,7 +7,7 @@
 Example system configurations can be found at:
 
 :::{code-block} console
-$ ${ASTRA_SIM}/inputs/system/
+$ ${ASTRA_SIM}/examples/network_analytical/system.json
 :::
 
 - **scheduling-policy**: (LIFO/FIFO)
