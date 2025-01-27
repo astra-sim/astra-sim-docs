@@ -41,7 +41,6 @@ You can convert ASTRA-sim 1.0 text input files into Chakra traces with the follo
 ```bash
 $ cd ./extern/graph_frontend/chakra/
 $ pip3 install .
-$ pip3 install --upgrade protobuf
 $ chakra_converter Text \
     --input ../../../examples/text_converter/text_workloads/Resnet50_DataParallel.txt \
     --output ../../../examples/text_converter/text_workloads/Resnet50_DataParallel \
