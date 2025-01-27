@@ -15,7 +15,7 @@ ASTRA_SIM=$(realpath ./astra-sim)
 
 :::{code-block} console
 cd ${ASTRA_SIM}
-git submodule update --init --recursive # setup submodules
+git submodule update --init --recursive
 ::: 
 
 ### Analytical Network Backend
