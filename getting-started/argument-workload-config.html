@@ -7,7 +7,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Argument ${WORKLOAD_CONFIG} &mdash; ASTRA-sim 2.2 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
   
@@ -101,7 +101,7 @@
 </pre></div>
 </div>
 <p>The example traces can be found at:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span><span class="o">{</span>ASTRA_SIM<span class="o">}</span>/inputs/workload/
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span><span class="o">{</span>ASTRA_SIM<span class="o">}</span>/examples/network_analytical/workload
 </pre></div>
 </div>
 <div class="admonition note">
@@ -111,6 +111,22 @@
 <section id="using-chakra-execution-trace">
 <h2>Using <a class="reference external" href="https://github.com/mlcommons/chakra/wiki">Chakra Execution Trace</a><a class="headerlink" href="#using-chakra-execution-trace" title="Link to this heading"></a></h2>
 <p>ASTRA-sim supports Chakra ET (Execution Trace) as inputs to the workload layer.</p>
+<p>To run a preset workload, such as <code class="docutils literal notranslate"><span class="pre">AllReduce_1MB</span></code>, execute the following commands:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span><span class="si">${</span><span class="nv">ASTRA_SIM</span><span class="si">}</span>/examples/network_analytical
+bash<span class="w"> </span>run_network_analytical.sh
+</pre></div>
+</div>
+<p>This script will compile ASTRA-Sim, run the workload on an 8-NPU cluster, and display the number of cycles required to complete the simulation.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span><span class="m">2025</span>-01-26<span class="w"> </span><span class="m">23</span>:03:37.384<span class="o">]</span><span class="w"> </span><span class="o">[</span>workload<span class="o">]</span><span class="w"> </span><span class="o">[</span>info<span class="o">]</span><span class="w"> </span>sys<span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="w"> </span>finished,<span class="w"> </span><span class="m">64440</span><span class="w"> </span>cycles,<span class="w"> </span>exposed<span class="w"> </span>communication<span class="w"> </span><span class="m">64440</span><span class="w"> </span>cycles.
+<span class="o">[</span><span class="m">2025</span>-01-26<span class="w"> </span><span class="m">23</span>:03:37.384<span class="o">]</span><span class="w"> </span><span class="o">[</span>workload<span class="o">]</span><span class="w"> </span><span class="o">[</span>info<span class="o">]</span><span class="w"> </span>sys<span class="o">[</span><span class="m">1</span><span class="o">]</span><span class="w"> </span>finished,<span class="w"> </span><span class="m">64440</span><span class="w"> </span>cycles,<span class="w"> </span>exposed<span class="w"> </span>communication<span class="w"> </span><span class="m">64440</span><span class="w"> </span>cycles.
+<span class="o">[</span><span class="m">2025</span>-01-26<span class="w"> </span><span class="m">23</span>:03:37.384<span class="o">]</span><span class="w"> </span><span class="o">[</span>workload<span class="o">]</span><span class="w"> </span><span class="o">[</span>info<span class="o">]</span><span class="w"> </span>sys<span class="o">[</span><span class="m">2</span><span class="o">]</span><span class="w"> </span>finished,<span class="w"> </span><span class="m">64440</span><span class="w"> </span>cycles,<span class="w"> </span>exposed<span class="w"> </span>communication<span class="w"> </span><span class="m">64440</span><span class="w"> </span>cycles.
+<span class="o">[</span><span class="m">2025</span>-01-26<span class="w"> </span><span class="m">23</span>:03:37.384<span class="o">]</span><span class="w"> </span><span class="o">[</span>workload<span class="o">]</span><span class="w"> </span><span class="o">[</span>info<span class="o">]</span><span class="w"> </span>sys<span class="o">[</span><span class="m">3</span><span class="o">]</span><span class="w"> </span>finished,<span class="w"> </span><span class="m">64440</span><span class="w"> </span>cycles,<span class="w"> </span>exposed<span class="w"> </span>communication<span class="w"> </span><span class="m">64440</span><span class="w"> </span>cycles.
+<span class="o">[</span><span class="m">2025</span>-01-26<span class="w"> </span><span class="m">23</span>:03:37.384<span class="o">]</span><span class="w"> </span><span class="o">[</span>workload<span class="o">]</span><span class="w"> </span><span class="o">[</span>info<span class="o">]</span><span class="w"> </span>sys<span class="o">[</span><span class="m">4</span><span class="o">]</span><span class="w"> </span>finished,<span class="w"> </span><span class="m">64440</span><span class="w"> </span>cycles,<span class="w"> </span>exposed<span class="w"> </span>communication<span class="w"> </span><span class="m">64440</span><span class="w"> </span>cycles.
+<span class="o">[</span><span class="m">2025</span>-01-26<span class="w"> </span><span class="m">23</span>:03:37.384<span class="o">]</span><span class="w"> </span><span class="o">[</span>workload<span class="o">]</span><span class="w"> </span><span class="o">[</span>info<span class="o">]</span><span class="w"> </span>sys<span class="o">[</span><span class="m">5</span><span class="o">]</span><span class="w"> </span>finished,<span class="w"> </span><span class="m">64440</span><span class="w"> </span>cycles,<span class="w"> </span>exposed<span class="w"> </span>communication<span class="w"> </span><span class="m">64440</span><span class="w"> </span>cycles.
+<span class="o">[</span><span class="m">2025</span>-01-26<span class="w"> </span><span class="m">23</span>:03:37.384<span class="o">]</span><span class="w"> </span><span class="o">[</span>workload<span class="o">]</span><span class="w"> </span><span class="o">[</span>info<span class="o">]</span><span class="w"> </span>sys<span class="o">[</span><span class="m">6</span><span class="o">]</span><span class="w"> </span>finished,<span class="w"> </span><span class="m">64440</span><span class="w"> </span>cycles,<span class="w"> </span>exposed<span class="w"> </span>communication<span class="w"> </span><span class="m">64440</span><span class="w"> </span>cycles.
+<span class="o">[</span><span class="m">2025</span>-01-26<span class="w"> </span><span class="m">23</span>:03:37.384<span class="o">]</span><span class="w"> </span><span class="o">[</span>workload<span class="o">]</span><span class="w"> </span><span class="o">[</span>info<span class="o">]</span><span class="w"> </span>sys<span class="o">[</span><span class="m">7</span><span class="o">]</span><span class="w"> </span>finished,<span class="w"> </span><span class="m">64440</span><span class="w"> </span>cycles,<span class="w"> </span>exposed<span class="w"> </span>communication<span class="w"> </span><span class="m">64440</span><span class="w"> </span>cycles.
+</pre></div>
+</div>
 <p>An example of how to generate Chakra traces and run ASTRA-sim is illustrated at <a class="reference external" href="https://github.com/mlcommons/chakra/wiki/Running-Simulation-with-Chakra">Running Simulation with Chakra</a>.</p>
 </section>
 <section id="using-execution-trace-converter-et-converter">
@@ -118,30 +134,30 @@
 <p>You can convert ASTRA-sim 1.0 text input files into Chakra traces with the following commands.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>./extern/graph_frontend/chakra/
 $<span class="w"> </span>pip3<span class="w"> </span>install<span class="w"> </span>.
-$<span class="w"> </span>python3<span class="w"> </span>-m<span class="w"> </span>chakra.et_converter.et_converter<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--input_type<span class="w"> </span>Text<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--input_filename<span class="w"> </span>../../../inputs/workload/ASTRA-sim-1.0/Resnet50_DataParallel.txt<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--output_filename<span class="w"> </span>../../../inputs/workload/ASTRA-sim-2.0/Resnet50_DataParallel<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--num_npus<span class="w"> </span><span class="m">64</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--num_dims<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--num_passes<span class="w"> </span><span class="m">1</span>
+$<span class="w"> </span>chakra_converter<span class="w"> </span>Text<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--input<span class="w"> </span>../../../examples/text_converter/text_workloads/Resnet50_DataParallel.txt<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--output<span class="w"> </span>../../../examples/text_converter/text_workloads/Resnet50_DataParallel<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--num-npus<span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--num-passes<span class="w"> </span><span class="m">1</span>
 </pre></div>
 </div>
-<p>Run the following command.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>-
-$<span class="w"> </span>./build/astra_analytical/build/bin/AstraSim_Analytical_Congestion_Unaware<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--workload-configuration<span class="o">=</span>./inputs/workload/ASTRA-sim-2.0/Resnet50_DataParallel<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--system-configuration<span class="o">=</span>./inputs/system/Switch.json<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--network-configuration<span class="o">=</span>./inputs/network/analytical/Switch.yml<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--remote-memory-configuration<span class="o">=</span>./inputs/remote_memory/analytical/no_memory_expansion.json
+<p>In the project root, run the following command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>./build/astra_analytical/build/bin/AstraSim_Analytical_Congestion_Unaware<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--workload-configuration<span class="o">=</span>./examples/text_converter/text_workloads/Resnet50_DataParallel<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--system-configuration<span class="o">=</span>./examples/text_converter/system.json<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--network-configuration<span class="o">=</span>./examples/text_converter/network.yml<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--remote-memory-configuration<span class="o">=</span>./examples/text_converter/remote_memory.json
 </pre></div>
 </div>
 <p>Upon completion, ASTRA-sim will display the number of cycles it took to run the simulation.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sys<span class="o">[</span><span class="m">62</span><span class="o">]</span><span class="w"> </span>finished,<span class="w"> </span><span class="m">6749042</span><span class="w"> </span>cycles
-sys<span class="o">[</span><span class="m">61</span><span class="o">]</span><span class="w"> </span>finished,<span class="w"> </span><span class="m">6749042</span><span class="w"> </span>cycles
-...
-sys<span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="w"> </span>finished,<span class="w"> </span><span class="m">6749042</span><span class="w"> </span>cycles
-sys<span class="o">[</span><span class="m">63</span><span class="o">]</span><span class="w"> </span>finished,<span class="w"> </span><span class="m">6749042</span><span class="w"> </span>cycles
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span><span class="m">2025</span>-01-26<span class="w"> </span><span class="m">22</span>:50:05.669<span class="o">]</span><span class="w"> </span><span class="o">[</span>workload<span class="o">]</span><span class="w"> </span><span class="o">[</span>info<span class="o">]</span><span class="w"> </span>sys<span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="w"> </span>finished,<span class="w"> </span><span class="m">1082478600</span><span class="w"> </span>cycles,<span class="w"> </span>exposed<span class="w"> </span>communication<span class="w"> </span><span class="m">28600</span><span class="w"> </span>cycles.
+<span class="o">[</span><span class="m">2025</span>-01-26<span class="w"> </span><span class="m">22</span>:50:05.669<span class="o">]</span><span class="w"> </span><span class="o">[</span>workload<span class="o">]</span><span class="w"> </span><span class="o">[</span>info<span class="o">]</span><span class="w"> </span>sys<span class="o">[</span><span class="m">1</span><span class="o">]</span><span class="w"> </span>finished,<span class="w"> </span><span class="m">1082478600</span><span class="w"> </span>cycles,<span class="w"> </span>exposed<span class="w"> </span>communication<span class="w"> </span><span class="m">28600</span><span class="w"> </span>cycles.
+<span class="o">[</span><span class="m">2025</span>-01-26<span class="w"> </span><span class="m">22</span>:50:05.669<span class="o">]</span><span class="w"> </span><span class="o">[</span>workload<span class="o">]</span><span class="w"> </span><span class="o">[</span>info<span class="o">]</span><span class="w"> </span>sys<span class="o">[</span><span class="m">2</span><span class="o">]</span><span class="w"> </span>finished,<span class="w"> </span><span class="m">1082478600</span><span class="w"> </span>cycles,<span class="w"> </span>exposed<span class="w"> </span>communication<span class="w"> </span><span class="m">28600</span><span class="w"> </span>cycles.
+<span class="o">[</span><span class="m">2025</span>-01-26<span class="w"> </span><span class="m">22</span>:50:05.669<span class="o">]</span><span class="w"> </span><span class="o">[</span>workload<span class="o">]</span><span class="w"> </span><span class="o">[</span>info<span class="o">]</span><span class="w"> </span>sys<span class="o">[</span><span class="m">3</span><span class="o">]</span><span class="w"> </span>finished,<span class="w"> </span><span class="m">1082478600</span><span class="w"> </span>cycles,<span class="w"> </span>exposed<span class="w"> </span>communication<span class="w"> </span><span class="m">28600</span><span class="w"> </span>cycles.
+<span class="o">[</span><span class="m">2025</span>-01-26<span class="w"> </span><span class="m">22</span>:50:05.669<span class="o">]</span><span class="w"> </span><span class="o">[</span>workload<span class="o">]</span><span class="w"> </span><span class="o">[</span>info<span class="o">]</span><span class="w"> </span>sys<span class="o">[</span><span class="m">4</span><span class="o">]</span><span class="w"> </span>finished,<span class="w"> </span><span class="m">1082478600</span><span class="w"> </span>cycles,<span class="w"> </span>exposed<span class="w"> </span>communication<span class="w"> </span><span class="m">28600</span><span class="w"> </span>cycles.
+<span class="o">[</span><span class="m">2025</span>-01-26<span class="w"> </span><span class="m">22</span>:50:05.669<span class="o">]</span><span class="w"> </span><span class="o">[</span>workload<span class="o">]</span><span class="w"> </span><span class="o">[</span>info<span class="o">]</span><span class="w"> </span>sys<span class="o">[</span><span class="m">5</span><span class="o">]</span><span class="w"> </span>finished,<span class="w"> </span><span class="m">1082478600</span><span class="w"> </span>cycles,<span class="w"> </span>exposed<span class="w"> </span>communication<span class="w"> </span><span class="m">28600</span><span class="w"> </span>cycles.
+<span class="o">[</span><span class="m">2025</span>-01-26<span class="w"> </span><span class="m">22</span>:50:05.669<span class="o">]</span><span class="w"> </span><span class="o">[</span>workload<span class="o">]</span><span class="w"> </span><span class="o">[</span>info<span class="o">]</span><span class="w"> </span>sys<span class="o">[</span><span class="m">6</span><span class="o">]</span><span class="w"> </span>finished,<span class="w"> </span><span class="m">1082478600</span><span class="w"> </span>cycles,<span class="w"> </span>exposed<span class="w"> </span>communication<span class="w"> </span><span class="m">28600</span><span class="w"> </span>cycles.
+<span class="o">[</span><span class="m">2025</span>-01-26<span class="w"> </span><span class="m">22</span>:50:05.669<span class="o">]</span><span class="w"> </span><span class="o">[</span>workload<span class="o">]</span><span class="w"> </span><span class="o">[</span>info<span class="o">]</span><span class="w"> </span>sys<span class="o">[</span><span class="m">7</span><span class="o">]</span><span class="w"> </span>finished,<span class="w"> </span><span class="m">1082478600</span><span class="w"> </span>cycles,<span class="w"> </span>exposed<span class="w"> </span>communication<span class="w"> </span><span class="m">28600</span><span class="w"> </span>cycles.
 </pre></div>
 </div>
 </section>
@@ -178,7 +194,7 @@ The first communicator group, with ID 0, includes GPU IDs from 0 to 3. The secon
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2020-2024, Synergy Lab, Georgia Institute of Technology.</p>
+    <p>&#169; Copyright 2020-2025, Synergy Lab, Georgia Institute of Technology.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

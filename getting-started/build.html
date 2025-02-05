@@ -7,7 +7,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Build ASTRA-sim &mdash; ASTRA-sim 2.2 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
   
@@ -99,16 +99,15 @@
 </div>
 <section id="clone-repository">
 <h2>Clone Repository<a class="headerlink" href="#clone-repository" title="Link to this heading"></a></h2>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">git clone --recurse-submodules git@github.com:astra-sim/astra-sim.git</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">git clone git@github.com:astra-sim/astra-sim.git</span>
 <span class="go">ASTRA_SIM=$(realpath ./astra-sim)</span>
+<span class="go">cd ${ASTRA_SIM}</span>
+<span class="go">git submodule update --init --recursive</span>
 </pre></div>
 </div>
 </section>
 <section id="compile-program">
 <h2>Compile Program<a class="headerlink" href="#compile-program" title="Link to this heading"></a></h2>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cd ${ASTRA_SIM}</span>
-</pre></div>
-</div>
 <section id="analytical-network-backend">
 <h3>Analytical Network Backend<a class="headerlink" href="#analytical-network-backend" title="Link to this heading"></a></h3>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">./build/astra_analytical/build.sh</span>
@@ -139,7 +138,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2020-2024, Synergy Lab, Georgia Institute of Technology.</p>
+    <p>&#169; Copyright 2020-2025, Synergy Lab, Georgia Institute of Technology.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

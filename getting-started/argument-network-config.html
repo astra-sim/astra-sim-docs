@@ -7,7 +7,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Argument ${NETWORK_CONFIG} &mdash; ASTRA-sim 2.2 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
   
@@ -103,7 +103,7 @@
 <section id="analytical-network-config">
 <h2><a class="reference external" href="https://github.com/astra-sim/astra-network-analytical/tree/40d3d0ff11bfd241b20423f1d9b5c670dc0d5bd8">Analytical Network Config</a><a class="headerlink" href="#analytical-network-config" title="Link to this heading"></a></h2>
 <p>Example network configurations can be found at</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="si">${</span><span class="nv">ASTRA_SIM</span><span class="si">}</span>/inputs/network/analytical/
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="si">${</span><span class="nv">ASTRA_SIM</span><span class="si">}</span>/examples/network_analytical/network.yml
 </pre></div>
 </div>
 <ul class="simple">
@@ -130,10 +130,6 @@
 </section>
 <section id="garnet-network-config">
 <h2><a class="reference external" href="https://github.com/astra-sim/astra-network-garnet/tree/c09ba4ebee0643cff3f75d64143d5310b7f31ee1">Garnet Network Config</a><a class="headerlink" href="#garnet-network-config" title="Link to this heading"></a></h2>
-<p>Example network configurations can be found at</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="si">${</span><span class="nv">ASTRA_SIM</span><span class="si">}</span>/inputs/network/garnet/
-</pre></div>
-</div>
 <ul class="simple">
 <li><p><strong>num-npus</strong>: (int) Total number of NPUs we are simulating</p></li>
 <li><p><strong>num-packages</strong>: (int) Total number of packages (each could contain one or multiple NPUs)</p></li>
@@ -188,7 +184,7 @@ Refer to <a class="reference external" href="https://docs.google.com/spreadsheet
 <h3>Logical Topology<a class="headerlink" href="#logical-topology" title="Link to this heading"></a></h3>
 <p>In addition to the ns3 configurations (including the physical topology), the binary for the NS3 backend takes a unique command line argument, <code class="docutils literal notranslate"><span class="pre">--logical-topology-configuration=${LOGICAL_TOPOLOGY}</span></code>.</p>
 <p>Examples of this can be found at</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="si">${</span><span class="nv">ASTRA_SIM</span><span class="si">}</span>/inputs/network/ns3
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="si">${</span><span class="nv">ASTRA_SIM</span><span class="si">}</span>/examples/ns3/sample_64nodes_2D.json
 </pre></div>
 </div>
 <p>This file defines the <em>logical</em> topology, where each number corresponds to the number of NPUs in a dimension.
@@ -208,7 +204,7 @@ If the file shows <code class="docutils literal notranslate"><span class="pre">{
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2020-2024, Synergy Lab, Georgia Institute of Technology.</p>
+    <p>&#169; Copyright 2020-2025, Synergy Lab, Georgia Institute of Technology.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
