@@ -9,14 +9,11 @@ Please make sure that you have all the required depencencies installed.
 :::{code-block} console
 git clone git@github.com:astra-sim/astra-sim.git
 ASTRA_SIM=$(realpath ./astra-sim)
+cd ${ASTRA_SIM}
+git submodule update --init --recursive
 :::
 
 ## Compile Program
-
-:::{code-block} console
-cd ${ASTRA_SIM}
-git submodule update --init --recursive
-::: 
 
 ### Analytical Network Backend
 :::{code-block} console
