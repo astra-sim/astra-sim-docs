@@ -9,8 +9,11 @@ ASTRA-sim currently supports three network simulators as its communication model
 - ns-3 Network Simulator
 - Garnet (from gem5) Network Simulator
 
+Users can also define their own custom network backend.
+
 :::{toctree}
 analytical-network-backend.md
 ns3-network-backend.md
 garnet-network-backend.md
+custom-network-backend.md
 :::
