@@ -7,15 +7,13 @@ Please make sure that you have all the required depencencies installed.
 ## Clone Repository
 
 :::{code-block} console
-git clone --recurse-submodules git@github.com:astra-sim/astra-sim.git
+git clone git@github.com:astra-sim/astra-sim.git
 ASTRA_SIM=$(realpath ./astra-sim)
+cd ${ASTRA_SIM}
+git submodule update --init --recursive
 :::
 
 ## Compile Program
-
-:::{code-block} console
-cd ${ASTRA_SIM}
-::: 
 
 ### Analytical Network Backend
 :::{code-block} console

@@ -9,7 +9,7 @@
 Example network configurations can be found at
 
 :::{code-block} console
-$ ${ASTRA_SIM}/inputs/network/analytical/
+$ ${ASTRA_SIM}/examples/network_analytical/network.yml
 :::
 
 - **topology-name**: (string) put "Hierarchical"
@@ -44,11 +44,6 @@ Each configurations below is represented as an array of size **dimensions-count*
 
 ## [Garnet Network Config](https://github.com/astra-sim/astra-network-garnet/tree/c09ba4ebee0643cff3f75d64143d5310b7f31ee1)
 
-Example network configurations can be found at
-
-:::{code-block} console
-$ ${ASTRA_SIM}/inputs/network/garnet/
-:::
 
 - **num-npus**: (int) Total number of NPUs we are simulating
 
@@ -128,7 +123,7 @@ In addition to the ns3 configurations (including the physical topology), the bin
 Examples of this can be found at 
 
 :::{code-block} console
-$ ${ASTRA_SIM}/inputs/network/ns3
+$ ${ASTRA_SIM}/examples/ns3/sample_64nodes_2D.json
 :::
 
 This file defines the *logical* topology, where each number corresponds to the number of NPUs in a dimension.
