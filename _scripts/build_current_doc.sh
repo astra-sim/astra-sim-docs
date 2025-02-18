@@ -7,6 +7,6 @@ rm -rf ./_build
 # Compile the latest version
 sphinx-build \
     -b html \
-    -j$(nproc) \
+    -j $(nprocs) \
     -d ./_build/doctree \
     . ./_build/html
