@@ -19,12 +19,7 @@ The **Network API** is the interface between the System layer and the network ba
 
 Note that ASTRA-sim is an event based discrete simulator. This allows the control flow to pass between the network backend and the rest of the simulator (refer to the figure above). While the control flow is within the rest of the simulator, such as the System layer or the compute backend, the simulated clock is 'paused', and no event is 'taking place simultaneously'. Passing control flow is done mainly through **callback functions**. When the System layer issues an event to the network backend, the system layer will also define a callback function. When the network backend simulates the end of the event, it will call the callback function, passing the control flow back to the System or Workload layer. It will then move on to the next operations within the workload.
 
-The Network API is the interface between the System layer and the network backend. Through this API the rest of the simulator commands the network backend to simulate message events or forward the simulated clock. The user has to implement a 'network handler', which implements this Netowrk API and issues necessary commands to the actual network simulator.
-
 The system layer consists of multiple instances of the `Sys` class, where one instance corresponds to one process (rank). When constructing the `Sys` class instance, the user needs to provide it with a handler of the network backend that implements the Network API. For this reason, in ASTRA-sim, the main function (i.e. constructing the `Sys` class) is unique to each network backend and must be implemented uniquely to the network backend. 
-
-Note that ASTRA-sim is an event based discrete simulator. This allows the control flow to pass between the network backend and the rest of the simulator (While the control flow is within the rest of the simulator, such as the System layer or the compute backend, the simulated clock is 'paused', and no event is 'taking place simultaneously'). 
-
 
 
 ## Detailed Implementaiton 
