@@ -68,22 +68,3 @@ Upon completion, ASTRA-sim will display the number of cycles it took to run the 
 [2025-01-26 22:50:05.669] [workload] [info] sys[6] finished, 1082478600 cycles, exposed communication 28600 cycles.
 [2025-01-26 22:50:05.669] [workload] [info] sys[7] finished, 1082478600 cycles, exposed communication 28600 cycles.
 ```
-
-## Enable Communicator Groups
-ASTRA-sim 2.0 supports [communicator groups](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/communicators.html).
-You can pass a communicator group configuration file by specifying the file path using `--comm-group-configuration`.
-If you do not pass a communicator group configuration file, by default, it will create a single group with all GPUs.
-A valid communication group file is a JSON file with the following format.
-```
-{
-  "<communicator_group_id>" : [gpu_ids]
-}
-```
-For example, you can create two communicator groups with the following configuration file.
-The first communicator group, with ID 0, includes GPU IDs from 0 to 3. The second communicator group, with ID 1, includes GPU IDs from 4 to 7.
-```
-{
-  "0": [0, 1, 2, 3],
-  "1": [4, 5, 6, 7]
-}
-```
