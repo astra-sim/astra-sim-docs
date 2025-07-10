@@ -24,12 +24,12 @@ The below is an example of the system input using the Collective API:
 ```
 ...
     "active-chunks-per-dimension": 1,
-    "all-reduce-implementation-chakra": ["/app/hoti2024/demo5/inputs/custom_ring"],
+    "all-reduce-implementation-custom": ["/absolute/path/dir/custom_ring"],
 ...
 ```
 
 Note some differences: 
-First, we use the key `all-*-implemenation-chakra` instead of `all-*-implemenation`. Note how the Chakra ET files refereed here is different from the workload file passed to the workload layer. The value in each item is the absolute path to the Chakra ET files, excluding the last `{rank}.et` string (this is similar to the Workload layer input). Also, even if there are many 'dimensions', the list only accepts one value. This is because the notion of cross-dimension communication is already included in the Chakra ET.
+First, we use the key `all-*-implemenation-custom` instead of `all-*-implemenation`. Note how the Chakra ET files refereed here is different from the workload file passed to the workload layer. The value in each item is the absolute path to the Chakra ET files, excluding the last `{rank}.et` string (this is similar to the Workload layer input). Also, even if there are many 'dimensions', the list only accepts one value. This is because the notion of cross-dimension communication is already included in the Chakra ET.
 
 
 ### Generating Chakra ET Representation from Collective Tools
@@ -39,16 +39,15 @@ We now talk about obtaining the Chakra ET files to define the collective algorit
 The MSCCLang Domain Specific Language (DSL) allows users to easily and expressively write arbitrary, custom collective algorithms.
 For a more detailed explanation into the MSCCLang DSL, please refer to their paper at [1]. 
 First, we lower the MSCCLang DSL program into an Intermediate Representation (IR) called MSCCL-IR, which is in XML format. 
-```
-git clone git@github.com:jinsun-yoo/msccl-tools.git
-cd msccl-tools/examples/mscclang
+```bash
+git clone --recurse-submodules git@github.com:astra-sim/collectiveapi.git 
+cd collectiveapi/msccl-tools/examples/mscclang
 python3 allreduce_a100_ring.py ${NUM_GPUS} 1 1 > allreduce_ring.xml
 ```
 
 Then, we convert this into a Chakra ET that ASTRA-sim's collective API can understand. 
-```
-git clone git@github.com:astra-sim/collectiveapi.git
-cd chakra_converter
+```bash
+cd collectiveapi/chakra_converter
 
 python3 et_converter.py \
     --input_type msccl \
