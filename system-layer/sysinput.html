@@ -113,12 +113,12 @@ For a detailed explanation of the behavior of the system layer, please refer to 
 <p>The below is an example of the system input using the Collective API:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
     <span class="s2">&quot;active-chunks-per-dimension&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">&quot;all-reduce-implementation-chakra&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;/app/hoti2024/demo5/inputs/custom_ring&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;all-reduce-implementation-custom&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;/absolute/path/dir/custom_ring&quot;</span><span class="p">],</span>
 <span class="o">...</span>
 </pre></div>
 </div>
 <p>Note some differences:
-First, we use the key <code class="docutils literal notranslate"><span class="pre">all-*-implemenation-chakra</span></code> instead of <code class="docutils literal notranslate"><span class="pre">all-*-implemenation</span></code>. Note how the Chakra ET files refereed here is different from the workload file passed to the workload layer. The value in each item is the absolute path to the Chakra ET files, excluding the last <code class="docutils literal notranslate"><span class="pre">{rank}.et</span></code> string (this is similar to the Workload layer input). Also, even if there are many ‘dimensions’, the list only accepts one value. This is because the notion of cross-dimension communication is already included in the Chakra ET.</p>
+First, we use the key <code class="docutils literal notranslate"><span class="pre">all-*-implemenation-custom</span></code> instead of <code class="docutils literal notranslate"><span class="pre">all-*-implemenation</span></code>. Note how the Chakra ET files refereed here is different from the workload file passed to the workload layer. The value in each item is the absolute path to the Chakra ET files, excluding the last <code class="docutils literal notranslate"><span class="pre">{rank}.et</span></code> string (this is similar to the Workload layer input). Also, even if there are many ‘dimensions’, the list only accepts one value. This is because the notion of cross-dimension communication is already included in the Chakra ET.</p>
 <section id="generating-chakra-et-representation-from-collective-tools">
 <h3>Generating Chakra ET Representation from Collective Tools<a class="headerlink" href="#generating-chakra-et-representation-from-collective-tools" title="Link to this heading"></a></h3>
 <p>We now talk about obtaining the Chakra ET files to define the collective algorithm.</p>
@@ -127,23 +127,22 @@ First, we use the key <code class="docutils literal notranslate"><span class="pr
 <p>The MSCCLang Domain Specific Language (DSL) allows users to easily and expressively write arbitrary, custom collective algorithms.
 For a more detailed explanation into the MSCCLang DSL, please refer to their paper at [1].
 First, we lower the MSCCLang DSL program into an Intermediate Representation (IR) called MSCCL-IR, which is in XML format.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>git clone git@github.com:jinsun-yoo/msccl-tools.git
-cd msccl-tools/examples/mscclang
-python3 allreduce_a100_ring.py ${NUM_GPUS} 1 1 &gt; allreduce_ring.xml
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>--recurse-submodules<span class="w"> </span>git@github.com:astra-sim/collectiveapi.git<span class="w"> </span>
+<span class="nb">cd</span><span class="w"> </span>collectiveapi/msccl-tools/examples/mscclang
+python3<span class="w"> </span>allreduce_a100_ring.py<span class="w"> </span><span class="si">${</span><span class="nv">NUM_GPUS</span><span class="si">}</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span>&gt;<span class="w"> </span>allreduce_ring.xml
 </pre></div>
 </div>
 <p>Then, we convert this into a Chakra ET that ASTRA-sim’s collective API can understand.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>git clone git@github.com:astra-sim/collectiveapi.git
-cd chakra_converter
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>collectiveapi/chakra_converter
 
-python3 et_converter.py \
-    --input_type msccl \
-    --input_filename ${FILEPATH}/allreduce_ring.xml \
-    --output_filename allreduce_ring_mscclang \
-    --coll_size 1048576
+python3<span class="w"> </span>et_converter.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--input_type<span class="w"> </span>msccl<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--input_filename<span class="w"> </span><span class="si">${</span><span class="nv">FILEPATH</span><span class="si">}</span>/allreduce_ring.xml<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--output_filename<span class="w"> </span>allreduce_ring_mscclang<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--coll_size<span class="w"> </span><span class="m">1048576</span>
 
-ls allreduce_ring_mscclang*
-allreduce_ring_mscclang.0.et  allreduce_ring_mscclang.1.et  allreduce_ring_mscclang.2.et  allreduce_ring_mscclang.3.et
+ls<span class="w"> </span>allreduce_ring_mscclang*
+allreduce_ring_mscclang.0.et<span class="w">  </span>allreduce_ring_mscclang.1.et<span class="w">  </span>allreduce_ring_mscclang.2.et<span class="w">  </span>allreduce_ring_mscclang.3.et
 ...
 </pre></div>
 </div>
