@@ -29,6 +29,10 @@ $ ${ASTRA_SIM}/examples/network_analytical/system.json
 - **preferred-dataset-splits**: (int)
   - The number of chunks we divide each collective into.
 
+:::{note}
+For a detailed discussion on collective related inputs, refer to the [System Layer](../system-layer/sysinput.md) section.
+:::
+
 - **all-reduce-implementation**: (Dimension0Collective_Dimension1Collective_xxx_DimensionNCollective)
   - Here we can create a multiphase colective all-reduce algorithm and directly specify the collective algorithm type for each logical dimension. The available options (algorithms) are: ring, direct, doubleBinaryTree, oneRing, oneDirect.
   - For example, "ring_doubleBinaryTree" means we create a logical topology with 2 dimensions and we perform ring algorithm on the first dimension followed by double binary tree on the second dimension for the all-reduce pattern. Hence the number of physical dimension should be equal to the number of logical dimensions. The only exceptions are oneRing/oneDirect where we assume no matter how many physical dimensions we have, we create a one big logical ring/direct(AllToAll) topology where all NPUs are connected and perfrom a one phase ring/direct algorithm.
