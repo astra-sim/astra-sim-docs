@@ -50,12 +50,12 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Argument ${WORKLOAD_CONFIG}</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#using-chakra-execution-trace">Using Chakra Execution Trace</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#using-execution-trace-converter-et-converter">Using Execution Trace Converter (et_converter)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#enable-communicator-groups">Enable Communicator Groups</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="argument-system-config.html">Argument ${SYSTEM_CONFIG}</a></li>
 <li class="toctree-l3"><a class="reference internal" href="argument-network-config.html">Argument ${NETWORK_CONFIG}</a></li>
 <li class="toctree-l3"><a class="reference internal" href="argument-remote-memory-config.html">Argument ${REMOTE_MEMORY_CONFIG}</a></li>
+<li class="toctree-l3"><a class="reference internal" href="argument-comm-group-config.html">Argument {COMM_GROUP_CONFIG}</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="output.html">ASTRA-sim Output</a></li>
@@ -158,26 +158,6 @@ $<span class="w"> </span>chakra_converter<span class="w"> </span>Text<span class
 <span class="o">[</span><span class="m">2025</span>-01-26<span class="w"> </span><span class="m">22</span>:50:05.669<span class="o">]</span><span class="w"> </span><span class="o">[</span>workload<span class="o">]</span><span class="w"> </span><span class="o">[</span>info<span class="o">]</span><span class="w"> </span>sys<span class="o">[</span><span class="m">5</span><span class="o">]</span><span class="w"> </span>finished,<span class="w"> </span><span class="m">1082478600</span><span class="w"> </span>cycles,<span class="w"> </span>exposed<span class="w"> </span>communication<span class="w"> </span><span class="m">28600</span><span class="w"> </span>cycles.
 <span class="o">[</span><span class="m">2025</span>-01-26<span class="w"> </span><span class="m">22</span>:50:05.669<span class="o">]</span><span class="w"> </span><span class="o">[</span>workload<span class="o">]</span><span class="w"> </span><span class="o">[</span>info<span class="o">]</span><span class="w"> </span>sys<span class="o">[</span><span class="m">6</span><span class="o">]</span><span class="w"> </span>finished,<span class="w"> </span><span class="m">1082478600</span><span class="w"> </span>cycles,<span class="w"> </span>exposed<span class="w"> </span>communication<span class="w"> </span><span class="m">28600</span><span class="w"> </span>cycles.
 <span class="o">[</span><span class="m">2025</span>-01-26<span class="w"> </span><span class="m">22</span>:50:05.669<span class="o">]</span><span class="w"> </span><span class="o">[</span>workload<span class="o">]</span><span class="w"> </span><span class="o">[</span>info<span class="o">]</span><span class="w"> </span>sys<span class="o">[</span><span class="m">7</span><span class="o">]</span><span class="w"> </span>finished,<span class="w"> </span><span class="m">1082478600</span><span class="w"> </span>cycles,<span class="w"> </span>exposed<span class="w"> </span>communication<span class="w"> </span><span class="m">28600</span><span class="w"> </span>cycles.
-</pre></div>
-</div>
-</section>
-<section id="enable-communicator-groups">
-<h2>Enable Communicator Groups<a class="headerlink" href="#enable-communicator-groups" title="Link to this heading"></a></h2>
-<p>ASTRA-sim 2.0 supports <a class="reference external" href="https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/communicators.html">communicator groups</a>.
-You can pass a communicator group configuration file by specifying the file path using <code class="docutils literal notranslate"><span class="pre">--comm-group-configuration</span></code>.
-If you do not pass a communicator group configuration file, by default, it will create a single group with all GPUs.
-A valid communication group file is a JSON file with the following format.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s2">&quot;&lt;communicator_group_id&gt;&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="n">gpu_ids</span><span class="p">]</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p>For example, you can create two communicator groups with the following configuration file.
-The first communicator group, with ID 0, includes GPU IDs from 0 to 3. The second communicator group, with ID 1, includes GPU IDs from 4 to 7.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s2">&quot;0&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
-  <span class="s2">&quot;1&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
-<span class="p">}</span>
 </pre></div>
 </div>
 </section>
