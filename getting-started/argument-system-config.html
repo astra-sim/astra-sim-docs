@@ -132,6 +132,12 @@ each logical dimesnion of topology.</p></li>
 <li><p>The number of chunks we divide each collective into.</p></li>
 </ul>
 </li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>These fields relate to the native collective implementation in ASTRA-sim. Alternatively, users can also point to a custom collective implementation. For a detailed discussion on collective related inputs, refer to the <a class="reference internal" href="../system-layer/sysinput.html"><span class="std std-doc">System Layer</span></a> section.</p>
+</div>
+<ul class="simple">
 <li><p><strong>all-reduce-implementation</strong>: (Dimension0Collective_Dimension1Collective_xxx_DimensionNCollective)</p>
 <ul>
 <li><p>Here we can create a multiphase colective all-reduce algorithm and directly specify the collective algorithm type for each logical dimension. The available options (algorithms) are: ring, direct, doubleBinaryTree, oneRing, oneDirect.</p></li>

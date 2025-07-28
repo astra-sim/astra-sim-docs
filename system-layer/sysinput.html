@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Input Files for Collective API &mdash; ASTRA-sim 2.2 documentation</title>
+  <title>Input Files for Collectives &mdash; ASTRA-sim 2.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
@@ -20,7 +20,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Network Backend" href="../network-backend/network-backend.html" />
-    <link rel="prev" title="Collective Implementation" href="collective-implementation.html" /> 
+    <link rel="prev" title="Collective Algorithms: Native or Custom Implementation" href="collective-implementation.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -47,10 +47,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../workload-layer/workload-layer.html">Workload Layer</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="system-layer.html">System Layer</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="collective-scheduler.html">Collective Scheduler</a></li>
-<li class="toctree-l2"><a class="reference internal" href="collective-implementation.html">Collective Implementation</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Input Files for Collective API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#astra-sim-native">ASTRA-sim Native</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#collective-api">Collective API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="collective-implementation.html">Collective Algorithms: Native or Custom Implementation</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Input Files for Collectives</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#native-collective-implementation">Native Collective Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#custom-collective-implementation">Custom Collective Implementation</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#generating-chakra-et-representation-from-collective-tools">Generating Chakra ET Representation from Collective Tools</a></li>
 </ul>
 </li>
@@ -79,7 +79,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="system-layer.html">System Layer</a></li>
-      <li class="breadcrumb-item active">Input Files for Collective API</li>
+      <li class="breadcrumb-item active">Input Files for Collectives</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/system-layer/sysinput.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -89,14 +89,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="input-files-for-collective-api">
-<h1>Input Files for Collective API<a class="headerlink" href="#input-files-for-collective-api" title="Link to this heading"></a></h1>
+  <section id="input-files-for-collectives">
+<h1>Input Files for Collectives<a class="headerlink" href="#input-files-for-collectives" title="Link to this heading"></a></h1>
 <p>This section describes specific pointers to the collective API within the system layer input.
 For a general description of the other items in the system layer input, please refer to the <a class="reference external" href="https://astra-sim.github.io/astra-sim-docs/getting-started/argument-system-config.html">Argument ${SYSTEM_CONFIG}</a> page.
 For a detailed explanation of the behavior of the system layer, please refer to the previous sections.</p>
-<section id="astra-sim-native">
-<h2>ASTRA-sim Native<a class="headerlink" href="#astra-sim-native" title="Link to this heading"></a></h2>
-<p>Let’s briefly take note of an example of the system layer input using the astra-sim native implementation:</p>
+<section id="native-collective-implementation">
+<h2>Native Collective Implementation<a class="headerlink" href="#native-collective-implementation" title="Link to this heading"></a></h2>
+<p>Let’s briefly take note of an example of the system layer input using the native collective implementation:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
   <span class="s2">&quot;active-chunks-per-dimension&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
   <span class="s2">&quot;all-reduce-implementation&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;ring&quot;</span><span class="p">],</span>
@@ -108,26 +108,38 @@ For a detailed explanation of the behavior of the system layer, please refer to 
 <p>Note the values of the <code class="docutils literal notranslate"><span class="pre">all-*-implementation</span></code> items. These entries point to how the simulator will decompose the given collective into send and receive messages. Two entries in the list mean the simulator will break down the All Gather across two dimensions - the first dimension uses the ring algorithm and the second dimension uses the double binary algorithm. Note that repeated entries such as <code class="docutils literal notranslate"><span class="pre">[&quot;ring&quot;,</span> <span class="pre">&quot;ring&quot;]</span></code> are also possible. How the physical nodes are broken down into each dimension is defined by the network backend. For now, the native implementation requires that the dimensions for collective algorithsm are same across all collectives. The above example, where AllReduce is a 1D collective but AllGather is a 2D collective is simply an illustrative example.</p>
 <p>The mapping between each string value and the corresponding simulator code can be found in the <a class="reference external" href="https://github.com/astra-sim/astra-sim/blob/92fc71a71752f4e38d92c7d03a44829114d70143/astra-sim/system/Sys.cc#L468">generate_collective_impl_from_input</a> function.</p>
 </section>
-<section id="collective-api">
-<h2>Collective API<a class="headerlink" href="#collective-api" title="Link to this heading"></a></h2>
+<section id="custom-collective-implementation">
+<h2>Custom Collective Implementation<a class="headerlink" href="#custom-collective-implementation" title="Link to this heading"></a></h2>
 <p>The below is an example of the system input using the Collective API:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
     <span class="s2">&quot;active-chunks-per-dimension&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">&quot;all-reduce-implementation-custom&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;/absolute/path/dir/custom_ring&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;all-reduce-implementation-custom&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;examples/custom_collective/allreduce_ring&quot;</span><span class="p">],</span>
 <span class="o">...</span>
 </pre></div>
 </div>
-<p>Note some differences:
-First, we use the key <code class="docutils literal notranslate"><span class="pre">all-*-implemenation-custom</span></code> instead of <code class="docutils literal notranslate"><span class="pre">all-*-implemenation</span></code>. Note how the Chakra ET files refereed here is different from the workload file passed to the workload layer. The value in each item is the absolute path to the Chakra ET files, excluding the last <code class="docutils literal notranslate"><span class="pre">{rank}.et</span></code> string (this is similar to the Workload layer input). Also, even if there are many ‘dimensions’, the list only accepts one value. This is because the notion of cross-dimension communication is already included in the Chakra ET.</p>
+<p>Note some differences:</p>
+<ul class="simple">
+<li><p>First, we use the key <code class="docutils literal notranslate"><span class="pre">all-*-implemenation-custom</span></code> instead of <code class="docutils literal notranslate"><span class="pre">all-*-implemenation</span></code>.</p></li>
+<li><p>Second, for the value, we point to a set of Chakra ET files, instead of the name of a generic algorithm. Note how the Chakra ET files refereed here is different from the workload file passed to the workload layer. The path could be absolute or relative to the working directory. The filepath should exclude the last <code class="docutils literal notranslate"><span class="pre">{rank}.et</span></code> string (this is similar to the Workload layer input). Also, even if there are many ‘dimensions’, the list only accepts one value. This is because the notion of cross-dimension communication is already included in the Chakra ET.</p></li>
+</ul>
+<p>One thing to note is that the focus of this collectiveAPI is to represent custom collectives. The Chakra ET simply happens to be the format used to represent the collective.</p>
 <section id="generating-chakra-et-representation-from-collective-tools">
 <h3>Generating Chakra ET Representation from Collective Tools<a class="headerlink" href="#generating-chakra-et-representation-from-collective-tools" title="Link to this heading"></a></h3>
-<p>We now talk about obtaining the Chakra ET files to define the collective algorithm.</p>
+<p>We now talk about generating the Chakra ET files to define the custom collective. Using a generic Collective API allows us to generate the collective representation from several tools.</p>
 <section id="mscclang">
 <h4>MSCCLang<a class="headerlink" href="#mscclang" title="Link to this heading"></a></h4>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Sample ET files and scripts are provided in <code class="docutils literal notranslate"><span class="pre">examples/custom_collective/sample</span></code>.</p>
+<ul class="simple">
+<li><p>The sample script <a class="reference external" href="https://github.com/astra-sim/astra-sim/blob/master/examples/custom_collective/create_graph_custom_allreduce.sh">create_graph_custom_allreduce.sh</a> generates the same ET files (and is essentially a copy paste of the commands below)</p></li>
+<li><p>The sample script <a class="reference external" href="https://github.com/astra-sim/astra-sim/blob/master/examples/custom_collective/run_analytical_with_custom_collective.sh">run_analytical_with_custom_collective.sh</a> shows how to execute ASTRA-sim with the custom collective.</p></li>
+</ul>
+</div>
 <p>The MSCCLang Domain Specific Language (DSL) allows users to easily and expressively write arbitrary, custom collective algorithms.
 For a more detailed explanation into the MSCCLang DSL, please refer to their paper at [1].
 First, we lower the MSCCLang DSL program into an Intermediate Representation (IR) called MSCCL-IR, which is in XML format.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>--recurse-submodules<span class="w"> </span>git@github.com:astra-sim/collectiveapi.git<span class="w"> </span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>git@github.com:astra-sim/collectiveapi.git<span class="w"> </span>--recurse-submodules
 <span class="nb">cd</span><span class="w"> </span>collectiveapi/msccl-tools/examples/mscclang
 python3<span class="w"> </span>allreduce_a100_ring.py<span class="w"> </span><span class="si">${</span><span class="nv">NUM_GPUS</span><span class="si">}</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span>&gt;<span class="w"> </span>allreduce_ring.xml
 </pre></div>
@@ -136,16 +148,17 @@ python3<span class="w"> </span>allreduce_a100_ring.py<span class="w"> </span><sp
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>collectiveapi/chakra_converter
 
 python3<span class="w"> </span>et_converter.py<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--input_type<span class="w"> </span>msccl<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--input_filename<span class="w"> </span><span class="si">${</span><span class="nv">FILEPATH</span><span class="si">}</span>/allreduce_ring.xml<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--output_filename<span class="w"> </span>allreduce_ring_mscclang<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--coll_size<span class="w"> </span><span class="m">1048576</span>
+<span class="w">    </span>--coll_size<span class="w"> </span><span class="m">1048576</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--collective<span class="w"> </span>allreduce
 
 ls<span class="w"> </span>allreduce_ring_mscclang*
 allreduce_ring_mscclang.0.et<span class="w">  </span>allreduce_ring_mscclang.1.et<span class="w">  </span>allreduce_ring_mscclang.2.et<span class="w">  </span>allreduce_ring_mscclang.3.et
 ...
 </pre></div>
 </div>
+<p>Then, in the <code class="docutils literal notranslate"><span class="pre">system-configuration</span></code> input, set the key <code class="docutils literal notranslate"><span class="pre">all-reduce-implementation-custom</span></code> and this path as the value.</p>
 <p>Note how we have to provide the communication size to the converter. This is a current limit where we have to hardcode the collective size into the algorithm, and ignore the collective size of the Chakra ET in the workload layer. We will release an update shortly to fix this limitation.</p>
 </section>
 <section id="tacos">
@@ -165,7 +178,7 @@ allreduce_ring_mscclang.0.et<span class="w">  </span>allreduce_ring_mscclang.1.e
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="collective-implementation.html" class="btn btn-neutral float-left" title="Collective Implementation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="collective-implementation.html" class="btn btn-neutral float-left" title="Collective Algorithms: Native or Custom Implementation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="../network-backend/network-backend.html" class="btn btn-neutral float-right" title="Network Backend" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
