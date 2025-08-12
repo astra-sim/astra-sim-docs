@@ -20,7 +20,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Run ASTRA-sim" href="run.html" />
-    <link rel="prev" title="Dependencies Setup" href="setup.html" /> 
+    <link rel="prev" title="Setup ASTRA-Sim - Installation" href="setup.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -44,9 +44,8 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="getting-started.html">Getting Started</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="setup.html">Dependencies Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup.html">Setup ASTRA-Sim - Installation</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Build ASTRA-sim</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#clone-repository">Clone Repository</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#compile-program">Compile Program</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#analytical-network-backend">Analytical Network Backend</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#ns3-network-backend">NS3 Network Backend</a></li>
@@ -55,7 +54,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="run.html">Run ASTRA-sim</a></li>
-<li class="toctree-l2"><a class="reference internal" href="output.html">ASTRA-sim Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="output.html">ASTRA-Sim: Quick Example</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../workload-layer/workload-layer.html">Workload Layer</a></li>
@@ -95,17 +94,8 @@
 <h1>Build ASTRA-sim<a class="headerlink" href="#build-astra-sim" title="Link to this heading"></a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Please make sure that you have all the required depencencies installed.</p>
+<p>Please make sure that you have all the required depencencies or docker installed. If not, please refer to the <a class="reference internal" href="setup.html"><span class="std std-doc">Setup ASTRA-Sim</span></a></p>
 </div>
-<section id="clone-repository">
-<h2>Clone Repository<a class="headerlink" href="#clone-repository" title="Link to this heading"></a></h2>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">git clone git@github.com:astra-sim/astra-sim.git</span>
-<span class="go">ASTRA_SIM=$(realpath ./astra-sim)</span>
-<span class="go">cd ${ASTRA_SIM}</span>
-<span class="go">git submodule update --init --recursive</span>
-</pre></div>
-</div>
-</section>
 <section id="compile-program">
 <h2>Compile Program<a class="headerlink" href="#compile-program" title="Link to this heading"></a></h2>
 <section id="analytical-network-backend">
@@ -131,7 +121,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="setup.html" class="btn btn-neutral float-left" title="Dependencies Setup" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="setup.html" class="btn btn-neutral float-left" title="Setup ASTRA-Sim - Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="run.html" class="btn btn-neutral float-right" title="Run ASTRA-sim" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

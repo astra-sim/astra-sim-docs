@@ -4,7 +4,7 @@
 ![Workload Layer Overview](/_static/images/workload_overview.png)
 
 The workload layer in ASTRA-Sim plays a pivotal role, enabling users to define and simulate their desired DNN models, parallelization strategies, and training loops efficiently. 
-The transition from ASTRA-Sim 1.0 to 2.0 brought forth significant advancements, enhancing the layer's functionality and operational efficiency.
+The transition from ASTRA-Sim 1.0 to 2.0 brought forth significant advancements, enhancing the layer's functionality and operational efficiency. [Source Code Directory](https://github.com/astra-sim/astra-sim/tree/master/astra-sim/workload)
 
 ### Evolution from ASTRA-Sim 1.0 to 2.0
 Initially, ASTRA-Sim 1.0 laid the groundwork by allowing users to articulate target DNN models, parallelization strategies, and training loops.

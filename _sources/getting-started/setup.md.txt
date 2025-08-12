@@ -1,6 +1,31 @@
-# Dependencies Setup
+# Setup ASTRA-Sim - Installation
 
-## Debian-Based Linux Distributions (Recommend Ubuntu 22.04)
+## Clone Repository
+
+:::{code-block} console
+git clone git@github.com:astra-sim/astra-sim.git
+ASTRA_SIM=$(realpath ./astra-sim)
+cd ${ASTRA_SIM}
+git submodule update --init --recursive
+:::
+
+## Docker Setup (Recommended)
+
+Build Docker Image
+
+:::{code-block} console  
+docker build -t astra-sim:latest -f Dockerfile .
+:::
+
+Run Docker Container
+
+:::{code-block} console  
+docker run -it --name astra-sim-latest  --shm-size=8g astra-sim:latest bash
+:::
+
+## Bare Metal Deployment Dependencies
+
+### Debian-Based Linux Distributions (Recommend Ubuntu 22.04)
 
 Install system dependencies:
 
@@ -22,4 +47,5 @@ pip3 install --upgrade pip
 pip3 install protobuf==5.28.2
 pip3 install graphviz pydot
 :::
+
 

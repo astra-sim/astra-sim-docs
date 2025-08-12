@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dependencies Setup &mdash; ASTRA-sim 2.2 documentation</title>
+  <title>Setup ASTRA-Sim - Installation &mdash; ASTRA-sim 2.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
@@ -44,13 +44,18 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="getting-started.html">Getting Started</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Dependencies Setup</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#debian-based-linux-distributions-recommend-ubuntu-22-04">Debian-Based Linux Distributions (Recommend Ubuntu 22.04)</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Setup ASTRA-Sim - Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#clone-repository">Clone Repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#docker-setup-recommended">Docker Setup (Recommended)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bare-metal-deployment-dependencies">Bare Metal Deployment Dependencies</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#debian-based-linux-distributions-recommend-ubuntu-22-04">Debian-Based Linux Distributions (Recommend Ubuntu 22.04)</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="build.html">Build ASTRA-sim</a></li>
 <li class="toctree-l2"><a class="reference internal" href="run.html">Run ASTRA-sim</a></li>
-<li class="toctree-l2"><a class="reference internal" href="output.html">ASTRA-sim Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="output.html">ASTRA-Sim: Quick Example</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../workload-layer/workload-layer.html">Workload Layer</a></li>
@@ -76,7 +81,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="getting-started.html">Getting Started</a></li>
-      <li class="breadcrumb-item active">Dependencies Setup</li>
+      <li class="breadcrumb-item active">Setup ASTRA-Sim - Installation</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/getting-started/setup.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -86,10 +91,32 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="dependencies-setup">
-<h1>Dependencies Setup<a class="headerlink" href="#dependencies-setup" title="Link to this heading"></a></h1>
+  <section id="setup-astra-sim-installation">
+<h1>Setup ASTRA-Sim - Installation<a class="headerlink" href="#setup-astra-sim-installation" title="Link to this heading"></a></h1>
+<section id="clone-repository">
+<h2>Clone Repository<a class="headerlink" href="#clone-repository" title="Link to this heading"></a></h2>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">git clone git@github.com:astra-sim/astra-sim.git</span>
+<span class="go">ASTRA_SIM=$(realpath ./astra-sim)</span>
+<span class="go">cd ${ASTRA_SIM}</span>
+<span class="go">git submodule update --init --recursive</span>
+</pre></div>
+</div>
+</section>
+<section id="docker-setup-recommended">
+<h2>Docker Setup (Recommended)<a class="headerlink" href="#docker-setup-recommended" title="Link to this heading"></a></h2>
+<p>Build Docker Image</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">docker build -t astra-sim:latest -f Dockerfile .</span>
+</pre></div>
+</div>
+<p>Run Docker Container</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">docker run -it --name astra-sim-latest  --shm-size=8g astra-sim:latest bash</span>
+</pre></div>
+</div>
+</section>
+<section id="bare-metal-deployment-dependencies">
+<h2>Bare Metal Deployment Dependencies<a class="headerlink" href="#bare-metal-deployment-dependencies" title="Link to this heading"></a></h2>
 <section id="debian-based-linux-distributions-recommend-ubuntu-22-04">
-<h2>Debian-Based Linux Distributions (Recommend Ubuntu 22.04)<a class="headerlink" href="#debian-based-linux-distributions-recommend-ubuntu-22-04" title="Link to this heading"></a></h2>
+<h3>Debian-Based Linux Distributions (Recommend Ubuntu 22.04)<a class="headerlink" href="#debian-based-linux-distributions-recommend-ubuntu-22-04" title="Link to this heading"></a></h3>
 <p>Install system dependencies:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo apt -y update</span>
 <span class="go">sudo apt -y install coreutils wget vim git</span>
@@ -107,6 +134,7 @@
 <span class="go">pip3 install graphviz pydot</span>
 </pre></div>
 </div>
+</section>
 </section>
 </section>
 

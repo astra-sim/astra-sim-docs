@@ -6,7 +6,7 @@ The Workload layer iterates over the nodes in the Chakra ET and issues commands 
 - Memory operation: Issues a call to the Memory backend to simulate the duration of the operation. 
 - Collective operation: Breaks the collective communication into point-to-point send and receive messages, and issues a 'send' or 'receive' call to the network backend to simulate the messages. 
 
-Since the compute and memory operations are fairly straightforward, we focus on how the collective operations are scheduled and executed.
+Since the compute and memory operations are fairly straightforward, we focus on how the collective operations are scheduled and executed. [Source Code Directory](https://github.com/astra-sim/astra-sim/tree/master/astra-sim/system)
 
 :::{toctree}
 collective-scheduler.md

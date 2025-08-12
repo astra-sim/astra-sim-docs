@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ASTRA-sim Output &mdash; ASTRA-sim 2.2 documentation</title>
+  <title>ASTRA-Sim: Quick Example &mdash; ASTRA-sim 2.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
@@ -44,10 +44,10 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="getting-started.html">Getting Started</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="setup.html">Dependencies Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup.html">Setup ASTRA-Sim - Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="build.html">Build ASTRA-sim</a></li>
 <li class="toctree-l2"><a class="reference internal" href="run.html">Run ASTRA-sim</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">ASTRA-sim Output</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">ASTRA-Sim: Quick Example</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../workload-layer/workload-layer.html">Workload Layer</a></li>
@@ -73,7 +73,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="getting-started.html">Getting Started</a></li>
-      <li class="breadcrumb-item active">ASTRA-sim Output</li>
+      <li class="breadcrumb-item active">ASTRA-Sim: Quick Example</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/getting-started/output.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -83,22 +83,34 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="astra-sim-output">
-<h1>ASTRA-sim Output<a class="headerlink" href="#astra-sim-output" title="Link to this heading"></a></h1>
-<p>The output of ASTRA-sim is printed to terminal, as shown below:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="go">[CostModel] Adding (inter-Node, Link) bandwidth: 25, radix: 1, count: 4 (added cost: $400)</span>
-<span class="linenos"> 2</span><span class="go">[CostModel] Adding (inter-Node, Switch) bandwidth: 25, radix: 4, count: 1 (added cost: $1300)</span>
-<span class="linenos"> 3</span><span class="go">[CostModel] Adding (inter-Node, Nic) bandwidth: 25, radix: 1, count: 4 (added cost: $0)</span>
-<span class="linenos"> 4</span><span class="go">ring of node 0, id: 0 dimension: local total nodes in ring: 4 index in ring: 0 offset: 1total nodes in ring: 4</span>
-<span class="linenos"> 5</span><span class="go">ring of node 0, id: 0 dimension: local total nodes in ring: 4 index in ring: 0 offset: 1total nodes in ring: 4</span>
-<span class="linenos"> 6</span><span class="go">ring of node 0, id: 0 dimension: local total nodes in ring: 4 index in ring: 0 offset: 1total nodes in ring: 4</span>
-<span class="linenos"> 7</span><span class="go">ring of node 0, id: 0 dimension: local total nodes in ring: 4 index in ring: 0 offset: 1total nodes in ring: 4</span>
-<span class="linenos"> 8</span><span class="go">sys[2] finished, 646570 cycles</span>
-<span class="linenos"> 9</span><span class="go">sys[1] finished, 646570 cycles</span>
-<span class="linenos">10</span><span class="go">sys[0] finished, 646570 cycles</span>
-<span class="linenos">11</span><span class="go">sys[3] finished, 646570 cycles</span>
+  <section id="astra-sim-quick-example">
+<h1>ASTRA-Sim: Quick Example<a class="headerlink" href="#astra-sim-quick-example" title="Link to this heading"></a></h1>
+<p>Run Astra-Sim with a quick example (<a class="reference external" href="https://github.com/astra-sim/astra-sim/blob/master/examples/run_scripts/analytical/congestion_aware/Ring_allgather_16npus.sh">Ring_allgather_16npus.sh</a>):
+This example demonstrates a ring all-gather operation on 16 NPUs connected in a ring topology. Please go back to build up the necessary dependencies before running the example.
+The following shows the expected output:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="go">[system::topology::RingTopology] [info] ring of node 0, id: 0 dimension: local total nodes in ring: 16 index in ring: 0 offset: 1 total nodes in ring: 16</span>
+<span class="linenos"> 2</span><span class="go">[system::topology::RingTopology] [info] ring of node 0, id: 0 dimension: local total nodes in ring: 16 index in ring: 0 offset: 1 total nodes in ring: 16</span>
+<span class="linenos"> 3</span><span class="go">[system::topology::RingTopology] [info] ring of node 0, id: 0 dimension: local total nodes in ring: 16 index in ring: 0 offset: 1 total nodes in ring: 16</span>
+<span class="linenos"> 4</span><span class="go">[system::topology::RingTopology] [info] ring of node 0, id: 0 dimension: local total nodes in ring: 16 index in ring: 0 offset: 1 total nodes in ring: 16</span>
+<span class="linenos"> 5</span><span class="go">[workload] [info] sys[12] finished, 323560 cycles, exposed communication 323560 cycles.</span>
+<span class="linenos"> 6</span><span class="go">[workload] [info] sys[13] finished, 323560 cycles, exposed communication 323560 cycles.</span>
+<span class="linenos"> 7</span><span class="go">[workload] [info] sys[14] finished, 323560 cycles, exposed communication 323560 cycles.</span>
+<span class="linenos"> 8</span><span class="go">[workload] [info] sys[15] finished, 323560 cycles, exposed communication 323560 cycles.</span>
+<span class="linenos"> 9</span><span class="go">[workload] [info] sys[0] finished, 323560 cycles, exposed communication 323560 cycles.</span>
+<span class="linenos">10</span><span class="go">[workload] [info] sys[1] finished, 323560 cycles, exposed communication 323560 cycles.</span>
+<span class="linenos">11</span><span class="go">[workload] [info] sys[2] finished, 323560 cycles, exposed communication 323560 cycles.</span>
+<span class="linenos">12</span><span class="go">[workload] [info] sys[3] finished, 323560 cycles, exposed communication 323560 cycles.</span>
+<span class="linenos">13</span><span class="go">[workload] [info] sys[4] finished, 323560 cycles, exposed communication 323560 cycles.</span>
+<span class="linenos">14</span><span class="go">[workload] [info] sys[5] finished, 323560 cycles, exposed communication 323560 cycles.</span>
+<span class="linenos">15</span><span class="go">[workload] [info] sys[6] finished, 323560 cycles, exposed communication 323560 cycles.</span>
+<span class="linenos">16</span><span class="go">[workload] [info] sys[7] finished, 323560 cycles, exposed communication 323560 cycles.</span>
+<span class="linenos">17</span><span class="go">[workload] [info] sys[8] finished, 323560 cycles, exposed communication 323560 cycles.</span>
+<span class="linenos">18</span><span class="go">[workload] [info] sys[9] finished, 323560 cycles, exposed communication 323560 cycles.</span>
+<span class="linenos">19</span><span class="go">[workload] [info] sys[10] finished, 323560 cycles, exposed communication 323560 cycles.</span>
+<span class="linenos">20</span><span class="go">[workload] [info] sys[11] finished, 323560 cycles, exposed communication 323560 cycles.</span>
 </pre></div>
 </div>
+<p>For additional quick runs and other featured microbenchmarks, see the <a class="reference external" href="https://github.com/astra-sim/astra-sim/tree/master/examples">ASTRA-Sim Examples</a> and review the accompanying documentation.</p>
 </section>
 
 
