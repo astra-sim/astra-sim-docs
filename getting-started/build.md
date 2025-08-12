@@ -1,18 +1,8 @@
 # Build ASTRA-sim
 
 :::{note}
-Please make sure that you have all the required depencencies installed.
+Please make sure that you have all the required depencencies or docker installed. If not, please refer to the [Setup ASTRA-Sim](./setup.md) 
 :::
-
-## Clone Repository
-
-:::{code-block} console
-git clone git@github.com:astra-sim/astra-sim.git
-ASTRA_SIM=$(realpath ./astra-sim)
-cd ${ASTRA_SIM}
-git submodule update --init --recursive
-:::
-
 ## Compile Program
 
 ### Analytical Network Backend
