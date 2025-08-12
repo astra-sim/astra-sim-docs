@@ -43,7 +43,7 @@
 ## Senario - 3: 8-GPUs All-Reduce
 ### Hardware Setup
 1. 8 GPUs connected in a hybrid cube mesh:
-![Alt text](HPE_Server_Arch.png)
+![Alt text](../../_static/images/validation/hardware/HPE_Server_Arch.png)
 2. Each GPU has 6 NVLINKs at 25 GB/s
 3. NCCL ring Algorithm
 

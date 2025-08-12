@@ -1,7 +1,7 @@
 # ns-3 Network Backend
 
 :::{note}
-The below documentation is a copy-paste of a recent email. We posted the documentation here considering the urgency, but will strive to update /clean up as soon as possible. 
+The below documentation is a copy-paste of a recent email. We posted the documentation here considering the urgency, but will strive to update /clean up as soon as possible.  
 :::
 
 ## Running the ns3 backend. 

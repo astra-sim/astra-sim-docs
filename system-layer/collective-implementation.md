@@ -1,5 +1,5 @@
-## Collective Algorithms: Native or Custom Implementation
-![Collective Algorithm Implementation](/_static/images/coll_implementation.svg)
+# Collective Algorithms: Native or Custom Implementation
+![Collective Algorithm Implementation](../_static/images/coll_implementation.svg)
 
 As discussed before, the simulator takes in a collective communication (e.g., AllReduce, AllGather, etc.) and breaks it down into send and receive messages. These send and receive messages are simulated by the network backend.
 
