@@ -52,7 +52,9 @@ First, we lower the MSCCLang DSL program into an Intermediate Representation (IR
 
 ```bash
 git clone git@github.com:astra-sim/collectiveapi.git --recurse-submodules
-cd collectiveapi/msccl-tools/examples/mscclang
+cd collectiveapi/msccl-tools
+pip install .
+cd examples/mscclang
 python3 allreduce_a100_ring.py ${NUM_GPUS} 1 1 > allreduce_ring.xml
 ```
 
