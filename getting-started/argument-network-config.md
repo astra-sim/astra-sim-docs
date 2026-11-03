@@ -4,46 +4,40 @@
 --network-configuration: path to the network configuration file
 :::
 
-## [Analytical Network Config](https://github.com/astra-sim/astra-network-analytical/tree/40d3d0ff11bfd241b20423f1d9b5c670dc0d5bd8)
+## [Analytical Network Config](https://github.com/astra-sim/astra-network-analytical)
 
 Example network configurations can be found at
 
 :::{code-block} console
-$ ${ASTRA_SIM}/examples/network_analytical/network.yml
+$ ${ASTRA_SIM}/examples/network/analytical/Ring_8npus.yml
 :::
 
-- **topology-name**: (string) put "Hierarchical"
+The analytical network configuration uses a simple YAML format:
 
-- **dimensions-count**: (uint) number of network dimensions
+```yaml
+topology: [ Ring ]
+npus_count: [ 8 ]
+bandwidth: [ 50.0 ]  # GB/s
+latency: [ 500.0 ]   # ns
+```
+
+- **topology**: (array) network topology per dimension — options: `Ring`, `FullyConnected`, `Switch`
+- **npus_count**: (array) number of NPUs per dimension
+- **bandwidth**: (array) link bandwidth per dimension in GB/s
+- **latency**: (array) link latency per dimension in ns
 
 :::{note}
-Each configurations below is represented as an array of size **dimensions-count**, indexed by the dimension level.
+Each array is indexed by dimension level. For a 2D topology, each array would have two entries (one per dimension).
 :::
 
-- **topologies-per-dim**: (string) network topology ("Ring", "FullyConnected", or "Switch")
+For more details, see the [Analytical Network Simulator Documentation](https://astra-sim.github.io/astra-network-analytical-docs/index.html).
 
-- **dimension-type**: (string) dimension type ("Tile", "Package", "Node", or "Pod")
+## [Garnet Network Config](https://github.com/astra-sim/astra-network-garnet)
 
-- **units-count**: (uint) number of GPUs
-
-- **links-count**: (uint) number of links
-
-- **link-latency**: (uint) link latency (ns)
-
-- **link-bandwidth**: (uint) link bandwidth (GB/s or B/ns)
-
-- **nic-latency**: (uint) nic latency (ns)
-
-- **router-latency**: (uint) router latency (ns)
-
-- **hbm-latency**: (uint) memory latency (ns)
-
-- **hbm-bandwidth**: (uint) memory bandwidth (GB/s or B/ns)
-
-- **hbm-scale**: (uint) memory scaling factor
-
-## [Garnet Network Config](https://github.com/astra-sim/astra-network-garnet/tree/c09ba4ebee0643cff3f75d64143d5310b7f31ee1)
-
+:::{warning}
+The Garnet backend is no longer actively maintained in the current version of ASTRA-sim.
+The configuration fields below are preserved for reference but may not work with the latest codebase.
+:::
 
 - **num-npus**: (int) Total number of NPUs we are simulating
 
@@ -59,17 +53,17 @@ Each configurations below is represented as an array of size **dimensions-count*
 
 - **horizontal-rings**: (int) Determines the number of rings in the horizontal (inter-package) dimension (applicable only on the Torus3D topology)
 
-- **links-per-tile**: (int) Determines the number of links for the alltoall (inter-package) dimesnion (applicable only on the NV_Switch topology)
+- **links-per-tile**: (int) Determines the number of links for the alltoall (inter-package) dimension (applicable only on the NV_Switch topology)
 
 - **flit-width**: (int) The width of flits in bits
 
-- **local-packet-size**: (int) The size of intra-pcakge packets in bytes
+- **local-packet-size**: (int) The size of intra-package packets in bytes
 
-- **package-packet-size**: (int) The size of inter-pcakge packets in bytes
+- **package-packet-size**: (int) The size of inter-package packets in bytes
 
-- **tile-link-width**: (int) The width of intra-pcakge links in bits
+- **tile-link-width**: (int) The width of intra-package links in bits
 
-- **package-link-width**: (int) The width of inter-pcakge links in bits
+- **package-link-width**: (int) The width of inter-package links in bits
 
 - **vcs-per-vnet**: (int) Number of VCs per each Vnet
 
@@ -81,13 +75,13 @@ Each configurations below is represented as an array of size **dimensions-count*
 
 - **package-link-latency**: (int) delay of inter-package links in cycles
 
-- **buffers-per-vc**: (int) Buffer size per each VS in terms of number of flits
+- **buffers-per-vc**: (int) Buffer size per each VC in terms of number of flits
 
 - **local-link-efficiency**: (float) The ratio of (data/header+data) for intra-package packets
 
 - **package-link-efficiency**: (float) The ratio of (data/header+data) for inter-package packets
 
-## [NS3 Network Config](https://github.com/astra-sim/astra-network-ns3/tree/a46d80f9fab4d44ba687e81588c9d317ecaf3370)
+## [NS-3 Network Config](https://github.com/astra-sim/astra-network-ns3)
 
 Example network configurations can be found at
 
@@ -101,30 +95,32 @@ Refer to [this spreadsheet](https://docs.google.com/spreadsheets/d/1Xoo_QWgOuEJo
 ### Physical Topology
 One important knob of the configuration is the *physical topology*. Examples are located in `.../ns-3/scratch/topology`, and the filenames are defined in the configuration file under `TOPOLOGY_FILE`.
 
-Let's take a sample file, `7_nodes_3_switch_topology.txt`, and examine its components. This file describes a topology where there are 7 nodes, 3 of which are network switches (4, 5, 6). There are 8 links in total. 
+Let's take a sample file, `8_nodes_1_switch_topology.txt`, and examine its components. The file format is:
 
-```
-7 3 8 // {no. of nodes}  {no. of switches}  {no. of links}
-4 5 6 // {List of node id for switches}
-4 0 200Gbps 0.0005ms 0 // From here on each line corresponds to one link.
-6 0 200Gbps 0.0005ms 0 // {id of one endpoint} {id of another endpoint} {bandwidth} {latency} {error rate of link}
-4 1 200Gbps 0.0005ms 0
-6 1 200Gbps 0.0005ms 0
-5 2 200Gbps 0.0005ms 0
-6 2 200Gbps 0.0005ms 0
-5 3 200Gbps 0.0005ms 0
-6 3 200Gbps 0.0005ms 0
+- Line 1: `{no. of nodes} {no. of switches} {no. of links}`
+- Line 2: `{List of node IDs for switches}`
+- Each subsequent line: `{id of one endpoint} {id of another endpoint} {bandwidth} {latency} {error rate of link}`
 
-```
+Available topology examples in `extern/network_backend/ns-3/scratch/topology/`:
+- `8_nodes_1_switch_topology.txt`
+- `8nodes_ring_topology.txt`
+- `128_nodes_16_switch_topology.txt`
+- `128_nodes_32_switch_topology.txt`
 
 ### Logical Topology 
 In addition to the ns3 configurations (including the physical topology), the binary for the NS3 backend takes a unique command line argument, `--logical-topology-configuration=${LOGICAL_TOPOLOGY}`. 
 
-Examples of this can be found at 
+Examples of this can be found at
 
 :::{code-block} console
-$ ${ASTRA_SIM}/examples/ns3/sample_64nodes_2D.json
+$ ${ASTRA_SIM}/examples/network/ns3/sample_16nodes_2D.json
 :::
+
+Available logical topology examples:
+- `sample_4nodes_1D.json` — 4 NPUs, 1D
+- `sample_8nodes_1D.json` — 8 NPUs, 1D
+- `sample_16nodes_1D.json` — 16 NPUs, 1D
+- `sample_16nodes_2D.json` — 16 NPUs, 2D
 
 This file defines the *logical* topology, where each number corresponds to the number of NPUs in a dimension.
 If the file shows `{8, 4}`, the system layer will run a 2D topology, regardless of the physical connectivity.

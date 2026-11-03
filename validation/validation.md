@@ -10,5 +10,4 @@ This page will be populated with validation results by comparing ASTRA-sim resul
 ./hardware/gpu-validation.md
 ./hardware/gpu-validation-hgx-h100.md
 ./hardware/tpu-validation.md
-./astra-sim-backends/analytical-vs-ns3-backend-validation.md
 :::

@@ -10,7 +10,7 @@ There are two ways the simulator breaks a collective into send and receive messa
 Both methods are implementations of the `CollectivePhase::Algorithm` object, which is the unit of scheduling in the System layer (refer to the previous scheduling page). Please refer to the code in [CollectivePhase.hh](https://github.com/astra-sim/astra-sim/blob/master/astra-sim/system/CollectivePhase.hh) for a definition of the `Algorithm` object, and [native_collectives] and [custom_collectives] for implementations. Because they implement the `CollectivePhase::Algorithm` object, both methods are executed through the stream based scheduler described in ::collective-scheduler.
 
 ### Native Collective Implementation
-This part is still under construction. For now, please refer to the code in the [native_collecties] directory, especially [Ring.cc](https://github.com/astra-sim/astra-sim/blob/master/astra-sim/system/collective/Ring.cc) as a starting point.
+This part is still under construction. For now, please refer to the code in the `astra-sim/system/astraccl/native_collectives/` directory.
 
 ### Custom Collective Implementation
 An inherent limitation of the above native method is that to simulate a new collective algorithm, one would have to implement the whole collective in ASTRA_sim native code.

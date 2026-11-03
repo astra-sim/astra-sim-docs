@@ -5,26 +5,26 @@ The below documentation is a copy-paste of a recent email. We posted the documen
 :::
 
 ## Running the ns3 backend. 
-There have been some changes to the execution/build script recently. Please pull the most recent commit from the github repo.
-Compiling the ns3 backend is similar to the analytical backend. 
-bash build/astra_ns3/build.sh
-And running the ns3 backend is done with the following command: 
+Please use the example run script for the correct paths and configuration:
+
+```bash
+# Run the ns3 example from the examples directory
+cd ${ASTRA_SIM}/examples/run_scripts/ns3
+bash Ring_allgather_16npus.sh
 ```
-   # {NS3_DIR} is the directory of the ns-3 backend. That is, '{ASTRA_SIM_ROOT_DIRECTORY}/extern/network_backend/ns-3'
-    cd "${NS3_DIR}/build/scratch"
-    ./ns3.42-AstraSimNetwork-default \
-        --workload-configuration="${SCRIPT_DIR:?}"/../../extern/graph_frontend/chakra/one_comm_coll_node_allgather}  \
-        --system-configuration="${SCRIPT_DIR:?}"/../../inputs/system/Switch.json  \
-        --network-configuration="../../../ns-3/scratch/config/config.txt"   \
-        --remote-memory-configuration="${SCRIPT_DIR:?}"/../../inputs/remote_memory/analytical/no_memory_expansion.json \
-        --logical-topology-configuration="${SCRIPT_DIR:?}"/../../inputs/network/ns3/sample_8nodes_1D.json   \
-        --comm-group-configuration=\"empty\"
-```
-This can also be achieved with 
-```
+
+The run script uses the following configuration paths:
+- **Workload:** `examples/workload/microbenchmarks/all_gather/16npus_1MB/all_gather`
+- **System:** `examples/system/native_collectives/Ring_4chunks.json`
+- **Network:** `extern/network_backend/ns-3/scratch/config/config_clos.txt`
+- **Logical Topology:** `examples/network/ns3/sample_16nodes_1D.json`
+- **Remote Memory:** `examples/remote_memory/analytical/no_memory_expansion.json`
+
+You can also compile and run in one step with:
+```bash
 bash build/astra_ns3/build.sh -r
 ```
-Note the '-r' flag. If you examine the top of the build script, you'll be able to find how to change between different configuration files
+Note the '-r' flag. If you examine the top of the build script, you'll be able to find how to change between different configuration files.
 
 ## Configuring the ns3 backend. 
 In the execution script above, note the two flags `--network-backend` and `--logical-topology`. Note that in the analytical backend, we only used the `--network backend`. This is because, in the analytical backend, the logical topology and physical topology was the same, while ns3 allows us to separate logical and physical topology. More on this later. 
@@ -59,7 +59,7 @@ Each line starting from the third line ("0 128 200Gbps...") defines a link. Note
 
 ![Physical Topology Definition](/_static/images/ns3_physical_topology.png)
 
-For the other knobs in the ns3 configuration, please refer to the document in : 'astra-sim/extern/network_backend/ns-3/scratch/config/config_doc.txt'
+For the other knobs in the ns3 configuration, please refer to the document at: `extern/network_backend/ns-3/scratch/config/config_doc.txt`
 
 
 Now let's talk about the logical topology. 
@@ -74,11 +74,11 @@ The ns3 simulator's `--logical dimension` flag allows the ability to test differ
 ```
 
 Note that the number of logical dimensions (1D v. 2D v. 3D) must match the number of collectives in the system configuration, passed to `--system-configuration`.
-```
-# astra-sim/inputs/system/Ring_FullyConnected_Switch.json
+```json
+# examples/system/native_collectives/Ring_4chunks.json
 {
 (...)
-  "all-reduce-implementation": ["ring", "direct", "halvingDoubling"],
+  "all-reduce-implementation": ["ring"],
 } 
 ```
-The above two examples would not work (the simulator might not complain, but semantically it wouldn't be correct) because while we have a 2D logical topology, the system layer is prepared to run a 3D all-reduce implementation. 
+The above example uses a 1D logical topology with a ring all-reduce implementation. The number of dimensions in the logical topology must match the number of algorithms specified in the system configuration. 

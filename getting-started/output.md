@@ -1,8 +1,14 @@
 # ASTRA-Sim: Quick Example
 
+Run ASTRA-Sim with a quick example:
 
-Run Astra-Sim with a quick example ([Ring_allgather_16npus.sh](https://github.com/astra-sim/astra-sim/blob/master/examples/run_scripts/analytical/congestion_aware/Ring_allgather_16npus.sh)): 
-This example demonstrates a ring all-gather operation on 16 NPUs connected in a ring topology. Please go back to build up the necessary dependencies before running the example.
+```bash
+cd ${ASTRA_SIM}/examples/run_scripts/analytical/congestion_aware
+bash Ring_allgather_16npus.sh
+```
+
+This example demonstrates a ring all-gather operation on 16 NPUs connected in a ring topology. The script compiles ASTRA-Sim and runs the simulation. See [Ring_allgather_16npus.sh](https://github.com/astra-sim/astra-sim/blob/master/examples/run_scripts/analytical/congestion_aware/Ring_allgather_16npus.sh) on GitHub.
+
 The following shows the expected output:
 :::{code-block} console
 :lineno-start: 1
