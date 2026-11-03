@@ -1,6 +1,6 @@
 # Run ASTRA-sim
 
-Run simulations by passing the required aruguments:
+Run simulations by passing the required arguments:
 
 :::{code-block} console
 ${ASTRA_SIM_BIN} \

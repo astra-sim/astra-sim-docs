@@ -9,7 +9,7 @@
 Example remote memory configurations can be found at
 
 :::{code-block} console
-$ ${ASTRA_SIM}/examples/network_analytical/remote_memory.json
+$ ${ASTRA_SIM}/examples/remote_memory/analytical/no_memory_expansion.json
 :::
 
 - **memory-type**: (string) memory type ("NO_MEMORY_EXPANSION", "PER_NODE_MEMORY_EXPANSION", "PER_NPU_MEMORY_EXPANSION", or "MEMORY_POOL")

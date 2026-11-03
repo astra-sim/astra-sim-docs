@@ -24,7 +24,7 @@ The below is an example of the system input using the Collective API:
 ```
 ...
     "active-chunks-per-dimension": 1,
-    "all-reduce-implementation-custom": ["examples/custom_collective/allreduce_ring"],
+    "all-reduce-implementation-custom": ["examples/system/custom_collectives/custom_ring_allreduce_8npus_1MB/custom_allreduce"],
 ...
 ```
 
@@ -41,9 +41,9 @@ We now talk about generating the Chakra ET files to define the custom collective
 #### MSCCLang
 
 :::{note}
-Sample ET files and scripts are provided in `examples/custom_collective/sample`.
-- The sample script [create_graph_custom_allreduce.sh](https://github.com/astra-sim/astra-sim/blob/master/examples/custom_collective/create_graph_custom_allreduce.sh) generates the same ET files (and is essentially a copy paste of the commands below)
-- The sample script [run_analytical_with_custom_collective.sh](https://github.com/astra-sim/astra-sim/blob/master/examples/custom_collective/run_analytical_with_custom_collective.sh) shows how to execute ASTRA-sim with the custom collective.
+Sample ET files and scripts are provided in `examples/system/custom_collectives/`.
+- The sample script [create_custom_allreduce_algorithm.sh](https://github.com/astra-sim/astra-sim/blob/master/examples/system/custom_collectives/create_custom_allreduce_algorithm.sh) generates the same ET files (and is essentially a copy paste of the commands below)
+- The sample script [run_analytical_with_custom_collective.sh](https://github.com/astra-sim/astra-sim/blob/master/examples/run_scripts/analytical/congestion_aware/run_analytical_with_custom_collective.sh) shows how to execute ASTRA-sim with the custom collective.
 :::
 
 The MSCCLang Domain Specific Language (DSL) allows users to easily and expressively write arbitrary, custom collective algorithms.

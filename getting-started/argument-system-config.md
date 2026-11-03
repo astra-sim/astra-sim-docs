@@ -7,7 +7,7 @@
 Example system configurations can be found at:
 
 :::{code-block} console
-$ ${ASTRA_SIM}/examples/network_analytical/system.json
+$ ${ASTRA_SIM}/examples/system/native_collectives/Ring_4chunks.json
 :::
 
 - **scheduling-policy**: (LIFO/FIFO)
@@ -38,7 +38,7 @@ These fields relate to the native collective implementation in ASTRA-sim. Altern
   - For example, "ring_doubleBinaryTree" means we create a logical topology with 2 dimensions and we perform ring algorithm on the first dimension followed by double binary tree on the second dimension for the all-reduce pattern. Hence the number of physical dimension should be equal to the number of logical dimensions. The only exceptions are oneRing/oneDirect where we assume no matter how many physical dimensions we have, we create a one big logical ring/direct(AllToAll) topology where all NPUs are connected and perfrom a one phase ring/direct algorithm.
 
 :::{note}
-oneRing and oneDirect is not available for Garnet Backend in this version.
+oneRing and oneDirect may not be available for all network backends.
 :::
 
 - **reduce-scatter-implementation**: (Dimension0CollectiveAlg_Dimension1CollectiveAlg_xxx_DimensionNCollectiveAlg)
@@ -54,5 +54,5 @@ oneRing and oneDirect is not available for Garnet Backend in this version.
   - baseline issues allreduce across all dimensions to handle allreduce of single chunk. While for an N-dimensional network, localBWAware issues a series of reduce-scatters on all dimensions from dim1 to dimN-1, followed by all-reduce on dimN, and then series of all-gathers starting from dimN-1 to dim1. This optimization is used to reduce the chunk size as it goes to the next network dimensions.
 
 :::{note}
-The default clock cycle period is 1ns (1 Ghz feq). This value is defined inside Sys.hh. One can change it to any number. It will be a configurable command line parameter in the later versions.
+The default clock cycle period is 1ns (1 GHz freq). This value is defined inside `Common.hh` (`astra-sim/common/Common.hh`). One can change it to any number. It will be a configurable command line parameter in the later versions.
 :::
